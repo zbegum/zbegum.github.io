@@ -1,0 +1,94 @@
+/* --- General Style --- */
+body {
+  font-family: 'Lora', serif;
+  color: #2c2c2c;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Navbar --- */
+.navbar {
+  width: 100%;
+  text-align: center;
+  padding: 25px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 10;
+  border-bottom: 1px solid #eee;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar li {
+  display: inline-block;
+  margin: 0 25px;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-family: 'Karla', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #222;
+  letter-spacing: 0.5px;
+  transition: color 0.3s;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: #c931ee; /* subtle yellow hover */
+}
+
+/* --- Intro Section --- */
+.intro {
+  max-width: 750px;
+  margin: 160px auto 0 auto; /* space for fixed navbar */
+  text-align: left;
+  line-height: 1.7;
+  padding: 0 20px;
+}
+
+.name {
+  font-family: 'Karla', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #2a2a2a;
+  margin-bottom: 2rem;
+}
+
+.tagline {
+  font-size: 1.4rem;
+  font-family: 'Lora', serif;
+  margin-bottom: 3rem;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #d42020; /* Highlight text with the desired color (yellow in this case) */
+}
+
+.subheading {
+  font-family: 'Karla', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* --- Footer --- */
+footer {
+  text-align: center;
+  font-family: 'Karla', sans-serif;
+  font-size: 1rem;
+  color: #999;
+  margin-top: 80px;
+  padding-bottom: 30px;
+}
+
