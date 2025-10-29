@@ -1,247 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zeynep Begüm Kara Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZBK</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Space+Grotesk:wght@400;600&family=IBM+Plex+Mono:wght@400;500&family=Karla:wght@400;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;600&family=Lora:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      background-color: #ffffff;
-      font-family: 'Lora', serif;
-      overflow: hidden;
-    }
-    canvas {
-      display: block;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
-    }
-    #research-title {
-      font-family: 'Karla', sans-serif;
-      font-weight: 600;
-      font-size: 0.8rem;
-      color: #333;
-      margin-top: 20px;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-  </style>
 </head>
 
 <body>
-  <!-- NAVBAR -->
   <nav class="navbar">
     <ul>
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="arts.html">Arts</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="index.html" class="active">HOME</a></li>
+      <li><a href="projects.html">PROJECTS</a></li>
+      <li><a href="arts.html">ARTS</a></li>
+      <li><a href="about.html">ABOUT</a></li>
     </ul>
   </nav>
 
-  <!-- INTRO SECTION -->
-  <section class="intro">
-    <h1 class="name">ZEYNEP BEGÜM KARA</h1>
-    <p class="tagline">
-      HCI Researcher passionate about how technology can amplify human potential, focusing on 
-      <span class="highlight">human-AI collaboration</span> and <span class="highlight">human-centered systems</span> at the intersection of art, design, and technology.
-    </p>
-    <p id="research-title">Current Research Interests</p>
-    <!-- Mindmap Container -->
-    <section id="mindmap-container">
-      <canvas id="canvas"></canvas>
-    </section>  
-  </section>
-  
-  <!-- FOOTER -->
-  <footer>© 2025 Zeynep Begüm Kara</footer>
 
-  <script>
-    // Purple Color Palette
-    const purplePalette = [
-      "#6A0DAD", // Dark Purple (Main color)
-      "#8A2BE2", // Blue-Violet (Hover effect)
-      "#9B30FF", // Purple (Secondary color)
-      "#DA70D6", // Orchid (Edge color)
-      "#D8BFD8"  // Thistle (Lighter edges or text color)
-    ];
+  <main>
+    <section class="intro">
+      <div class="mindmap-column">
+        <section id="mindmap-container" aria-hidden="true">
+          <canvas id="canvas"></canvas>
+        </section>
+        <p id="research-title">Fig. 1 — Current Research Interests</p>
+      </div>
 
-    // Research Topics (Nodes) - Total 9 topics
-    const topics = [
-      { text: "Human-AI Collaboration", color: purplePalette[0] },
-      { text: "Sketching", color: purplePalette[1] },
-      { text: "Creativity", color: purplePalette[2] },
-      { text: "Hybrid Intelligence", color: purplePalette[3] },
-      { text: "Artificial Intelligence", color: purplePalette[0] },
-      { text: "Human-Centered Design", color: purplePalette[0] },
-      { text: "Intelligent User Interface", color: purplePalette[2] },
-      { text: "Multimodals", color: purplePalette[3] },
-      { text: "Generative Interfaces", color: purplePalette[4] }
-    ];
+      <div class="intro-text">
+        <p class="tagline">
+          CS MSc student in Human–Computer Interaction, researching <span class="highlight">human-AI
+            collaboration</span> and
+          <span class="highlight">hybrid intelligence systems</span> that augment human flourishing.
+        </p>
+      </div>
+    </section>
+  </main>
 
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
+  <footer>
+    © ZBK &nbsp;•&nbsp; Last updated October 2025
+  </footer>
 
-    // Set canvas to full window size
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let nodes = [];
-    let edges = [];
-    let mouse = { x: undefined, y: undefined };
-    let hoverRadius = 150;  // Increased radius where nodes get influenced by cursor
-    let isHovered = false;   // Track if any node is hovered
-    let stopAnimation = false;  // Flag to control animation state
-
-    // Node class
-    class Node {
-      constructor(x, y, text, color) {
-        this.x = x;
-        this.y = y;
-        this.size = 25;  // Larger nodes for better visibility
-        this.baseX = x; // Original X position
-        this.baseY = y; // Original Y position
-        this.text = text; // Store the topic name as the label
-        this.color = color || purplePalette[0];  // Default to first purple color if not provided
-        this.isHovered = false; // Track if hovered over
-        this.randomX = Math.random() * 2 - 1; // Random movement X direction
-        this.randomY = Math.random() * 2 - 1; // Random movement Y direction
-      }
-      
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color; // Keep the original color
-        ctx.fill();
-        ctx.strokeStyle = "#000"; // Black border for the node
-        ctx.lineWidth = 2;
-        ctx.stroke();
-
-        // Draw the label near the node
-        ctx.fillStyle = '#333';  // Darker text for readability
-        ctx.font = '24px Arial';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        const labelOffset = 40;  // Position the label above the node
-        ctx.fillText(this.text, this.x, this.y - labelOffset);  // Draw text near node
-      }
-      
-      update() {
-        // Stop movement if animation is stopped
-        if (!stopAnimation) {
-          this.x += this.randomX * 2;  // Increase random X movement
-          this.y += this.randomY * 2;  // Increase random Y movement
-        }
-
-        // Apply boundaries to keep nodes inside the canvas
-        if (this.x < 0 || this.x > canvas.width) this.randomX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.randomY *= -1;
-
-        // Hover effect
-        this.isHovered = Math.sqrt((mouse.x - this.x) ** 2 + (mouse.y - this.y) ** 2) < this.size + hoverRadius;
-      }
-    }
-
-    // Create nodes and position them
-    function createNodes() {
-      nodes = [];
-      edges = [];
-
-      const angleStep = Math.PI * 2 / topics.length;
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
-      const radius = 200;
-
-      topics.forEach((topic, i) => {
-        const angle = angleStep * i;
-        const x = centerX + Math.cos(angle) * radius;
-        const y = centerY + Math.sin(angle) * radius;
-        const node = new Node(x, y, topic.text, topic.color);  // Pass the specific color
-        nodes.push(node);
-
-        // Create edges between nodes
-        if (i > 0) {
-          edges.push(new Edge(nodes[i - 1], node));
-        }
-        if (i === topics.length - 1) {
-          edges.push(new Edge(nodes[i], nodes[0])); // Connect the last node to the first
-        }
-      });
-    }
-
-    // Create edge class
-    class Edge {
-      constructor(node1, node2) {
-        this.node1 = node1;
-        this.node2 = node2;
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.moveTo(this.node1.x, this.node1.y);
-        ctx.lineTo(this.node2.x, this.node2.y);
-        ctx.strokeStyle = "#D8BFD8"; // Orchid edge color
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
-    }
-
-    // Animation loop
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      nodes.forEach(node => {
-        node.update();
-        node.draw();
-      });
-
-      edges.forEach(edge => {
-        edge.draw();
-      });
-
-      requestAnimationFrame(animate);
-    }
-
-    // Event listeners
-    window.addEventListener('mousemove', function(event) {
-      mouse.x = event.x;
-      mouse.y = event.y;
-      checkHover();  // Check if any node is hovered
-    });
-
-    window.addEventListener('resize', function() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      createNodes();  // Recreate nodes on resize
-    });
-    
-    // Check if any node is hovered
-    function checkHover() {
-      isHovered = false;
-      nodes.forEach(node => {
-        if (Math.sqrt((mouse.x - node.x) ** 2 + (mouse.y - node.y) ** 2) < node.size + hoverRadius) {
-          isHovered = true;
-        }
-      });
-    }
-
-    // Hover over the mindmap container to stop animation
-    const mindmapContainer = document.getElementById("mindmap-container");
-    mindmapContainer.addEventListener("mouseenter", () => {
-      stopAnimation = true;  // Stop all movement
-    });
-
-    mindmapContainer.addEventListener("mouseleave", () => {
-      stopAnimation = false;  // Resume movement
-    });
-
-    // Initialize and start animation
-    createNodes();
-    animate();
-  </script>
+  <script src="js/mindmap.js"></script>
 </body>
+
 </html>

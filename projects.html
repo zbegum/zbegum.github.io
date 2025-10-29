@@ -1,41 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects | Zeynep Begüm Kara</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects | ZBK</title>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Space+Grotesk:wght@400;600&family=IBM+Plex+Mono:wght@400;500&family=Karla:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css?v=1" />
+  <link rel="stylesheet" href="css/about.css?v=1" />
+  <link rel="stylesheet" href="css/projects.css?v=1" />
 </head>
-<body>
+
+<body class="projects">
   <nav class="navbar">
-    <div class="logo">Z. BEGUM KARA</div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="projects.html" class="active">Projects</a>
-      <a href="arts.html">Arts</a>
-    </div>
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a class="active" href="projects.html">PROJECTS</a></li>
+      <li><a href="arts.html">ARTS</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+    </ul>
   </nav>
 
-  <main>
-    <h1>Selected Projects</h1>
-    <div class="grid">
-      <div class="card">
-        <h2>Lacy</h2>
-        <p>
-          AI-assisted onboarding and documentation system integrating
-          expert knowledge, code tours, and multimodal guidance.
-        </p>
-      </div>
-      <div class="card">
-        <h2>Sketching as Communication</h2>
-        <p>
-          Studying how shared abstraction and information-theoretic
-          representations enhance creative collaboration.
-        </p>
-      </div>
-    </div>
-  </main>
+  <main class="projects-page">
 
-  <footer>© 2025 ZBK </footer>
+    <header class="projects-header">
+      <h1 class="about-kicker">PROJECTS</h1>
+    </header>
+
+    <article class="project" data-year="2025">
+      <h2 class="project-title">Research @ Intelligent User Interfaces Lab, Koç University</h2>
+      <div class="project-meta">
+        <time datetime="2025">2025 — present</time> · Human–AI Interaction
+      </div>
+      <p class="project-desc">
+        MSc student with <span class="wavy-key">KU Graduate Fellowship</span>,
+        (tuition + stipend + waiver).
+        Conducting research under
+        <a href="https://www.ku.edu.tr/en/academic/metin-sezgin/" class="chip" target="_blank" rel="noopener">
+          &nbsp;Prof. Metin&nbsp;Sezgin, <em>MIT PhD</em>
+        </a>
+        on creativity, machine learning, and sketch-based interfaces.
+      </p>
+      <div class="project-links">
+        <a href="https://iui.ku.edu.tr" class="term-chip" target="_blank" rel="noopener">IUI Lab&nbsp;Website</a>
+      </div>
+
+    </article>
+
+    <article class="project" data-year="2025" id="lacy">
+      <div class="project-split">
+        <!-- LEFT: Poster -->
+        <aside class="project-poster">
+          <figure class="poster-card">
+            <a href="#lacy-poster" class="lb-link">
+              <img src="assets/projects/lacy/LacyPoster.png" alt="LACY project poster" class="poster-img"
+                loading="lazy">
+            </a>
+            <figcaption class="poster-caption">Project Poster</figcaption>
+          </figure>
+
+          <p class="award-line">
+            🏆 <strong>Best Innovation Award</strong> at the Bilkent University CS Fair 2025 —
+            standing out among 44 remarkable teams!
+          </p>
+
+        </aside>
+
+        <!-- RIGHT: Content -->
+        <section class="project-main">
+          <h2 class="project-title">LACY — Expert Guidance in Software Development</h2>
+          <div class="project-meta"><time datetime="2025">2024 — 2025</time> · Senior Design Project, Team Leader</div>
+
+          <p class="project-desc">
+            In collaboration with <a href="https://www.beko.com/" class="chip" target="_blank" rel="noopener">Beko</a>,
+            we examined current industry practices in legacy system maintenance and developer onboarding.
+            Based on these observations, I initiated, designed, and led a team of five to develop <strong>LACY</strong>
+            — an AI-assisted VS Code extension that simulates expert-to-learner mentorship within real development
+            environments.
+            The system integrates interactive code tours, contextual quizzes, and narrated walkthroughs to support
+            human–AI collaboration in knowledge transfer.
+            The project is currently ongoing as part of Beko&nbsp;R&amp;D.
+          </p>
+
+          <!-- 2×2 grid: 3 images + 1 embedded video -->
+          <div class="project-media-grid media-quad">
+            <!-- video tile -->
+            <figure class="video-tile">
+              <div class="embed-wrapper">
+                <iframe src="https://www.youtube.com/embed/TwHs3akSzr8?rel=0" title="LACY Demo Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin">
+                </iframe>
+              </div>
+            </figure>
+
+            <!-- 3 image tiles -->
+            <figure><a href="#lacy-1" class="lb-link"><img src="assets/projects/lacy/lacy1.jpeg" alt="LACY UI"
+                  loading="lazy"></a></figure>
+            <figure><a href="#lacy-2" class="lb-link"><img src="assets/projects/lacy/lacy2.jpeg" alt="Pipeline"
+                  loading="lazy"></a></figure>
+            <figure><a href="#lacy-3" class="lb-link"><img src="assets/projects/lacy/lacy3.jpeg" alt="Results"
+                  loading="lazy"></a></figure>
+          </div>
+
+        </section>
+      </div>
+    </article>
+
+    <article class="project" data-year="2025">
+      <h2 class="project-title">A Case Study on Gemini’s MCQ Success - Defining Directed Multiple-Choice Questions</h2>
+      <div class="project-meta">
+        <time datetime="2024">2023 - 2024</time> · Individual Research
+      </div>
+      <p class="project-desc">
+        Individual Research under supervision of <a href="https://www.cs.bilkent.edu.tr/~guvenir/" class="chip"
+          target="_blank" rel="noopener">Prof.&nbsp;H.&nbsp;Altay&nbsp;Guvenir</a>
+        I designed a Directed MCQ (DMCQ) system to
+        evaluate how Large Language Models like Gemini perform under human-informed guidance. The study simulates
+        collaborative test-solving scenarios, where human cues and AI analysis jointly contribute to the elimination of
+        options. The goal is to understand how such directed interaction influences model reasoning and accuracy in
+        structured evaluation settings. </p>
+
+      <div class="project-slides">
+        <iframe
+          src="https://docs.google.com/presentation/d/15SLUoIjxFbva_8eolX_lBtHR3-phKBGiylkDk47Jbd8/embed?start=false&loop=false&delayms=3000"
+          frameborder="0" width="100%" height="480" allowfullscreen="true" mozallowfullscreen="true"
+          webkitallowfullscreen="true">
+        </iframe>
+      </div>
+    </article>
+
+    <article class="project" data-year="2022">
+      <h2 class="project-title">Mathematics Volunteering</h2>
+      <div class="project-meta"><time datetime="2022">2019—2025</time> · Community</div>
+      <p class="project-desc">
+        Mathematics has always been a shared space for curiosity.
+        Over the years, I’ve taken part in several math communities in Turkey, contributing as a student, volunteer, and
+        organizer — supporting both learning and outreach efforts.
+      </p>
+
+      <!-- NESIN MATHEMATICS VILLAGE -->
+      <section class="subproject">
+        <div class="sub-flex">
+          <img src="assets/projects/math/nmk.png" alt="Nesin Mathematics Village" class="subphoto">
+          <div class="subtext">
+            <h3 class="sub-title">Nesin Mathematics Village <span class="sub-date">(Summers since 2019)</span></h3>
+            <p>
+              I first arrived as a student, spending long summer days studying, thinking, and daydreaming under the
+              trees.
+              Over time, I also became a volunteer — helping in the library and kitchen so the village could keep
+              running
+              for students to learn, grow, and discover who they are.
+              It’s a place where I met some of the most inspiring and important people in my life.
+            </p>
+            <a href="https://nesinkoyleri.org/en/main-page/" target="_blank" rel="noopener" class="sublink">Visit site
+              →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- TURKEY MATHEMATICS CLUB -->
+      <section class="subproject">
+        <div class="sub-flex">
+          <img src="assets/projects/math/matematikturkiye.jpg" alt="Turkey Mathematics Club" class="subphoto">
+          <div class="subtext">
+            <h3 class="sub-title">Turkiye Mathematics Club <span class="sub-date">(2020–2022)</span></h3>
+            <p>
+              Served as board member and head of public relations; built the club’s identity and communication network.
+              Together, we organized academic and popular events to promote mathematical culture, both online and
+              face-to-face.
+            </p>
+            <a href="https://matematikturkiye.com/" target="_blank" rel="noopener" class="sublink">Visit site →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- MATEMATIK DUNYASI -->
+      <section class="subproject">
+        <div class="sub-flex">
+          <img src="assets/projects/math/md.png" alt="Matematik Dünyası Journal" class="subphoto">
+          <div class="subtext">
+            <h3 class="sub-title">Matematik Dünyası (Journal) <span class="sub-date">(2021–2023)</span></h3>
+            <p>
+              Helped digitize and preserve old issues of Matematik Dünyası, contributing to the journal’s online archive
+              and continuity of mathematical culture in Turkiye.
+            </p>
+            <a href="https://www.matematikdunyasi.org/" target="_blank" rel="noopener" class="sublink">Visit site →</a>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <article class="project" data-year="2023">
+      <h2 class="project-title">A Literary Approach to Computer Music: Translation of Words</h2>
+      <div class="project-meta"><time datetime="2022">2022</time> · Hobby Project</div>
+      <p class="project-desc">
+        This project aims to generate computer music by transforming input text, specifically its rhythmic and harmonic
+        aspects, into synthesized instrument sounds. The core idea is to correlate language and music by analyzing
+        language syntax through rhythm and phonetics through harmony and sound combinations. The project creates
+        two-channel music, with one channel producing drum sounds from individual letters
+        (vowels, consonants, spaces) and the other generating piano chords from grouped syllables, offering an
+        <span class="kw kw-cyan">experimental exploration of how diverse texts translate into musical compositions using
+          computers</span>
+        , drawing inspiration from
+        historical rhythmic structures such as the dactylic hexameter of the Iliad and Arabic prosody (Aruz ölçüsü).
+      </p>
+      <div class="project-links">
+        <a href="https://drive.google.com/file/d/1My5X-fgMg66EpJGt-g1x_3VG739Tf-7W/view?usp=sharing" class="term-chip"
+          target="_blank" rel="noopener">Project Report</a>
+      </div>
+    </article>
+    <footer>
+      © ZBK &nbsp;•&nbsp; Last updated October 2025
+    </footer>
+
+    <!-- Lightbox targets -->
+    <!-- Lightbox targets (can sit at end of <main>) -->
+    <a href="#" class="lightbox" id="lacy-poster" aria-label="Close image">
+      <span class="lightbox__content">
+        <img src="assets/projects/lacy/LacyPoster.png" alt="">
+        <span class="lightbox__close" aria-hidden="true">×</span>
+      </span>
+    </a>
+
+    <!-- Images -->
+    <a href="#" class="lightbox" id="lacy-1" aria-label="Close image"><span class="lightbox__content"><img
+          src="assets/projects/lacy/lacy1.jpeg" alt=""><span class="lightbox__close">×</span></span></a>
+    <a href="#" class="lightbox" id="lacy-2" aria-label="Close image"><span class="lightbox__content"><img
+          src="assets/projects/lacy/lacy2.jpeg" alt=""><span class="lightbox__close">×</span></span></a>
+    <a href="#" class="lightbox" id="lacy-3" aria-label="Close image"><span class="lightbox__content"><img
+          src="assets/projects/lacy/lacy3.jpeg" alt=""><span class="lightbox__close">×</span></span></a>
+  </main>
 </body>
+
 </html>

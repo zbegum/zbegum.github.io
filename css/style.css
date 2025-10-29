@@ -1,94 +1,187 @@
-/* --- General Style --- */
-body {
-  font-family: 'Lora', serif;
-  color: #2c2c2c;
-  background-color: #fff;
-  margin: 0;
-  padding: 0;
+:root {
+  --bg: #18191b;
+  --text: #f4f4f6;
+  --text-muted: #9a9ca4;
+  --accent-violet: #b38cff;
+  --accent-coral: #ff6f61;
+
+  --intro-max: 960px;
+  --intro-pad-x: 28px;
+  --mindmap-h: clamp(280px, 42vw, 420px);
 }
 
-/* --- Navbar --- */
+* {
+  box-sizing: border-box
+}
+
+html,
+body {
+  height: 100%
+}
+
+body {
+  margin: 0;
+  font-family: 'Karla', sans-serif;
+  background: radial-gradient(circle at top right, #1f1f21 0%, #171719 70%);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   width: 100%;
   text-align: center;
-  padding: 25px 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #fff;
-  z-index: 10;
-  border-bottom: 1px solid #eee;
+  padding: 22px 0;
+  background: rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(3px);
 }
 
 .navbar ul {
   list-style: none;
-  padding: 0;
   margin: 0;
-}
-
-.navbar li {
-  display: inline-block;
-  margin: 0 25px;
+  padding: 0;
+  display: flex;
+  gap: 56px;
+  justify-content: center
 }
 
 .navbar a {
+  color: var(--text-muted);
   text-decoration: none;
-  font-family: 'Karla', sans-serif;
   font-weight: 600;
-  font-size: 1rem;
-  color: #222;
-  letter-spacing: 0.5px;
-  transition: color 0.3s;
+  letter-spacing: 1px
 }
 
-.navbar a:hover,
-.navbar a.active {
-  color: #c931ee; /* subtle yellow hover */
+.navbar a.active,
+.navbar a:hover {
+  color: var(--accent-violet)
 }
 
-/* --- Intro Section --- */
 .intro {
-  max-width: 750px;
-  margin: 160px auto 0 auto; /* space for fixed navbar */
-  text-align: left;
-  line-height: 1.7;
-  padding: 0 20px;
+  display: grid;
+  grid-template-columns: minmax(560px, 640px) minmax(600px, 1fr);
+  gap: 96px;
+  align-items: center;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 140px 40px 110px;
+  position: relative;
 }
 
-.name {
-  font-family: 'Karla', sans-serif;
-  font-size: 1rem;
-  letter-spacing: 2px;
-  font-weight: 700;
-  color: #2a2a2a;
-  margin-bottom: 2rem;
+
+.intro-text {
+  text-align: left;
+}
+
+.intro-text .name,
+.intro-text .tagline,
+#research-title {
+  max-width: 760px;
+}
+
+#mindmap-container {
+  width: 100%;
+  height: clamp(480px, 58vh, 620px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+#mindmap-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 980px) {
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 110px 20px 80px;
+  }
+
+  #mindmap-container {
+    order: 2;
+    height: clamp(280px, 50vw, 380px);
+  }
+
+  .intro-text {
+    order: 1;
+    text-align: left;
+  }
 }
 
 .tagline {
-  font-size: 1.4rem;
-  font-family: 'Lora', serif;
-  margin-bottom: 3rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.06rem;
+  line-height: 1.85;
+  margin-bottom: 24px;
+  max-width: 720px;
 }
 
 .highlight {
-  font-weight: bold;
-  color: #d42020; /* Highlight text with the desired color (yellow in this case) */
+  background: linear-gradient(90deg, var(--accent-coral), var(--accent-violet));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
 }
 
-.subheading {
-  font-family: 'Karla', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+#research-title {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: none;
+  opacity: 0.85;
 }
 
-/* --- Footer --- */
+#mindmap-container {
+  width: 100%;
+  height: var(--mindmap-h);
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+
+#mindmap-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 footer {
   text-align: center;
-  font-family: 'Karla', sans-serif;
-  font-size: 1rem;
-  color: #999;
-  margin-top: 80px;
-  padding-bottom: 30px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 56px 0 28px;
 }
 
+footer span {
+  opacity: 0.6;
+  font-size: 0.65rem;
+}
+
+.name,
+#research-title {
+  font-family: 'Karla', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.name {
+  font-size: 0.1rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
