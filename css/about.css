@@ -3,34 +3,36 @@
    ========================= */
    :root {
     --nav-h: 64px;
-    --accent-cyan: #62d6ff;                /* you had ':root { color: ... }' */
+    --accent-cyan: #62d6ff;
   }
   
-  /* Default: allow scroll (prevents mobile clipping) */
-  body.about { overflow: auto; }
+  body.about {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
   
   /* =========================
      LAYOUT
      ========================= */
   .about-page{
-    min-height: calc(100svh - var(--nav-h)); /* fills screen but can grow */
+    min-height: calc(100svh - var(--nav-h));
     max-width: 840px;
     width: 100%;
     margin: 0 auto;
     padding: clamp(16px, 4vw, 24px);
     display: grid;
-    align-content: center;
-    gap: 0;                                   /* compact baseline */
+    align-content: start;
+    gap: 0;
   }
   
   .about-text { 
     font-size: 1rem;
     line-height: 1.75;
   }
-  .about-text::after { content:""; display: table; clear: both; } /* clearfix */
+  .about-text::after { content:""; display: table; clear: both; }
   
   .about-kicker{
-    margin: 4rem 0 8px 0;
+    margin: 3rem 0 8px 0;
     font-size: 1rem;
     letter-spacing: 2px;
     color: var(--text-muted);
@@ -66,9 +68,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;                             
+    gap: 10px;
     margin: 6px auto 0;
-    flex-wrap: nowrap;                      /* one line on wide screens */
+    flex-wrap: wrap;
   }
   .about-links a{
     font-family: 'Karla', sans-serif;
@@ -81,6 +83,12 @@
   }
   .about-links a:hover{ opacity: .7; }
   
+  .about-links > span {
+    user-select: none;
+  }
+  .about-links > span:has(+ br),
+  .about-links > br + span { display: none; }
+  
   /* =========================
      ASCII ART (CENTERED, SAFE)
      ========================= */
@@ -88,16 +96,19 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    margin: 0 auto;
+    margin: 8px auto 0;      
+    padding: 0 8px;          
+    overflow-x: auto;
     transform: translateX(-3rem);
   }
+  .ascii-wrap::-webkit-scrollbar { height: 6px; }
   
   .ascii-art {
-    font-size: clamp(8px, 1.2vw, 10px);
+    font-size: clamp(8px, 1.9vw, 11px);
     line-height: 1;
     white-space: pre;
-    display: inline-block;                  
-    text-align: left;                        
+    display: inline-block;
+    text-align: left;
     margin: 0;
     max-height: 26vh;
     overflow: hidden;
@@ -107,7 +118,7 @@
     font-size: 0.72rem;
     color: var(--text-muted);
     text-align: right;
-    margin-top: 4px;
+    margin: 6px 8px 0 0;
     opacity: 0.65;
     letter-spacing: 0.4px;
   }
@@ -123,6 +134,7 @@
     text-align: center;
     opacity: 0.6;
     letter-spacing: 0.4px;
+    margin-top: 10px;
   }
   
   /* =========================
@@ -153,10 +165,9 @@
   .kw { font-weight: 600; transition: opacity .2s ease; }
   .kw:hover { opacity: .85; }
   .kw-coral { color: var(--accent-coral); }
-  .kw-violet { color: var(--accent-violet); }  /* fixed accidental green */
-  .kw-cyan { color: var(--accent-cyan); }      /* uses the new variable */
+  .kw-violet { color: var(--accent-violet); }
+  .kw-cyan { color: var(--accent-cyan); }
   
-  /* Respect reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .uni-link, .wavy-key, .kw { transition: none; }
   }
@@ -165,45 +176,39 @@
      RESPONSIVE BEHAVIOR
      ========================= */
   
-  /* Desktop "one-screen" feel */
   @media (min-width: 981px){
-    body.about { overflow: hidden; }       /* lock to one screen on desktop */
+    body.about { overflow: hidden; }
     .about-page{
       height: calc(100svh - var(--nav-h));
       align-content: center;
     }
   }
   
-  /* Tablets & small laptops */
   @media (max-width: 980px){
-    body.about { overflow: auto; }         /* allow scrolling */
+    body.about { overflow-y: auto; }
     .about-page{
       min-height: auto;
       height: auto;
     }
-    .about-links{ flex-wrap: wrap; row-gap: 8px; }
+    .about-links{ row-gap: 8px; }
   }
   
-  /* Phones */
   @media (max-width: 700px){
+    .about-kicker{ margin: 2rem 0 6px 0; }
     .about-text{ font-size: .98rem; line-height: 1.8; }
   
-    /* Turn off float; center image above text */
     .about-inline-photo{
       float: none;
       display: block;
-      width: clamp(150px, 54vw, 280px);
+      width: clamp(140px, 58vw, 260px);
       margin: 6px auto 12px auto;
     }
   
-    /* ASCII: no hard cap and no nudge */
     .ascii-art{
-      font-size: clamp(7px, 2.4vw, 9px);
+      font-size: clamp(7px, 2.6vw, 10px);
       max-height: none;
-      transform: none;
     }
-    .ascii-wrap { --ascii-nudge: 0; }
   
-    .about-links{ gap: 10px; }
+    .about-links{ gap: 8px; }
   }
   

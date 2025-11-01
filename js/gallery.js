@@ -1,44 +1,137 @@
-// Minimal lightbox controller
-(function(){
-  const openers = document.querySelectorAll('[data-open]');
-  const byId = id => document.getElementById(id);
+// js/gallery.js
+(function () {
+  const openers = document.querySelectorAll('.card-link[data-open]');
+  const dialogsById = new Map();
 
-  openers.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const d = byId(btn.getAttribute('data-open'));
-      if (!d) return;
-      d.showModal();
-      wire(d);
+  document.querySelectorAll('dialog.lb').forEach(d => {
+    dialogsById.set(d.id, d);
+    // Close on backdrop click
+    d.addEventListener('click', e => {
+      if (e.target === d) d.close();
+    });
+    // Close buttons
+    d.querySelectorAll('[data-close]').forEach(btn => {
+      btn.addEventListener('click', () => d.close());
     });
   });
 
-  function wire(d){
-    if (d._wired) return; d._wired = true;
+  openers.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-open');
+      const dlg = dialogsById.get(id);
+      if (!dlg) return;
+      setupGallery(dlg);
+      dlg.showModal();
+      // ensure first layout sizing
+      centerControlsToImage(dlg);
+    });
+  });
 
-    const view = d.querySelector('[data-viewport] img');
-    const thumbs = Array.from(d.querySelectorAll('[data-thumbs] [data-src]')).map(b => b.getAttribute('data-src'));
-    let i = 0;
-    const set = n => { i = (n + thumbs.length) % thumbs.length; view.src = thumbs[i]; };
+  function setupGallery(dialog) {
+    if (dialog._wired) return; // init once
+    dialog._wired = true;
 
-    d.querySelector('[data-prev]')?.addEventListener('click', ()=> set(i-1));
-    d.querySelector('[data-next]')?.addEventListener('click', ()=> set(i+1));
-    d.querySelector('[data-thumbs]')?.addEventListener('click', e=>{
-      const b = e.target.closest('button[data-src]'); if(!b) return;
-      const idx = thumbs.indexOf(b.getAttribute('data-src')); if (idx > -1) set(idx);
+    const body = dialog.querySelector('[data-gallery]');
+    const viewport = body?.querySelector('[data-viewport]');
+    const img = viewport?.querySelector('img');
+    const prev = dialog.querySelector('[data-prev]');
+    const next = dialog.querySelector('[data-next]');
+
+    // Gather all thumb containers in this dialog (aside, vertical rail, overview)
+    const thumbGroups = Array.from(dialog.querySelectorAll('[data-thumbs]'));
+    // Flatten all buttons to build the ordered src list (unique by src order)
+    const allThumbButtons = thumbGroups.flatMap(g => Array.from(g.querySelectorAll('button[data-src]')));
+    let sources = [];
+
+    if (allThumbButtons.length) {
+      const seen = new Set();
+      allThumbButtons.forEach(b => {
+        const s = b.getAttribute('data-src');
+        if (s && !seen.has(s)) { seen.add(s); sources.push(s); }
+      });
+    } else if (img?.getAttribute('src')) {
+      sources = [img.getAttribute('src')];
+    }
+
+    // If the main <img> isn't in the list yet, prepend it
+    const mainSrc = img?.getAttribute('src');
+    if (mainSrc && !sources.includes(mainSrc)) sources.unshift(mainSrc);
+
+    let index = Math.max(0, sources.indexOf(mainSrc || sources[0]));
+
+    function setCurrent(i) {
+      if (!img) return;
+      index = (i + sources.length) % sources.length;
+      const newSrc = sources[index];
+      if (img.getAttribute('src') !== newSrc) img.setAttribute('src', newSrc);
+
+      // Update aria-current across ALL groups
+      thumbGroups.forEach(group => {
+        const btns = Array.from(group.querySelectorAll('button[data-src]'));
+        btns.forEach(b => {
+          const isActive = b.getAttribute('data-src') === newSrc;
+          if (isActive) b.setAttribute('aria-current', 'true');
+          else b.removeAttribute('aria-current');
+        });
+      });
+
+      // Recenter controls to current image width (after it loads/layouts)
+      if (img.complete) centerControlsToImage(dialog);
+      else img.onload = () => centerControlsToImage(dialog);
+    }
+
+    // Thumb clicks
+    thumbGroups.forEach(group => {
+      group.addEventListener('click', e => {
+        const btn = e.target.closest('button[data-src]');
+        if (!btn) return;
+        const s = btn.getAttribute('data-src');
+        const nextIdx = sources.indexOf(s);
+        if (nextIdx >= 0) setCurrent(nextIdx);
+      });
     });
 
-    d.addEventListener('click', e=>{
-      const r = d.getBoundingClientRect();
-      if (e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) d.close();
+    // Prev/Next
+    prev?.addEventListener('click', e => { e.preventDefault(); setCurrent(index - 1); });
+    next?.addEventListener('click', e => { e.preventDefault(); setCurrent(index + 1); });
+
+    // Keyboard
+    dialog.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); setCurrent(index - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); setCurrent(index + 1); }
+      if (e.key === 'Escape') { dialog.close(); }
     });
-    d.querySelector('[data-close]')?.addEventListener('click', ()=> d.close());
-    d.addEventListener('keydown', e=>{
-      if (e.key==='Escape') d.close();
-      if (e.key==='ArrowLeft') set(i-1);
-      if (e.key==='ArrowRight') set(i+1);
-    });
+
+    // Initial highlight + sizing
+    setCurrent(index);
+
+    // Resize handler (mobile rotations, etc.)
+    window.addEventListener('resize', () => centerControlsToImage(dialog));
   }
 
+  function centerControlsToImage(dialog) {
+    const viewport = dialog.querySelector('[data-viewport]');
+    const img = viewport?.querySelector('img');
+    const ctrls = viewport?.querySelector('.lb-ctrls');
+    if (!viewport || !img || !ctrls) return;
+
+    // Compute visible image width inside its container
+    // Use getBoundingClientRect to account for object-fit:contain
+    const imgRect = img.getBoundingClientRect();
+    const vpRect = viewport.getBoundingClientRect();
+
+    // Clamp to viewport width to avoid overflow; set as CSS variable
+    const effectiveWidth = Math.min(imgRect.width, vpRect.width);
+    viewport.style.setProperty('--img-w', `${Math.round(effectiveWidth)}px`);
+  }
+
+  // Progressive enhancement: open via hash e.g., arts.html#lb-swan
+  if (location.hash && dialogsById.has(location.hash.substring(1))) {
+    const dlg = dialogsById.get(location.hash.substring(1));
+    setupGallery(dlg);
+    dlg.showModal();
+    centerControlsToImage(dlg);
+  }
 })();
 
 (function () {

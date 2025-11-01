@@ -44,13 +44,11 @@ body.arts .work img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.25);          /* stronger default zoom */
+  transform: scale(1.25);
   transition: transform 0.6s cubic-bezier(0.25,0.1,0.25,1);
   will-change: transform;
 }
-body.arts .work:hover img {
-  transform: scale(1.02);          /* subtle breathe-out on hover */
-}
+body.arts .work:hover img { transform: scale(1.02); }
 
 /* Overlay info (shown on hover) */
 body.arts .overlay {
@@ -64,7 +62,7 @@ body.arts .overlay {
   color: var(--text);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.35s ease 0.05s; /* slight delay to sync with zoom */
+  transition: opacity 0.35s ease 0.05s;
 }
 body.arts .work:hover .overlay,
 body.arts .work:focus-within .overlay {
@@ -114,8 +112,8 @@ body.arts .work.tall { grid-row: span 2; }
   }
 }
 
-/* Hide overlays whenever a lightbox is open (prevents “stuck” hover labels) */
-body.arts dialog[open] ~ main .overlay {
+/* Hide overlays whenever a lightbox is open */
+body:has(dialog.lb[open]) .overlay {
   opacity: 0 !important;
   pointer-events: none !important;
 }
@@ -158,7 +156,7 @@ body.arts .lb-head {
   padding: 16px 24px;
   border-bottom: 1px solid rgba(255,255,255,0.12);
   background: rgba(18,18,20,0.9);
-  position: relative; /* needed for absolute close button */
+  position: relative;
 }
 body.arts .lb-title {
   margin: 0;
@@ -170,23 +168,26 @@ body.arts .lb-meta {
   color: var(--text-muted);
 }
 
-/* ✕ close in top-right */
-body.arts .lb-close {
+/* ✕ close button */
+body.arts .lb-btn-close {
   position: absolute;
   top: 12px;
   right: 16px;
-  background: none;
-  border: none;
-  color: var(--text-muted);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text);
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 1.3rem;
-  line-height: 1;
+  font-size: 1rem;
+  padding: 8px 14px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: color 0.2s ease, transform 0.2s ease;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
-body.arts .lb-close:hover {
+body.arts .lb-btn-close:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: #f5f5f5;
   color: #f5f5f5;
-  transform: scale(1.1);
 }
 
 /* layout */
@@ -215,22 +216,22 @@ body.arts .lb-view img {
   transition: transform 0.3s ease;
 }
 
-/* bottom-centered nav buttons */
-/* default controls */
+/* bottom-centered nav buttons — centered to the image bounds */
 body.arts .lb-ctrls{
-  position:absolute;
-  bottom:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:20px;
-  left:0; right:0;                 /* full width by default */
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  z-index: 3;
+  width: min(100%, var(--img-w, 100%));
+  pointer-events: none;              /* allow clicks through except on buttons */
 }
-
-/* when using the vertical rail, center within the image area only */
-body.arts .lb-view--with-rail .lb-ctrls{
-  left:0;
-  right:96px;                      /* match the rail offset */
+body.arts .lb-ctrls .lb-btn{
+  pointer-events: auto;
 }
 
 body.arts .lb-btn {
@@ -246,27 +247,6 @@ body.arts .lb-btn {
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 body.arts .lb-btn:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: #f5f5f5;
-  color: #f5f5f5;
-}
-
-body.arts .lb-btn-close {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: var(--text);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 1rem;
-  padding: 8px 14px;
-  border-radius: 10px;
-  cursor: pointer;
-  backdrop-filter: blur(6px);
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-body.arts .lb-btn-close:hover {
   background: rgba(255,255,255,0.15);
   border-color: #f5f5f5;
   color: #f5f5f5;
@@ -289,7 +269,7 @@ body.arts .lb-desc {
   letter-spacing: 0.1px;
 }
 
-/* thumbnails */
+/* thumbnails (grid style inside aside) */
 body.arts .lb-thumbs {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
@@ -323,12 +303,15 @@ body.arts .lb-thumbs button:hover img {
   }
   body.arts .lb-thumbs img { height: 60px; }
 }
+@media (max-width: 700px){
+  body.arts .lb-btn{ padding: 10px 16px; font-size: 1.05rem; }
+}
 
 /* ===== Lightbox template modifiers ===== */
 
-/* A) With explanation (default you already use) */
+/* A) With explanation (default) */
 body.arts dialog.lb.lb--with-desc .lb-body {
-  grid-template-columns: 1fr 360px;       /* main + aside */
+  grid-template-columns: 1fr 360px;
 }
 @media (max-width: 940px) {
   body.arts dialog.lb.lb--with-desc .lb-body { grid-template-columns: 1fr; }
@@ -336,45 +319,13 @@ body.arts dialog.lb.lb--with-desc .lb-body {
 
 /* B) Gallery-only: no aside, full-width image */
 body.arts dialog.lb.lb--gallery-only .lb-body {
-  grid-template-columns: 1fr;             /* image only */
+  grid-template-columns: 1fr;
 }
 body.arts dialog.lb.lb--gallery-only .lb-aside {
-  display: none !important;               /* hide aside */
+  display: none !important;
 }
 
-/* Bottom thumb rail for gallery-only */
-body.arts .lb-rail {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  padding: 6px 8px;
-  background: rgba(0,0,0,0.25);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
-  backdrop-filter: blur(6px);
-}
-body.arts .lb-rail button {
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-body.arts .lb-rail img {
-  width: 72px;
-  height: 54px;
-  object-fit: cover;
-  border-radius: 6px;
-  opacity: 0.85;
-  transition: opacity .2s ease, transform .2s ease;
-}
-body.arts .lb-rail button:hover img {
-  opacity: 1;
-  transform: scale(1.03);
-}
-
-/* --- Minimal overview gallery for lb--gallery-only --- */
+/* --- Minimal overview gallery for lb--gallery-only (bottom strip) --- */
 body.arts .lb--gallery-only .lb-overview {
   display: flex;
   justify-content: center;
@@ -385,7 +336,6 @@ body.arts .lb--gallery-only .lb-overview {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   flex-wrap: wrap;
 }
-
 body.arts .lb--gallery-only .lb-overview button {
   background: transparent;
   border: none;
@@ -393,7 +343,6 @@ body.arts .lb--gallery-only .lb-overview button {
   transition: transform 0.2s ease, opacity 0.2s ease;
   flex: 0 0 auto;
 }
-
 body.arts .lb--gallery-only .lb-overview img {
   width: 90px;
   height: 70px;
@@ -402,52 +351,10 @@ body.arts .lb--gallery-only .lb-overview img {
   opacity: 0.8;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
-
 body.arts .lb--gallery-only .lb-overview button:hover img {
   transform: scale(1.05);
   opacity: 1;
 }
-
-/* slightly smaller on mobile for balance */
-@media (max-width: 700px) {
-  body.arts .lb--gallery-only .lb-overview img {
-    width: 70px;
-    height: 55px;
-  }/* --- Minimal overview gallery for lb--gallery-only --- */
-body.arts .lb--gallery-only .lb-overview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 0 18px;
-  background: transparent;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  flex-wrap: wrap;
-}
-
-body.arts .lb--gallery-only .lb-overview button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  flex: 0 0 auto;
-}
-
-body.arts .lb--gallery-only .lb-overview img {
-  width: 90px;
-  height: 70px;
-  object-fit: cover;
-  border-radius: 6px;
-  opacity: 0.8;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-body.arts .lb--gallery-only .lb-overview button:hover img {
-  transform: scale(1.05);
-  opacity: 1;
-}
-
-/* slightly smaller on mobile for balance */
 @media (max-width: 700px) {
   body.arts .lb--gallery-only .lb-overview img {
     width: 70px;
@@ -455,13 +362,11 @@ body.arts .lb--gallery-only .lb-overview button:hover img {
   }
 }
 
-}
 /* === Vertical thumbnail rail (gallery-only) === */
 body.arts .lb-view--with-rail {
   position: relative;
   padding-right: 96px;            /* space for the rail */
 }
-
 body.arts .lb-rail-v {
   position: absolute;
   top: 50%;
@@ -476,13 +381,11 @@ body.arts .lb-rail-v {
   border-radius: 10px;
   backdrop-filter: blur(6px);
 }
-
 body.arts .lb-rail-v button {
   background: transparent;
   border: 0;
   cursor: pointer;
 }
-
 body.arts .lb-rail-v img {
   width: 66px;
   height: 50px;
@@ -496,22 +399,15 @@ body.arts .lb-rail-v button:hover img {
   transform: scale(1.03);
 }
 
-/* active thumb highlight (optional) */
-body.arts .lb-rail-v button[aria-current="true"] img {
-  outline: 2px solid rgba(255,255,255,.6);
-  outline-offset: 2px;
-  opacity: 1;
-}
-
-/* collapse rail on narrow screens */
-@media (max-width: 940px) {
-  body.arts .lb-view--with-rail { padding-right: 0; }
-  body.arts .lb-rail-v { display: none; }
-}
-
-/* active thumb highlight */
+/* active thumb highlight (works for any [data-thumbs]) */
 body.arts [data-thumbs] button[aria-current="true"] img{
   outline: 2px solid rgba(255,255,255,.65);
   outline-offset: 2px;
   opacity: 1;
+}
+
+/* collapse rail on narrow screens (and remove any ghost offsets) */
+@media (max-width: 940px) {
+  body.arts .lb-view--with-rail { padding-right: 0; }
+  body.arts .lb-rail-v { display: none; }
 }

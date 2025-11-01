@@ -10,24 +10,30 @@
   --mindmap-h: clamp(280px, 42vw, 420px);
 }
 
+/* ====================================
+   GLOBAL RESET + BASE LAYOUT
+   ==================================== */
 * {
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 html,
 body {
-  height: 100%
+  height: 100%;
 }
 
 body {
   margin: 0;
   font-family: 'Karla', sans-serif;
-  background: radial-gradient(circle at top right, #1f1f21 0%, #171719 70%);
+  background: var(--bg);          /* ⬅️ flat background everywhere */
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ====================================
+   NAVBAR
+   ==================================== */
 .navbar {
   position: sticky;
   top: 0;
@@ -45,21 +51,24 @@ body {
   padding: 0;
   display: flex;
   gap: 56px;
-  justify-content: center
+  justify-content: center;
 }
 
 .navbar a {
   color: var(--text-muted);
   text-decoration: none;
   font-weight: 600;
-  letter-spacing: 1px
+  letter-spacing: 1px;
 }
 
 .navbar a.active,
 .navbar a:hover {
-  color: var(--accent-violet)
+  color: var(--accent-violet);
 }
 
+/* ====================================
+   INTRO SECTION
+   ==================================== */
 .intro {
   display: grid;
   grid-template-columns: minmax(560px, 640px) minmax(600px, 1fr);
@@ -71,7 +80,6 @@ body {
   padding: 140px 40px 110px;
   position: relative;
 }
-
 
 .intro-text {
   text-align: left;
@@ -97,6 +105,9 @@ body {
   display: block;
 }
 
+/* ====================================
+   RESPONSIVE (intro)
+   ==================================== */
 @media (max-width: 980px) {
   .intro {
     grid-template-columns: 1fr;
@@ -115,6 +126,9 @@ body {
   }
 }
 
+/* ====================================
+   TYPOGRAPHY
+   ==================================== */
 .tagline {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 1.06rem;
@@ -141,6 +155,9 @@ body {
   opacity: 0.85;
 }
 
+/* ====================================
+   MINDMAP
+   ==================================== */
 #mindmap-container {
   width: 100%;
   height: var(--mindmap-h);
@@ -158,6 +175,9 @@ body {
   display: block;
 }
 
+/* ====================================
+   FOOTER
+   ==================================== */
 footer {
   text-align: center;
   color: var(--text-muted);
@@ -170,6 +190,9 @@ footer span {
   font-size: 0.65rem;
 }
 
+/* ====================================
+   HEADERS
+   ==================================== */
 .name,
 #research-title {
   font-family: 'Karla', sans-serif;
