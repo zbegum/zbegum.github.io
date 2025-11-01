@@ -178,11 +178,15 @@ body {
 /* ====================================
    FOOTER
    ==================================== */
+/* --- Footer (shared style for all pages) --- */
 footer {
   text-align: center;
+  font-size: 0.85rem;
+  letter-spacing: 0.4px;
+  opacity: 0.6;
   color: var(--text-muted);
-  font-size: 0.9rem;
-  margin: 56px 0 28px;
+  margin-top: 40px;           /* smaller gap above */
+  padding: 24px 0 40px;       /* balanced vertical spacing */
 }
 
 footer span {
@@ -190,6 +194,13 @@ footer span {
   font-size: 0.65rem;
 }
 
+@media (max-width: 700px) {
+  footer {
+    font-size: 0.8rem;
+    margin-top: 28px;
+    padding-bottom: 28px;
+  }
+}
 /* ====================================
    HEADERS
    ==================================== */
