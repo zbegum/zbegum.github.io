@@ -34,38 +34,75 @@ body {
 /* ====================================
    NAVBAR
    ==================================== */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
-  text-align: center;
-  padding: 22px 0;
-  background: rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(3px);
-}
-
-.navbar ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 56px;
-  justify-content: center;
-}
-
-.navbar a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-
-.navbar a.active,
-.navbar a:hover {
-  color: var(--accent-violet);
-}
-
+/* ====================================
+   NAVBAR
+   ==================================== */
+   .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(3px);
+  }
+  
+  /* layout */
+  .navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 56px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;   /* allows wrapping on small screens */
+  }
+  
+  /* links */
+  .navbar a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: color 0.2s ease;
+  }
+  
+  .navbar a.active,
+  .navbar a:hover {
+    color: var(--accent-violet);
+  }
+  
+  /* ------------------------------------
+     Responsive tweaks for mobile
+     ------------------------------------ */
+  @media (max-width: 700px) {
+    .navbar {
+      padding: 14px 0;
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(6px);
+    }
+  
+    .navbar ul {
+      gap: 28px;               /* tighter spacing */
+    }
+  
+    .navbar a {
+      font-size: 0.9rem;       /* slightly smaller text */
+      letter-spacing: 0.8px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .navbar ul {
+      gap: 20px;
+    }
+    .navbar a {
+      font-size: 0.85rem;
+    }
+  }
+  
 /* ====================================
    INTRO SECTION
    ==================================== */
