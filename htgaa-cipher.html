@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The most ancient cipher — ZBK HTGAA 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f2eb;
+  --surface: #ffffff;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.15);
+  --text: #1a1a14;
+  --muted: #8a8778;
+  --green: #2d7a4f;
+  --green-light: #e8f5ee;
+  --green-mid: #4aab72;
+  --amber: #b8860b;
+  --amber-light: #fdf6e3;
+  --red: #c0392b;
+  --red-light: #fdf0ee;
+  --mono: 'DM Mono', monospace;
+  --serif: 'Cormorant Garamond', serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* Animated DNA background */
+.dna-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.035;
+  z-index: 0;
+}
+
+.dna-col {
+  position: absolute;
+  top: -20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--green);
+  writing-mode: vertical-lr;
+  animation: fall linear infinite;
+  white-space: nowrap;
+  letter-spacing: 4px;
+}
+
+@keyframes fall {
+  from { transform: translateY(-100px); }
+  to   { transform: translateY(110vh); }
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.logo-block {}
+
+.logo-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: 38px;
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--text);
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--green);
+}
+
+.header-meta {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+  text-align: right;
+  padding-top: 8px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  background: var(--surface);
+}
+
+.tab {
+  flex: 1;
+  padding: 12px 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.tab.active {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.tab:not(.active):hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+/* Panels */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+textarea, input[type=text], input[type=password] {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+  line-height: 1.6;
+}
+
+textarea:focus, input:focus {
+  border-color: var(--green-mid);
+}
+
+.field { margin-bottom: 16px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.btn-primary:hover { background: #333; }
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border2);
+}
+
+.btn-secondary:hover { background: var(--border); }
+
+.btn-green {
+  background: var(--green);
+  color: white;
+}
+
+.btn-green:hover { background: #245f3e; }
+
+.actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+
+/* Result blocks */
+.result-block {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.7;
+  word-break: break-all;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 8px;
+  color: var(--text);
+}
+
+.result-block.dna-seq {
+  color: var(--green);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+/* Alert boxes */
+.alert {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin: 12px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.alert-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.alert.success { background: var(--green-light); color: var(--green); border: 1px solid rgba(45,122,79,0.2); }
+.alert.warning { background: var(--amber-light); color: var(--amber); border: 1px solid rgba(184,134,11,0.2); }
+.alert.error   { background: var(--red-light);   color: var(--red);   border: 1px solid rgba(192,57,43,0.2); }
+.alert.info    { background: #eef4fb; color: #1a5276; border: 1px solid rgba(26,82,118,0.2); }
+
+.alert.success .alert-dot { background: var(--green); }
+.alert.warning .alert-dot { background: var(--amber); }
+.alert.error   .alert-dot { background: var(--red); }
+.alert.info    .alert-dot { background: #1a5276; }
+
+/* Stats row */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.stat {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
+.stat-value { font-size: 18px; font-family: var(--serif); font-weight: 300; color: var(--text); }
+
+/* Codon map */
+.codon-map {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: 8px;
+  line-height: 1;
+}
+
+.codon-cell {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28px;
+  padding: 3px 2px;
+  border-radius: 3px;
+  cursor: default;
+  font-size: 8px;
+  font-family: var(--mono);
+  transition: transform 0.1s;
+}
+
+.codon-cell:hover { transform: scale(1.3); z-index: 10; }
+
+.codon-cell .aa  { color: var(--muted); font-size: 7px; }
+.codon-cell .cod { font-weight: 500; font-size: 8px; }
+
+.codon-cell.hidden-bit  { background: rgba(45,122,79,0.15); }
+.codon-cell.hidden-bit .cod { color: var(--green); }
+.codon-cell.no-wobble   { background: rgba(0,0,0,0.04); }
+.codon-cell.no-wobble .cod  { color: var(--muted); }
+
+/* Molecule diagram */
+.molecule {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin: 12px 0;
+  font-size: 10px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border2);
+}
+
+.mol-seg {
+  padding: 8px 10px;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.mol-a { background: #e8f5ee; color: #1a6b3c; flex: 0 0 auto; }
+.mol-b { background: #eef4fb; color: #1a5276; flex: 0 0 auto; }
+.mol-c { background: #fff8e8; color: #7d5a0a; flex: 1; }
+.mol-d { background: #fdf0ee; color: #922b21; flex: 0 0 auto; }
+
+/* Progress */
+.progress-wrap { margin: 10px 0; }
+.progress-bar-bg { height: 3px; background: var(--border); border-radius: 2px; }
+.progress-bar { height: 3px; background: var(--green-mid); border-radius: 2px; transition: width 0.3s; }
+
+/* Decoded message */
+.decoded-msg {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--green);
+  line-height: 1.5;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+/* Footer */
+footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 10px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Spinner */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner {
+  width: 14px; height: 14px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+/* GFP glow effect on success */
+@keyframes glow-pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(45,122,79,0); }
+  50% { box-shadow: 0 0 20px 4px rgba(45,122,79,0.15); }
+}
+
+.glow { animation: glow-pulse 2s ease-in-out 3; }
+</style>
+</head>
+<body>
+
+<!-- DNA rain background -->
+<div class="dna-bg" id="dna-bg"></div>
+
+<div class="page">
+
+  <header>
+    <div class="logo-block">
+      <h1>The most ancient cipher:<br><em>hide a message inside bacteria</em></h1>
+    </div>
+
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('encode')">Encode</button>
+    <button class="tab" onclick="switchTab('decode')">Decode</button>
+    <button class="tab" onclick="switchTab('about')">How it works</button>
+  </div>
+
+  <!-- ENCODE PANEL -->
+  <div class="panel active" id="panel-encode">
+
+    <div class="card">
+      <div class="card-title">Your message</div>
+      <div class="field">
+        <textarea id="enc-message" rows="4" placeholder="Write your message to hide inside sfGFP..."></textarea>
+      </div>
+      <div id="enc-capacity-bar" class="progress-wrap" style="display:none">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:4px">
+          <span>Capacity used</span>
+          <span id="enc-cap-label">0 / 341 bits</span>
+        </div>
+        <div class="progress-bar-bg"><div class="progress-bar" id="enc-cap-bar" style="width:0%"></div></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="encodeMessage()">
+          <span id="enc-spinner" style="display:none" class="spinner"></span>
+          Encode into sfGFP →
+        </button>
+      </div>
+    </div>
+
+    <div id="enc-result" style="display:none">
+
+      <div class="card">
+        <div class="card-title">Sequence health</div>
+        <div class="stats">
+          <div class="stat"><div class="stat-label">insert length</div><div class="stat-value" id="r-len">—</div></div>
+          <div class="stat"><div class="stat-label">GC content</div><div class="stat-value" id="r-gc">—</div></div>
+          <div class="stat"><div class="stat-label">bits hidden</div><div class="stat-value" id="r-bits">—</div></div>
+          <div class="stat"><div class="stat-label">max homopolymer</div><div class="stat-value" id="r-hp">—</div></div>
+        </div>
+        <div id="enc-alerts"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Insert structure</div>
+
+        <!-- Visual map bar -->
+        <div style="display:flex;height:36px;border-radius:6px;overflow:hidden;margin-bottom:8px;font-size:10px;font-weight:500">
+          <div style="background:#e8f5ee;color:#1a6b3c;display:flex;align-items:center;justify-content:center;flex:0 0 6px;min-width:28px;white-space:nowrap;padding:0 4px;border-right:1px solid rgba(0,0,0,0.08)">EcoRI</div>
+          <div style="background:#eef4fb;color:#1a5276;display:flex;align-items:center;justify-content:center;flex:0 0 72px;white-space:nowrap;padding:0 4px;border-right:1px solid rgba(0,0,0,0.08)">promoter + RBS</div>
+          <div style="background:#fff8e8;color:#7d5a0a;display:flex;align-items:center;justify-content:center;flex:1;border-right:1px solid rgba(0,0,0,0.08)">sfGFP CDS — message hidden here</div>
+          <div style="background:#fdf0ee;color:#922b21;display:flex;align-items:center;justify-content:center;flex:0 0 6px;min-width:36px;white-space:nowrap;padding:0 4px">HindIII</div>
+        </div>
+
+        <!-- Detailed breakdown table -->
+        <table style="width:100%;border-collapse:collapse;font-size:11px;margin-bottom:14px">
+          <thead>
+            <tr style="background:var(--bg)">
+              <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">element</th>
+              <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">sequence</th>
+              <th style="padding:6px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted)">length</th>
+              <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">function</th>
+              <th style="padding:6px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted)">carries message?</th>
+            </tr>
+          </thead>
+          <tbody style="font-family:var(--mono)">
+            <tr>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:#1a6b3c;font-weight:500">EcoRI site</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:#1a6b3c">GAATTC</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted)">6 nt</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--muted);font-family:var(--mono)">restriction cloning into pUC19</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:center">
+                <span style="background:var(--bg);color:var(--muted);padding:2px 8px;border-radius:4px;border:1px solid var(--border2);font-size:10px">fixed</span>
+              </td>
+            </tr>
+            <tr style="background:var(--bg)">
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:#1a5276;font-weight:500">lac promoter</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:#1a5276">TTGACAATTAATCATCGGCTCGTATAATG</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted)">29 nt</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--muted);font-family:var(--mono)">RNA pol binds → transcription starts</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:center">
+                <span style="background:var(--bg);color:var(--muted);padding:2px 8px;border-radius:4px;border:1px solid var(--border2);font-size:10px">fixed</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:#1a5276;font-weight:500">lac operator</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:#1a5276">TGTGGAATTGTGAGCGGATAACAATTTC</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted)">28 nt</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--muted);font-family:var(--mono)">LacI repressor binds → blocks until IPTG added</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:center">
+                <span style="background:var(--bg);color:var(--muted);padding:2px 8px;border-radius:4px;border:1px solid var(--border2);font-size:10px">fixed</span>
+              </td>
+            </tr>
+            <tr style="background:var(--bg)">
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:#1a5276;font-weight:500">RBS</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:#1a5276">ACAGGAAACAGCTATGAC</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted)">18 nt</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--muted);font-family:var(--mono)">ribosome binds on mRNA → finds ATG</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:center">
+                <span style="background:var(--bg);color:var(--muted);padding:2px 8px;border-radius:4px;border:1px solid var(--border2);font-size:10px">fixed</span>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:#7d5a0a;font-weight:500">sfGFP CDS</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:#7d5a0a">ATG...TAA</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted)">717 nt</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);color:var(--muted);font-family:var(--mono)">238 aa protein → glows green</td>
+              <td style="padding:6px 10px;border-bottom:1px solid var(--border);text-align:center">
+                <span style="background:rgba(45,122,79,0.12);color:var(--green);padding:2px 8px;border-radius:4px;border:1px solid rgba(45,122,79,0.3);font-size:10px">message here</span>
+              </td>
+            </tr>
+            <tr style="background:var(--bg)">
+              <td style="padding:6px 10px;color:#922b21;font-weight:500">HindIII site</td>
+              <td style="padding:6px 10px;color:#922b21">AAGCTT</td>
+              <td style="padding:6px 10px;text-align:center;color:var(--muted)">6 nt</td>
+              <td style="padding:6px 10px;color:var(--muted);font-family:var(--mono)">restriction cloning into pUC19</td>
+              <td style="padding:6px 10px;text-align:center">
+                <span style="background:var(--bg);color:var(--muted);padding:2px 8px;border-radius:4px;border:1px solid var(--border2);font-size:10px">fixed</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <label style="margin-top:4px">Full insert sequence</label>
+        <div style="position:relative;margin-top:6px">
+          <div class="result-block dna-seq" id="r-seq" style="padding-right:36px"></div>
+          <button onclick="copySeq()" title="Copy sequence" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border:1px solid var(--border2);border-radius:4px;background:var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0" id="copy-seq-btn">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted)">
+              <rect x="5" y="5" width="9" height="9" rx="1.5"/>
+              <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/>
+            </svg>
+          </button>
+        </div>
+        <div class="actions" style="margin-top:12px">
+          <button class="btn btn-secondary" onclick="downloadMeta()">Download metadata.json</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Codon map — hover to inspect</div>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:10px">
+          <span style="display:inline-block;width:10px;height:10px;background:rgba(45,122,79,0.15);border-radius:2px;margin-right:4px;vertical-align:middle"></span>green = carries hidden bits &nbsp;
+          <span style="display:inline-block;width:10px;height:10px;background:rgba(0,0,0,0.04);border-radius:2px;margin-right:4px;vertical-align:middle"></span>grey = no wobble room (Met, Trp)
+        </p>
+        <div class="codon-map" id="r-codon-map"></div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <!-- DECODE PANEL -->
+  <div class="panel" id="panel-decode">
+
+    <div class="card">
+      <div class="card-title">Sanger sequencing result</div>
+      <div class="field">
+        <label>Paste your sfGFP DNA sequence (raw Sanger output or just the CDS)</label>
+        <textarea id="dec-seq" rows="5" placeholder="Paste DNA sequence here — we'll find the sfGFP region automatically..."></textarea>
+      </div>
+      <div class="field">
+        <label>Metadata (paste contents of metadata.json)</label>
+        <textarea id="dec-meta" rows="4" placeholder='{"config":{...},"huffman_info":"..."}'></textarea>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" onclick="decodeMessage()">
+          <span id="dec-spinner" style="display:none" class="spinner"></span>
+          Decode message →
+        </button>
+        <button class="btn btn-secondary" onclick="loadDecodeExample()">Load example</button>
+      </div>
+    </div>
+
+    <div id="dec-result" style="display:none">
+      <div class="card" id="dec-result-card">
+        <div class="card-title">Decoded message</div>
+        <div class="decoded-msg" id="dec-message"></div>
+        <div id="dec-alerts"></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:8px" id="dec-stats"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROTOCOL PANEL -->
+  <div class="panel" id="panel-protocol">
+
+    <div class="card">
+      <div class="card-title">Part 1 — Sequence design</div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Use the Encode tab to generate your insert sequence. The tool performs Huffman compression, finds the optimal bit-rotation offset, and verifies a round-trip before outputting.</p>
+      <table style="width:100%;border-collapse:collapse;font-size:11px">
+        <thead><tr style="background:var(--bg)">
+          <th style="padding:6px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted);width:32px">#</th>
+          <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">Action</th>
+          <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">Parameters</th>
+        </tr></thead>
+        <tbody id="proto-steps-1"></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Part 2 — Gene synthesis + cloning (Twist Bioscience)</div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Order the fully assembled plasmid from Twist — they synthesize the insert and clone it into pUC19 for you. You receive a ready-to-transform circular plasmid. No restriction digest or ligation needed.</p>
+      <table style="width:100%;border-collapse:collapse;font-size:11px">
+        <thead><tr style="background:var(--bg)">
+          <th style="padding:6px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted);width:32px">#</th>
+          <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">Action</th>
+          <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">Parameters</th>
+        </tr></thead>
+        <tbody id="proto-steps-2"></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Part 3 — Transformation into E. coli DH5α</div>
+      <table style="width:100%;border-collapse:collapse;font-size:11px">
+        <thead><tr style="background:var(--bg)">
+          <th style="padding:6px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted);width:32px">#</th>
+          <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">Action</th>
+          <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">Parameters</th>
+        </tr></thead>
+        <tbody id="proto-steps-3"></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Part 4 — Colony screening</div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px">White colonies = lacZ disrupted by insert. Blue colonies = empty vector. White colonies with sfGFP insert glow green under UV when induced with IPTG.</p>
+      <table style="width:100%;border-collapse:collapse;font-size:11px">
+        <thead><tr style="background:var(--bg)">
+          <th style="padding:6px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted);width:32px">#</th>
+          <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">Action</th>
+          <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">Parameters</th>
+        </tr></thead>
+        <tbody id="proto-steps-4"></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Part 5 — Miniprep and Sanger sequencing</div>
+      <table style="width:100%;border-collapse:collapse;font-size:11px">
+        <thead><tr style="background:var(--bg)">
+          <th style="padding:6px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted);width:32px">#</th>
+          <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">Action</th>
+          <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">Parameters</th>
+        </tr></thead>
+        <tbody id="proto-steps-5"></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Part 6 — Decode the message</div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:12px">The decoder automatically finds the sfGFP CDS in the raw Sanger read, extracts bits from wobble codon positions, un-rotates the bit stream, and Huffman decodes to recover the original message.</p>
+      <table style="width:100%;border-collapse:collapse;font-size:11px">
+        <thead><tr style="background:var(--bg)">
+          <th style="padding:6px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted);width:32px">#</th>
+          <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">Action</th>
+          <th style="padding:6px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">Parameters</th>
+        </tr></thead>
+        <tbody id="proto-steps-6"></tbody>
+      </table>
+      <div class="alert success" style="margin-top:14px">
+        <div class="alert-dot"></div>
+        <span>Success: decoded text exactly matches original message → living bacteria were carrying your words</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="panel" id="panel-about">
+    <div class="card">
+      <div class="card-title">The idea</div>
+      <p style="color:var(--muted);font-size:13px;line-height:1.8;margin-bottom:12px">
+        The genetic code is degenerate — 61 codons encode only 20 amino acids. Leucine alone has 6 synonymous codons that all produce the exact same protein. This redundancy is an invisible information channel.
+      </p>
+      <p style="color:var(--muted);font-size:13px;line-height:1.8;margin-bottom:12px">
+        By choosing <em>which</em> synonymous codon to use at each position, we hide binary data inside a functional gene. The bacteria grow normally. The protein folds and glows green. The message is invisible unless you know to look — and have the metadata key.
+      </p>
+      <p style="color:var(--muted);font-size:13px;line-height:1.8">
+        Every different message produces a different DNA sequence — typically ~22% of codons change between messages. But the protein is always identical. The ribosome doesn't care which Leucine codon you chose. Your decoder does.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">How it works — interactive walkthrough</div>
+      <div id="explainer-steps" style="margin-bottom:12px">
+        <div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap">
+          <button onclick="showStep(0)" id="btn-s0" class="btn btn-primary" style="font-size:11px;padding:6px 14px">1. Wobble codons</button>
+          <button onclick="showStep(1)" id="btn-s1" class="btn btn-secondary" style="font-size:11px;padding:6px 14px">2. Bits → codons</button>
+          <button onclick="showStep(2)" id="btn-s2" class="btn btn-secondary" style="font-size:11px;padding:6px 14px">3. Bit rotation</button>
+          <button onclick="showStep(3)" id="btn-s3" class="btn btn-secondary" style="font-size:11px;padding:6px 14px">4. Full example</button>
+        </div>
+
+        <!-- STEP 0: Wobble codons -->
+        <div id="step-0">
+          <p style="color:var(--muted);font-size:12px;margin-bottom:12px">The genetic code has 64 codons but only 20 amino acids. Many amino acids have multiple synonymous codons — these are the <strong style="color:var(--text)">wobble positions</strong> where we can hide bits.</p>
+          <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:11px">
+            <thead>
+              <tr style="background:var(--bg)">
+                <th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">amino acid</th>
+                <th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">synonymous codons</th>
+                <th style="padding:8px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted)"># codons</th>
+                <th style="padding:8px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted)">bits hidden</th>
+                <th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Leucine (L)</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--green);font-family:var(--mono)">TTA TTG CTT CTC CTA CTG</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center">6</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center"><span style="background:var(--green-light);color:var(--green);padding:2px 8px;border-radius:4px">2 bits</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--muted)">00→TTA, 01→TTG, 10→CTT, 11→CTC</td></tr>
+              <tr style="background:var(--bg)"><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Serine (S)</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--green);font-family:var(--mono)">TCT TCC TCA TCG AGT AGC</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center">6</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center"><span style="background:var(--green-light);color:var(--green);padding:2px 8px;border-radius:4px">2 bits</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--muted)">00→AGC, 01→TCT, 10→AGT, 11→TCC</td></tr>
+              <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Lysine (K)</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--green);font-family:var(--mono)">AAA AAG</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center">2</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center"><span style="background:var(--green-light);color:var(--green);padding:2px 8px;border-radius:4px">1 bit</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--muted)">0→AAA, 1→AAG</td></tr>
+              <tr style="background:var(--bg)"><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Glycine (G)</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--green);font-family:var(--mono)">GGT GGC GGA GGG</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center">4</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center"><span style="background:var(--green-light);color:var(--green);padding:2px 8px;border-radius:4px">2 bits</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--muted)">00→GGC, 01→GGT, 10→GGG, 11→GGA</td></tr>
+              <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border)">Methionine (M)</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--muted);font-family:var(--mono)">ATG</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center">1</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center"><span style="background:var(--bg);color:var(--muted);padding:2px 8px;border-radius:4px;border:1px solid var(--border2)">0 bits</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--muted)">always ATG — no choice</td></tr>
+              <tr style="background:var(--bg)"><td style="padding:7px 10px">Tryptophan (W)</td><td style="padding:7px 10px;color:var(--muted);font-family:var(--mono)">TGG</td><td style="padding:7px 10px;text-align:center">1</td><td style="padding:7px 10px;text-align:center"><span style="background:var(--bg);color:var(--muted);padding:2px 8px;border-radius:4px;border:1px solid var(--border2)">0 bits</span></td><td style="padding:7px 10px;color:var(--muted)">always TGG — no choice</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <p style="color:var(--muted);font-size:11px;margin-top:10px">Formula: bits per position = floor(log₂(number of codons)). sfGFP has 231 wobble positions → total capacity 341 bits.</p>
+        </div>
+
+        <!-- STEP 1: Bits to codons -->
+        <div id="step-1" style="display:none">
+          <p style="color:var(--muted);font-size:12px;margin-bottom:12px">Your message is Huffman-compressed into a bit stream. Then we walk through sfGFP amino acid by amino acid, consuming bits and choosing codons.</p>
+          <div style="background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:14px;font-size:11px;overflow-x:auto">
+            <div style="margin-bottom:12px;color:var(--muted)">Message: <span style="color:var(--text)">"Hi"</span> → UTF-8 bytes → Huffman → bit stream:</div>
+            <div style="display:flex;gap:3px;flex-wrap:wrap;margin-bottom:16px">
+              <span style="background:#dbeafe;color:#1e40af;padding:3px 7px;border-radius:4px;font-weight:500">1</span>
+              <span style="background:#dbeafe;color:#1e40af;padding:3px 7px;border-radius:4px;font-weight:500">0</span>
+              <span style="background:#dcfce7;color:#166534;padding:3px 7px;border-radius:4px;font-weight:500">1</span>
+              <span style="background:#dcfce7;color:#166534;padding:3px 7px;border-radius:4px;font-weight:500">1</span>
+              <span style="background:#fef9c3;color:#854d0e;padding:3px 7px;border-radius:4px;font-weight:500">0</span>
+              <span style="background:#fef9c3;color:#854d0e;padding:3px 7px;border-radius:4px;font-weight:500">1</span>
+              <span style="background:#ffe4e6;color:#9f1239;padding:3px 7px;border-radius:4px;font-weight:500">1</span>
+              <span style="background:#ffe4e6;color:#9f1239;padding:3px 7px;border-radius:4px;font-weight:500">0</span>
+              <span style="background:var(--border);color:var(--muted);padding:3px 7px;border-radius:4px">…</span>
+            </div>
+            <table style="width:100%;border-collapse:collapse">
+              <thead>
+                <tr style="font-size:10px;color:var(--muted)">
+                  <th style="padding:6px 8px;text-align:left;border-bottom:1px solid var(--border2)">sfGFP position</th>
+                  <th style="padding:6px 8px;text-align:left;border-bottom:1px solid var(--border2)">amino acid</th>
+                  <th style="padding:6px 8px;text-align:left;border-bottom:1px solid var(--border2)">codon options</th>
+                  <th style="padding:6px 8px;text-align:center;border-bottom:1px solid var(--border2)">bits consumed</th>
+                  <th style="padding:6px 8px;text-align:left;border-bottom:1px solid var(--border2)">chosen codon</th>
+                </tr>
+              </thead>
+              <tbody style="font-size:11px">
+                <tr><td style="padding:6px 8px;border-bottom:1px solid var(--border)">1</td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">M (Met)</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);color:var(--muted)">ATG only</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted)">0 bits</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--muted)">ATG</td></tr>
+                <tr style="background:var(--bg)"><td style="padding:6px 8px;border-bottom:1px solid var(--border)">2</td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">S (Ser)</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);color:var(--green);font-family:var(--mono)">6 codons</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);text-align:center"><span style="background:#dbeafe;color:#1e40af;padding:1px 6px;border-radius:3px">10</span></td><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--green)">AGT (idx=2)</td></tr>
+                <tr><td style="padding:6px 8px;border-bottom:1px solid var(--border)">3</td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">K (Lys)</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);color:var(--green);font-family:var(--mono)">2 codons</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);text-align:center"><span style="background:#dcfce7;color:#166534;padding:1px 6px;border-radius:3px">1</span></td><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--green)">AAG (idx=1)</td></tr>
+                <tr style="background:var(--bg)"><td style="padding:6px 8px;border-bottom:1px solid var(--border)">4</td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">G (Gly)</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);color:var(--green);font-family:var(--mono)">4 codons</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);text-align:center"><span style="background:#fef9c3;color:#854d0e;padding:1px 6px;border-radius:3px">01</span></td><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--green)">GGT (idx=1)</td></tr>
+                <tr><td style="padding:6px 8px;border-bottom:1px solid var(--border)">5</td><td style="padding:6px 8px;border-bottom:1px solid var(--border)">E (Glu)</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);color:var(--green);font-family:var(--mono)">2 codons</td><td style="padding:6px 8px;border-bottom:1px solid var(--border);text-align:center"><span style="background:#ffe4e6;color:#9f1239;padding:1px 6px;border-radius:3px">1</span></td><td style="padding:6px 8px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--green)">GAG (idx=1)</td></tr>
+                <tr style="background:var(--bg);color:var(--muted)"><td style="padding:6px 8px" colspan="5" style="text-align:center">… 233 more positions …</td></tr>
+              </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:11px;color:var(--muted)">Decode is the reverse: look up each codon's index in the sorted list → reconstruct bits → Huffman decode → message.</p>
+          </div>
+        </div>
+
+        <!-- STEP 2: Bit rotation -->
+        <div id="step-2" style="display:none">
+          <p style="color:var(--muted);font-size:12px;margin-bottom:12px">The same bit stream mapped to the same positions always produces the same codons. If those codons happen to create a long homopolymer run (e.g. AAAAAAA), Twist rejects the sequence. Bit rotation fixes this by shifting <em>which bits land at which positions</em>.</p>
+
+          <div style="font-size:11px;margin-bottom:14px">
+            <div style="margin-bottom:8px;color:var(--text);font-weight:500">Original bit stream (offset = 0):</div>
+            <div style="display:flex;gap:2px;flex-wrap:wrap;margin-bottom:4px">
+              <span id="rot-bit-0" style="padding:4px 8px;border-radius:4px;background:#fee2e2;color:#991b1b;font-family:var(--mono);font-size:10px">1</span>
+              <span id="rot-bit-1" style="padding:4px 8px;border-radius:4px;background:#fee2e2;color:#991b1b;font-family:var(--mono);font-size:10px">0</span>
+              <span id="rot-bit-2" style="padding:4px 8px;border-radius:4px;background:#fee2e2;color:#991b1b;font-family:var(--mono);font-size:10px">1</span>
+              <span id="rot-bit-3" style="padding:4px 8px;border-radius:4px;background:#fef3c7;color:#92400e;font-family:var(--mono);font-size:10px">1</span>
+              <span id="rot-bit-4" style="padding:4px 8px;border-radius:4px;background:#fef3c7;color:#92400e;font-family:var(--mono);font-size:10px">0</span>
+              <span id="rot-bit-5" style="padding:4px 8px;border-radius:4px;background:#dcfce7;color:#166534;font-family:var(--mono);font-size:10px">0</span>
+              <span id="rot-bit-6" style="padding:4px 8px;border-radius:4px;background:#dcfce7;color:#166534;font-family:var(--mono);font-size:10px">1</span>
+              <span id="rot-bit-7" style="padding:4px 8px;border-radius:4px;background:#dbeafe;color:#1e40af;font-family:var(--mono);font-size:10px">1</span>
+              <span style="padding:4px 8px;color:var(--muted);font-size:10px">…322 bits total</span>
+            </div>
+
+            <div style="margin:14px 0 8px;color:var(--text);font-weight:500">Same bits, rotated by offset:</div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+              <label style="font-size:11px;color:var(--muted)">offset</label>
+              <input type="range" min="0" max="7" value="0" id="rot-slider" oninput="updateRotation(this.value)" style="width:120px">
+              <span id="rot-val" style="font-size:13px;font-weight:500;color:var(--text);min-width:20px">0</span>
+            </div>
+            <div style="display:flex;gap:2px;flex-wrap:wrap;margin-bottom:4px" id="rot-bits-display">
+            </div>
+
+            <div style="margin-top:16px;overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse;font-size:11px">
+              <thead>
+                <tr style="background:var(--bg)">
+                  <th style="padding:7px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">offset</th>
+                  <th style="padding:7px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">first 6 bits → sfGFP pos 2 (Ser, 2 bits) + pos 3 (Lys, 1 bit) + ...</th>
+                  <th style="padding:7px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted)">max run</th>
+                  <th style="padding:7px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted)">Twist?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono)">0</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--muted)">10 · 1 · 10 · 1 · ...</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center"><span style="background:#fee2e2;color:#991b1b;padding:2px 8px;border-radius:4px">8</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center">✗ reject</td></tr>
+                <tr style="background:var(--bg)"><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono)">3</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--green)">11 · 0 · 01 · 1 · ...</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center"><span style="background:var(--green-light);color:var(--green);padding:2px 8px;border-radius:4px">4</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center">✓ accept</td></tr>
+                <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono)">21</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--green)">00 · 1 · 11 · 0 · ...</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center"><span style="background:var(--green-light);color:var(--green);padding:2px 8px;border-radius:4px">4</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center">✓ accept</td></tr>
+              </tbody>
+            </table>
+            </div>
+            <p style="color:var(--muted);font-size:11px;margin-top:10px">The offset is stored in metadata.json. Decoder reads the offset, un-rotates the extracted bits, then Huffman decodes to get the original message.</p>
+          </div>
+        </div>
+
+        <!-- STEP 3: Full example -->
+        <div id="step-3" style="display:none">
+          <p style="color:var(--muted);font-size:12px;margin-bottom:12px">Complete encode → DNA → decode cycle for the message <strong style="color:var(--text)">"Hi"</strong>.</p>
+          <div style="font-size:11px;overflow-x:auto">
+
+            <div style="display:flex;align-items:stretch;gap:0;margin-bottom:16px;border-radius:8px;overflow:hidden;border:1px solid var(--border2)">
+              <div style="background:#dbeafe;color:#1e40af;padding:10px 14px;flex:0 0 auto;writing-mode:vertical-lr;text-align:center;font-size:10px;letter-spacing:.1em;text-transform:uppercase">encode</div>
+              <div style="flex:1;padding:12px 14px">
+                <div style="margin-bottom:6px"><span style="color:var(--muted)">message:</span> <span style="color:var(--text);font-weight:500">"Hi"</span></div>
+                <div style="margin-bottom:6px"><span style="color:var(--muted)">UTF-8 bytes:</span> <span style="font-family:var(--mono);color:var(--text)">72, 105</span></div>
+                <div style="margin-bottom:6px"><span style="color:var(--muted)">Huffman bits:</span> <span style="font-family:var(--mono);color:var(--text)">0 · 1</span> (2 bits — trivial example)</div>
+                <div><span style="color:var(--muted)">best offset found:</span> <span style="font-family:var(--mono);color:var(--text)">0</span></div>
+              </div>
+            </div>
+
+            <div style="overflow-x:auto;margin-bottom:16px">
+            <table style="min-width:580px;border-collapse:collapse;font-size:11px">
+              <thead>
+                <tr style="background:var(--bg)">
+                  <th style="padding:7px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">pos</th>
+                  <th style="padding:7px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">AA</th>
+                  <th style="padding:7px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">sorted codons (by E. coli usage)</th>
+                  <th style="padding:7px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted)">bits</th>
+                  <th style="padding:7px 10px;text-align:center;border-bottom:1px solid var(--border2);color:var(--muted)">index</th>
+                  <th style="padding:7px 10px;text-align:left;border-bottom:1px solid var(--border2);color:var(--muted)">chosen codon</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border)">1</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">M</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--muted)">ATG</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted)">—</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted)">—</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--muted)">ATG</td></tr>
+                <tr style="background:var(--bg)"><td style="padding:7px 10px;border-bottom:1px solid var(--border)">2</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">S</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--green)"><u>AGC</u> TCT AGT TCC TCA TCG</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center"><span style="background:#dbeafe;color:#1e40af;padding:1px 6px;border-radius:3px;font-family:var(--mono)">0</span><span style="color:var(--muted)">→1 bit</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center">0</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);font-weight:500;color:var(--green)">AGC ✓</td></tr>
+                <tr><td style="padding:7px 10px;border-bottom:1px solid var(--border)">3</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">K</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--green)"><u>AAA</u> AAG</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center"><span style="background:#dcfce7;color:#166534;padding:1px 6px;border-radius:3px;font-family:var(--mono)">1</span></td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center">1</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);font-weight:500;color:var(--green)">AAG ✓</td></tr>
+                <tr style="background:var(--bg)"><td style="padding:7px 10px;border-bottom:1px solid var(--border)">4</td><td style="padding:7px 10px;border-bottom:1px solid var(--border)">G</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--green)"><u>GGC</u> GGT GGG GGA</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted)">pad 0</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center">0</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);color:var(--muted)">GGC (pad)</td></tr>
+                <tr style="color:var(--muted)"><td style="padding:7px 10px" colspan="6">… remaining positions all use pad bits (0) …</td></tr>
+              </tbody>
+            </table>
+            </div>
+
+            <div style="display:flex;align-items:stretch;gap:0;margin-bottom:12px;border-radius:8px;overflow:hidden;border:1px solid var(--border2)">
+              <div style="background:#dcfce7;color:#166534;padding:10px 14px;flex:0 0 auto;writing-mode:vertical-lr;text-align:center;font-size:10px;letter-spacing:.1em;text-transform:uppercase">decode</div>
+              <div style="flex:1;padding:12px 14px">
+                <div style="margin-bottom:6px"><span style="color:var(--muted)">read CDS codons →</span> <span style="font-family:var(--mono)">ATG AGC AAG GGC ...</span></div>
+                <div style="margin-bottom:6px"><span style="color:var(--muted)">extract bits from wobble positions →</span> <span style="font-family:var(--mono)">0 · 1 · 00 · ...</span></div>
+                <div style="margin-bottom:6px"><span style="color:var(--muted)">un-rotate by offset 0 → same bit stream</span></div>
+                <div><span style="color:var(--muted)">Huffman decode →</span> <span style="color:var(--green);font-weight:500;font-family:var(--serif);font-size:16px;font-style:italic">"Hi"</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>ZBK · HTGAA 2026 · How to Grow (Almost) Anything</span>
+    <span>sfGFP steganography tool — codon wobble encoding</span>
+  </footer>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// BIOLOGICAL CONSTANTS
+// ═══════════════════════════════════════════════════════════════
+
+// sfGFP amino acid sequence (238 aa, standard superfolder GFP)
+const SFGFP_AA = "MSKGEELFTGVVPILVELDGDVNGHKFSVRGEGEGDATNGKLTLKFICTTGKLPVPWPTLVTTLTYGVQCFSRYPDHMKRHDFFKSAMPEGYVQERTISFKDDGTYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNFNSHNVYITADKQKNGIKANFKIRHNVEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSVLSKDPNEKRDHMVLLEFVTAAGITHGMDELYK";
+
+// E. coli codon usage table — codons sorted by usage frequency (descending)
+const CODON_TABLE = {
+  'F': ['TTC','TTT'],
+  'L': ['CTG','TTA','TTG','CTT','CTC','CTA'],
+  'I': ['ATT','ATC','ATA'],
+  'M': ['ATG'],
+  'V': ['GTG','GTT','GTC','GTA'],
+  'S': ['AGC','TCT','AGT','TCC','TCA','TCG'],
+  'P': ['CCG','CCA','CCT','CCC'],
+  'T': ['ACC','ACG','ACT','ACA'],
+  'A': ['GCG','GCC','GCA','GCT'],
+  'Y': ['TAT','TAC'],
+  '*': ['TAA','TGA','TAG'],
+  'H': ['CAT','CAC'],
+  'Q': ['CAG','CAA'],
+  'N': ['AAC','AAT'],
+  'K': ['AAA','AAG'],
+  'D': ['GAT','GAC'],
+  'E': ['GAA','GAG'],
+  'C': ['TGC','TGT'],
+  'W': ['TGG'],
+  'R': ['CGC','CGT','CGG','CGA','AGA','AGG'],
+  'G': ['GGC','GGT','GGG','GGA']
+};
+
+// Regulatory elements flanking the CDS
+const ECORI   = 'GAATTC';
+const LAC_PROMOTER = 'TTGACAATTAATCATCGGCTCGTATAATG';
+const LAC_OPERATOR = 'TGTGGAATTGTGAGCGGATAACAATTTC';
+const RBS     = 'ACAGGAAACAGCTATGAC';
+const HINDIII = 'AAGCTT';
+const PREFIX  = ECORI + LAC_PROMOTER + LAC_OPERATOR + RBS;
+
+// Bits available per amino acid
+function bitsFor(aa) {
+  const n = CODON_TABLE[aa].length;
+  return n <= 1 ? 0 : Math.floor(Math.log2(n));
+}
+
+// Total capacity
+const CAPACITY = SFGFP_AA.split('').reduce((s,aa) => s + bitsFor(aa), 0);
+
+// ═══════════════════════════════════════════════════════════════
+// HUFFMAN CODEC
+// ═══════════════════════════════════════════════════════════════
+
+class HuffNode {
+  constructor(ch, freq, left, right) {
+    this.ch = ch; this.freq = freq; this.left = left || null; this.right = right || null;
+  }
+}
+
+function buildHuffman(bytes) {
+  const freq = {};
+  for (const b of bytes) freq[b] = (freq[b]||0) + 1;
+  const nodes = Object.entries(freq).map(([ch,f]) => new HuffNode(parseInt(ch), f));
+  if (nodes.length === 1) nodes.push(new HuffNode(nodes[0].ch === 0 ? 1 : 0, 0));
+  while (nodes.length > 1) {
+    nodes.sort((a,b) => a.freq - b.freq || (a.ch??256) - (b.ch??256));
+    const l = nodes.shift(), r = nodes.shift();
+    nodes.push(new HuffNode(null, l.freq + r.freq, l, r));
+  }
+  const codes = {};
+  (function walk(n, prefix) {
+    if (n.ch !== null) { codes[n.ch] = prefix || '0'; return; }
+    walk(n.left, prefix+'0'); walk(n.right, prefix+'1');
+  })(nodes[0], '');
+  return codes;
+}
+
+function huffEncode(bytes) {
+  const codes = buildHuffman(bytes);
+  const bits = bytes.map(b => codes[b]).join('');
+  return { bits, codes };
+}
+
+function huffDecode(bits, codes) {
+  const rev = {};
+  for (const [byte, code] of Object.entries(codes)) rev[code] = parseInt(byte);
+  const out = [];
+  let buf = '';
+  for (const b of bits) {
+    buf += b;
+    if (rev[buf] !== undefined) { out.push(rev[buf]); buf = ''; }
+  }
+  return new Uint8Array(out);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ENCODE / DECODE ENGINE
+// ═══════════════════════════════════════════════════════════════
+
+function rotateBits(bits, offset) {
+  if (!bits.length || offset === 0) return bits;
+  const o = ((offset % bits.length) + bits.length) % bits.length;
+  return bits.slice(o) + bits.slice(0, o);
+}
+
+function unrotateBits(bits, offset) {
+  return rotateBits(bits, bits.length - offset);
+}
+
+function bitsToSequence(bitStream) {
+  let pos = 0;
+  const codons = [];
+  for (const aa of SFGFP_AA) {
+    const opts = CODON_TABLE[aa];
+    const b = bitsFor(aa);
+    if (b === 0) { codons.push(opts[0]); continue; }
+    let idx = 0;
+    for (let i = 0; i < b; i++) {
+      idx = (idx << 1) | (pos < bitStream.length ? parseInt(bitStream[pos++]) : 0);
+    }
+    codons.push(opts[idx % opts.length]);
+  }
+  return codons;
+}
+
+function sequenceToBits(codons) {
+  let bits = '';
+  for (let i = 0; i < codons.length; i++) {
+    const aa = SFGFP_AA[i];
+    const b = bitsFor(aa);
+    if (b === 0) continue;
+    const idx = CODON_TABLE[aa].indexOf(codons[i]);
+    if (idx < 0) return null;
+    bits += idx.toString(2).padStart(b, '0');
+  }
+  return bits;
+}
+
+function maxHomopolymer(seq) {
+  let max = 1, cur = 1;
+  for (let i = 1; i < seq.length; i++) {
+    if (seq[i] === seq[i-1]) { cur++; if (cur > max) max = cur; }
+    else cur = 1;
+  }
+  return max;
+}
+
+function gcContent(seq) {
+  const gc = [...seq].filter(c => c==='G'||c==='C').length;
+  return gc / seq.length;
+}
+
+function encode(message) {
+  const bytes = new TextEncoder().encode(message);
+  const { bits: rawBits, codes } = huffEncode([...bytes]);
+
+  if (rawBits.length > CAPACITY) {
+    return { error: `Message needs ${rawBits.length} bits but capacity is ${CAPACITY} bits. Shorten your message.` };
+  }
+
+  // Pad to capacity
+  const padded = rawBits.padEnd(CAPACITY, '0');
+
+  // Try all offsets, pick best (lowest max homopolymer)
+  let bestOffset = 0, bestHP = Infinity, bestCodons = null, bestSeq = '';
+  for (let off = 0; off < CAPACITY; off++) {
+    const rotated = rotateBits(padded, off);
+    const codons = bitsToSequence(rotated);
+    const cds = codons.join('');
+    const hp = maxHomopolymer(PREFIX + cds + HINDIII);
+    if (hp < bestHP) { bestHP = hp; bestOffset = off; bestCodons = codons; bestSeq = cds; }
+    if (hp <= 4) break; // Good enough for Twist
+  }
+
+  const fullInsert = PREFIX + bestSeq + HINDIII;
+
+  // Round-trip verify
+  const extractedBits = sequenceToBits(bestCodons);
+  const unrotated = unrotateBits(extractedBits, bestOffset);
+  const decoded = huffDecode(unrotated.slice(0, rawBits.length), codes);
+  const verify = new TextDecoder().decode(decoded);
+
+  return {
+    insert: fullInsert,
+    cds: bestSeq,
+    codons: bestCodons,
+    offset: bestOffset,
+    huffCodes: codes,
+    rawBitLen: rawBits.length,
+    gc: gcContent(fullInsert),
+    hp: bestHP,
+    verified: verify === message,
+    metadata: {
+      config: {
+        sfgfp_aa: SFGFP_AA,
+        codon_table_hash: 'ecoli_k12',
+        version: 1
+      },
+      encoding: {
+        huffman_codes: codes,
+        bit_length: rawBits.length,
+        rotation_offset: bestOffset,
+        capacity: CAPACITY
+      }
+    }
+  };
+}
+
+function decode(dnaInput, metadataStr) {
+  let meta;
+  try { meta = JSON.parse(metadataStr); } catch(e) {
+    return { error: 'Invalid metadata JSON: ' + e.message };
+  }
+
+  const seq = dnaInput.replace(/[^ATCGatcg]/g, '').toUpperCase();
+
+  // Find the CDS — look for ATG...TAA that matches sfGFP length (717 nt)
+  const cdsLen = SFGFP_AA.length * 3;
+  let cds = null;
+
+  // Strategy 1: look for our prefix
+  const prefixIdx = seq.indexOf(PREFIX.slice(-18)); // Last 18 of prefix (RBS)
+  if (prefixIdx >= 0) {
+    const start = prefixIdx + 18;
+    if (start + cdsLen <= seq.length) {
+      cds = seq.slice(start, start + cdsLen);
+    }
+  }
+
+  // Strategy 2: scan for ATG + correct length ending in stop
+  if (!cds) {
+    for (let i = 0; i <= seq.length - cdsLen; i++) {
+      if (seq.slice(i, i+3) === 'ATG') {
+        const candidate = seq.slice(i, i + cdsLen);
+        const lastCodon = candidate.slice(-3);
+        if (['TAA','TAG','TGA'].includes(lastCodon)) {
+          // Verify it translates to sfGFP
+          let match = true;
+          for (let j = 0; j < SFGFP_AA.length; j++) {
+            const codon = candidate.slice(j*3, j*3+3);
+            if (!CODON_TABLE[SFGFP_AA[j]].includes(codon)) { match = false; break; }
+          }
+          if (match) { cds = candidate; break; }
+        }
+      }
+    }
+  }
+
+  if (!cds) return { error: 'Could not find sfGFP CDS in the provided sequence.' };
+
+  // Extract codons
+  const codons = [];
+  for (let i = 0; i < cds.length; i += 3) codons.push(cds.slice(i, i+3));
+
+  const bits = sequenceToBits(codons);
+  if (!bits) return { error: 'Codon extraction failed — sequence may have mutations.' };
+
+  const { huffman_codes, bit_length, rotation_offset } = meta.encoding;
+  const unrotated = unrotateBits(bits, rotation_offset);
+  const msgBits = unrotated.slice(0, bit_length);
+
+  try {
+    const decoded = huffDecode(msgBits, huffman_codes);
+    const message = new TextDecoder().decode(decoded);
+    return { message, bitsUsed: bit_length, codonsRead: codons.length };
+  } catch(e) {
+    return { error: 'Huffman decode failed: ' + e.message };
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// UI
+// ═══════════════════════════════════════════════════════════════
+
+let lastEncodeResult = null;
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    const panels = ['encode','decode','about'];
+    const panelIds = ['panel-encode','panel-decode','panel-about'];
+    t.classList.toggle('active', panels[i] === name);
+  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  const id = name === 'about' ? 'panel-about' : 'panel-' + name;
+  document.getElementById(id).classList.add('active');
+}
+
+function encodeMessage() {
+  const msg = document.getElementById('enc-message').value.trim();
+  if (!msg) return;
+
+  document.getElementById('enc-spinner').style.display = 'inline-block';
+
+  setTimeout(() => {
+    const result = encode(msg);
+    document.getElementById('enc-spinner').style.display = 'none';
+
+    if (result.error) {
+      alert(result.error);
+      return;
+    }
+
+    lastEncodeResult = result;
+    document.getElementById('enc-result').style.display = 'block';
+
+    // Stats
+    document.getElementById('r-len').textContent = result.insert.length + ' nt';
+    document.getElementById('r-gc').textContent = (result.gc * 100).toFixed(1) + '%';
+    document.getElementById('r-bits').textContent = result.rawBitLen;
+    document.getElementById('r-hp').textContent = result.hp;
+
+    // Alerts
+    const alerts = document.getElementById('enc-alerts');
+    alerts.innerHTML = '';
+    if (result.verified) {
+      alerts.innerHTML += '<div class="alert success"><div class="alert-dot"></div>Round-trip verified — decode produces exact original message</div>';
+    }
+    if (result.gc >= 0.40 && result.gc <= 0.65) {
+      alerts.innerHTML += '<div class="alert success"><div class="alert-dot"></div>GC content ' + (result.gc*100).toFixed(1) + '% is within Twist\'s recommended range</div>';
+    } else {
+      alerts.innerHTML += '<div class="alert warning"><div class="alert-dot"></div>GC content ' + (result.gc*100).toFixed(1) + '% — check Twist guidelines</div>';
+    }
+    if (result.hp <= 6) {
+      alerts.innerHTML += '<div class="alert success"><div class="alert-dot"></div>Max homopolymer run: ' + result.hp + ' nt (Twist limit: 6)</div>';
+    } else {
+      alerts.innerHTML += '<div class="alert warning"><div class="alert-dot"></div>Max homopolymer run: ' + result.hp + ' nt — may need manual review</div>';
+    }
+
+    // Sequence
+    document.getElementById('r-seq').textContent = result.insert;
+
+    // Codon map
+    const map = document.getElementById('r-codon-map');
+    map.innerHTML = '';
+    result.codons.forEach((codon, i) => {
+      const aa = SFGFP_AA[i];
+      const bits = bitsFor(aa);
+      const cell = document.createElement('div');
+      cell.className = 'codon-cell ' + (bits > 0 ? 'hidden-bit' : 'no-wobble');
+      cell.title = `pos ${i+1}: ${aa} → ${codon} (${bits > 0 ? bits + ' bit' + (bits>1?'s':'') : 'fixed'})`;
+      cell.innerHTML = `<span class="aa">${aa}</span><span class="cod">${codon}</span>`;
+      map.appendChild(cell);
+    });
+
+    // Capacity bar
+    document.getElementById('enc-capacity-bar').style.display = 'block';
+    const pct = (result.rawBitLen / CAPACITY * 100);
+    document.getElementById('enc-cap-bar').style.width = pct + '%';
+    document.getElementById('enc-cap-label').textContent = result.rawBitLen + ' / ' + CAPACITY + ' bits';
+
+    // Scroll to result
+    document.getElementById('enc-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // GFP glow
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('glow'));
+    document.getElementById('enc-result').querySelector('.card').classList.add('glow');
+
+  }, 100);
+}
+
+function decodeMessage() {
+  const seq = document.getElementById('dec-seq').value.trim();
+  const meta = document.getElementById('dec-meta').value.trim();
+  if (!seq || !meta) return;
+
+  document.getElementById('dec-spinner').style.display = 'inline-block';
+
+  setTimeout(() => {
+    const result = decode(seq, meta);
+    document.getElementById('dec-spinner').style.display = 'none';
+    document.getElementById('dec-result').style.display = 'block';
+
+    if (result.error) {
+      document.getElementById('dec-message').textContent = '';
+      document.getElementById('dec-alerts').innerHTML = '<div class="alert error"><div class="alert-dot"></div>' + result.error + '</div>';
+      document.getElementById('dec-stats').textContent = '';
+      return;
+    }
+
+    document.getElementById('dec-message').textContent = result.message;
+    document.getElementById('dec-alerts').innerHTML = '<div class="alert success"><div class="alert-dot"></div>Message successfully decoded from DNA sequence</div>';
+    document.getElementById('dec-stats').textContent = `${result.bitsUsed} bits extracted from ${result.codonsRead} codons`;
+
+    document.getElementById('dec-result-card').classList.add('glow');
+    document.getElementById('dec-result').scrollIntoView({ behavior: 'smooth' });
+
+  }, 100);
+}
+
+function loadDecodeExample() {
+  // Encode a sample message first
+  const sample = encode("Hello from inside a bacterium!");
+  if (sample.error) return;
+  document.getElementById('dec-seq').value = sample.insert;
+  document.getElementById('dec-meta').value = JSON.stringify(sample.metadata, null, 2);
+}
+
+function copySeq() {
+  if (!lastEncodeResult) return;
+  navigator.clipboard.writeText(lastEncodeResult.insert).then(() => {
+    const btn = document.getElementById('copy-seq-btn');
+    btn.style.background = 'var(--green-light)';
+    setTimeout(() => btn.style.background = 'var(--surface)', 1200);
+  });
+}
+
+function downloadMeta() {
+  if (!lastEncodeResult) return;
+  const blob = new Blob([JSON.stringify(lastEncodeResult.metadata, null, 2)], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'metadata.json';
+  a.click();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EXPLAINER STEPS
+// ═══════════════════════════════════════════════════════════════
+
+function showStep(idx) {
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById('step-' + i);
+    const btn = document.getElementById('btn-s' + i);
+    if (el) el.style.display = i === idx ? 'block' : 'none';
+    if (btn) { btn.className = i === idx ? 'btn btn-primary' : 'btn btn-secondary'; btn.style.fontSize = '11px'; btn.style.padding = '6px 14px'; }
+  }
+}
+
+// Bit rotation demo
+const demoBits = [1,0,1,1,0,0,1,1];
+function updateRotation(val) {
+  document.getElementById('rot-val').textContent = val;
+  const offset = parseInt(val);
+  const display = document.getElementById('rot-bits-display');
+  const colors = ['#fee2e2','#fee2e2','#fee2e2','#fef3c7','#fef3c7','#dcfce7','#dcfce7','#dbeafe'];
+  const textColors = ['#991b1b','#991b1b','#991b1b','#92400e','#92400e','#166534','#166534','#1e40af'];
+  display.innerHTML = '';
+  for (let i = 0; i < 8; i++) {
+    const srcIdx = (i + offset) % 8;
+    const span = document.createElement('span');
+    span.style.cssText = `padding:4px 8px;border-radius:4px;background:${colors[srcIdx]};color:${textColors[srcIdx]};font-family:var(--mono);font-size:10px`;
+    span.textContent = demoBits[srcIdx];
+    display.appendChild(span);
+  }
+  const dots = document.createElement('span');
+  dots.style.cssText = 'padding:4px 8px;color:var(--muted);font-size:10px';
+  dots.textContent = '…rotated';
+  display.appendChild(dots);
+}
+updateRotation(0);
+
+// ═══════════════════════════════════════════════════════════════
+// PROTOCOL STEPS
+// ═══════════════════════════════════════════════════════════════
+
+const protoData = {
+  1: [
+    ['Type message in Encode tab', 'any UTF-8 text, up to ~42 bytes'],
+    ['Click "Encode into sfGFP"', 'auto: Huffman compress → bit-rotate → codon select'],
+    ['Verify green alerts', 'round-trip ✓, GC 40–65%, homopolymer ≤ 6'],
+    ['Download metadata.json', 'needed for decoding — store securely'],
+    ['Copy full insert sequence', '804 nt: EcoRI + promoter/operator/RBS + sfGFP CDS + HindIII'],
+  ],
+  2: [
+    ['Create Twist account', 'twistbioscience.com — academic pricing available'],
+    ['Select "Gene Fragments" or "Clonal Genes in pUC19"', 'clonal = they clone it for you → you get plasmid DNA'],
+    ['Paste your 804 nt insert', 'Twist runs automated QC: GC, homopolymers, repeats'],
+    ['Select pUC19 as cloning vector, EcoRI + HindIII as restriction sites', 'insert goes into MCS, disrupts lacZα'],
+    ['Order and wait ~2 weeks', 'you receive lyophilized plasmid DNA in a tube'],
+  ],
+  3: [
+    ['Resuspend plasmid in TE buffer', '10 µL TE → ~10 ng/µL'],
+    ['Thaw DH5α competent cells on ice', '50 µL aliquot, 10 min'],
+    ['Add 1–2 µL plasmid DNA to cells', 'mix gently by flicking — do NOT vortex'],
+    ['Ice 30 min → heat shock 42°C 45 sec → ice 2 min', 'standard chemical transformation'],
+    ['Add 950 µL SOC, shake 37°C 1 hr', 'recovery — cells express ampR'],
+    ['Plate on LB + ampicillin (100 µg/mL) + X-gal + IPTG', 'blue-white screening + GFP expression'],
+    ['Incubate 37°C overnight (12–16 hr)', 'colonies visible next morning'],
+  ],
+  4: [
+    ['Look for white colonies', 'white = lacZα disrupted = insert present'],
+    ['Optional: UV lamp check', 'sfGFP colonies glow green when IPTG is present'],
+    ['Pick 2–3 white/green colonies', 'streak on fresh LB+amp plate for single colonies'],
+    ['Inoculate 5 mL LB+amp overnight cultures', '37°C, 220 rpm, 12–16 hr'],
+  ],
+  5: [
+    ['Miniprep each culture', 'Qiagen or equivalent — yields ~200 ng/µL plasmid'],
+    ['Send for Sanger sequencing', 'use M13 forward primer (binds pUC19 upstream of MCS)'],
+    ['Wait ~24 hr for .ab1 results', 'read length ~800 nt covers entire insert'],
+  ],
+  6: [
+    ['Open Decode tab', 'paste raw Sanger sequence + metadata.json'],
+    ['Click "Decode message"', 'auto: find CDS → extract wobble bits → un-rotate → Huffman decode'],
+    ['Read your decoded message', 'if it matches, the bacteria were carrying your words'],
+  ],
+};
+
+Object.entries(protoData).forEach(([part, steps]) => {
+  const tbody = document.getElementById('proto-steps-' + part);
+  if (!tbody) return;
+  steps.forEach(([action, params], i) => {
+    const tr = document.createElement('tr');
+    if (i % 2) tr.style.background = 'var(--bg)';
+    tr.innerHTML = `
+      <td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted)">${i+1}</td>
+      <td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text)">${action}</td>
+      <td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--muted)">${params}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// DNA RAIN BACKGROUND
+// ═══════════════════════════════════════════════════════════════
+
+(function initDNARain() {
+  const bg = document.getElementById('dna-bg');
+  const bases = 'ATCGATCGATCG';
+  for (let i = 0; i < 20; i++) {
+    const col = document.createElement('div');
+    col.className = 'dna-col';
+    col.style.left = (Math.random() * 100) + '%';
+    col.style.animationDuration = (12 + Math.random() * 20) + 's';
+    col.style.animationDelay = (-Math.random() * 20) + 's';
+    let text = '';
+    for (let j = 0; j < 40; j++) text += bases[Math.floor(Math.random()*12)];
+    col.textContent = text;
+    bg.appendChild(col);
+  }
+})();
+</script>
+
+</body>
+</html>
