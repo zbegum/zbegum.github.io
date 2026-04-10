@@ -296,6 +296,9 @@ textarea:focus, input:focus { border-color: var(--green-mid); }
 .codon-cell.no-wobble   { background: rgba(0,0,0,0.04); }
 .codon-cell.no-wobble .cod  { color: var(--muted); }
 .codon-cell.no-wobble .bts  { color: transparent; }
+/* padding zeros — same channel, but dimmed */
+.codon-cell.padding-bit { opacity: 0.35; }
+.codon-cell.padding-bit:hover { opacity: 1; }
 
 /* detail panel */
 .codon-detail {
@@ -535,17 +538,18 @@ footer {
     <div class="card">
       <div class="card-title">Your message</div>
       <div class="field">
-        <textarea id="enc-message" rows="4" placeholder="Write your message to hide inside sfGFP..."></textarea>
+        <textarea id="enc-message" rows="4" placeholder="Write your message to hide inside sfGFP..." oninput="updateCapacityPreview()"></textarea>
       </div>
-      <div id="enc-capacity-bar" class="progress-wrap" style="display:none">
-        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:4px">
-          <span>Capacity used</span>
-          <span id="enc-cap-label">0 / 341 bits</span>
+      <div id="enc-capacity-bar" class="progress-wrap" style="display:block">
+        <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px">
+          <span style="color:var(--muted)">Capacity</span>
+          <span id="enc-cap-label" style="color:var(--muted)">0 / 346 bits</span>
         </div>
         <div class="progress-bar-bg"><div class="progress-bar" id="enc-cap-bar" style="width:0%"></div></div>
+        <div id="enc-cap-warn" style="display:none;font-size:11px;color:var(--red);margin-top:5px">Message too long — shorten it to fit within 346 bits.</div>
       </div>
       <div class="actions">
-        <button class="btn btn-primary" onclick="encodeMessage()">
+        <button id="enc-btn" class="btn btn-primary" onclick="encodeMessage()">
           <span id="enc-spinner" style="display:none" class="spinner"></span>
           Encode into sfGFP →
         </button>
@@ -607,18 +611,17 @@ footer {
           <div style="display:flex;gap:2px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:2px">
             <button onclick="setSeqMode('dna')"     id="mode-dna"    class="seq-mode-btn active">DNA</button>
             <button onclick="setSeqMode('protein')" id="mode-protein" class="seq-mode-btn">Protein</button>
-            <button onclick="setSeqMode('changes')" id="mode-changes" class="seq-mode-btn">Changes</button>
           </div>
         </div>
 
         <!-- Mode descriptions -->
-        <div id="mode-desc-dna"     style="font-size:11px;color:var(--muted);margin-bottom:8px">Raw DNA sequence — NdeI site + sfGFP CDS (717 nt) + XhoI site. Copy this and order from Twist.</div>
-        <div id="mode-desc-protein" style="font-size:11px;color:var(--muted);margin-bottom:8px;display:none">Translated protein — 238 amino acids. Identical to canonical sfGFP regardless of which codons were chosen. The message is invisible at the protein level.</div>
-        <div id="mode-desc-changes" style="font-size:11px;color:var(--muted);margin-bottom:8px;display:none">Steganography view — each codon shown as a chip. <span style="background:rgba(45,122,79,0.15);color:var(--green);padding:1px 5px;border-radius:3px">green</span> = carries hidden bits · <span style="background:rgba(45,122,79,0.08);color:var(--green-mid);padding:1px 5px;border-radius:3px">changed</span> = swapped from default codon to encode your message · <span style="background:rgba(0,0,0,0.04);color:var(--muted);padding:1px 5px;border-radius:3px">grey</span> = no wobble room.</div>
+        <div id="mode-desc-dna"     style="font-size:11px;color:var(--muted);margin-bottom:8px">The sfGFP coding sequence with your message hidden in synonymous codon choices.</div>
+        <div id="mode-desc-protein" style="font-size:11px;color:var(--muted);margin-bottom:8px;display:none">The translated protein — always identical to canonical sfGFP no matter what message you encoded.</div>
+        
 
         <!-- Sequence display area -->
         <div style="position:relative">
-          <div id="r-seq-display" style="background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:12px 36px 12px 12px;font-family:var(--mono);font-size:11px;line-height:1.9;max-height:220px;overflow-y:auto;word-break:break-all"></div>
+          <div id="r-seq-display" style="background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:12px 36px 12px 12px;font-family:var(--mono);font-size:11px;line-height:1.9;word-break:break-all"></div>
           <button onclick="copySeq()" title="Copy" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border:1px solid var(--border2);border-radius:4px;background:var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0" id="copy-seq-btn">
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted)"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>
           </button>
@@ -640,10 +643,11 @@ footer {
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px;font-size:11px;font-family:var(--mono)">
           <span><span id="cm-stat-bits" style="color:var(--text);font-weight:500">—</span> <span style="color:var(--muted)">bits hidden</span></span>
           <span><span id="cm-stat-wobble" style="color:var(--text);font-weight:500">—</span> <span style="color:var(--muted)">wobble positions</span></span>
+          <span><span id="cm-stat-changed" style="color:var(--text);font-weight:500">—</span> <span style="color:var(--muted)">codons changed</span></span>
           <span><span id="cm-stat-fixed" style="color:var(--text);font-weight:500">—</span> <span style="color:var(--muted)">fixed (Met / Trp)</span></span>
           <span style="margin-left:auto;display:flex;gap:10px;align-items:center">
-            <span style="display:inline-flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:rgba(45,122,79,0.22);border-radius:2px;display:inline-block"></span><span style="color:var(--muted)">2 bits</span></span>
-            <span style="display:inline-flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:rgba(45,122,79,0.10);border-radius:2px;display:inline-block"></span><span style="color:var(--muted)">1 bit</span></span>
+            <span style="display:inline-flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:rgba(45,122,79,0.22);border-radius:2px;display:inline-block"></span><span style="color:var(--muted)">message bit</span></span>
+            <span style="display:inline-flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:rgba(45,122,79,0.22);border-radius:2px;display:inline-block;opacity:0.35"></span><span style="color:var(--muted)">padding zero</span></span>
             <span style="display:inline-flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:rgba(0,0,0,0.04);border-radius:2px;display:inline-block"></span><span style="color:var(--muted)">fixed</span></span>
           </span>
         </div>
@@ -801,7 +805,7 @@ CTTGAATTTG TGACAGCTGC TGGTATCACT CACGGCATGG ATGAGCTTTA TAAGTAA
             </tbody>
           </table>
           </div>
-          <p style="color:var(--muted);font-size:11px;margin-top:10px">Formula: bits per position = floor(log₂(number of codons)). sfGFP has 231 wobble positions → total capacity 341 bits ≈ 42 bytes.</p>
+          <p style="color:var(--muted);font-size:11px;margin-top:10px">Formula: bits per position = floor(log₂(number of codons)). sfGFP has 232 wobble positions → total capacity 346 bits ≈ 43 bytes.</p>
         </div>
 
         <!-- STEP 1 -->
@@ -874,7 +878,7 @@ CTTGAATTTG TGACAGCTGC TGGTATCACT CACGGCATGG ATGAGCTTTA TAAGTAA
       <div class="card-title">Encoding pipeline</div>
       <ul class="pipe-list">
         <li><span class="pipe-num-badge">01</span><span><strong>Compress</strong> with Huffman coding — builds a variable-length prefix code from byte frequencies. Short messages compress to fewer bits.</span></li>
-        <li><span class="pipe-num-badge">02</span><span><strong>Scan sfGFP</strong> amino-acid by amino-acid. At each position, count synonymous codons in <em>E. coli</em>. If n codons exist, ⌊log₂(n)⌋ bits can be hidden here. Total capacity: 341 bits.</span></li>
+        <li><span class="pipe-num-badge">02</span><span><strong>Scan sfGFP</strong> amino-acid by amino-acid. At each position, count synonymous codons in <em>E. coli</em>. If n codons exist, ⌊log₂(n)⌋ bits can be hidden here. Total capacity: 346 bits.</span></li>
         <li><span class="pipe-num-badge">03</span><span><strong>Map bits → codons.</strong> Read ⌊log₂(n)⌋ bits from the stream; use the integer value as an index into the sorted codon list.</span></li>
         <li><span class="pipe-num-badge">04</span><span><strong>Bit rotation.</strong> Try all offsets; pick the one that minimises the longest homopolymer run. Store chosen offset in metadata.json.</span></li>
         <li><span class="pipe-num-badge">05</span><span><strong>Output</strong> the 729 nt insert (NdeI + sfGFP CDS + XhoI). Order from Twist, clone into pET-28a (NdeI / XhoI), transform <em>E. coli</em> BL21(DE3). Induce with IPTG.</span></li>
@@ -936,8 +940,8 @@ const CODON_TABLE = {
   'G': ['GGC','GGT','GGG','GGA']
 };
 
-const NDEI   = 'CA';   // completes NdeI site (CATATG) — ATG is sfGFP start codon
-const XHOI   = 'CTCGAG';
+
+
 
 function bitsFor(aa) {
   const n = CODON_TABLE[aa].length;
@@ -1064,12 +1068,10 @@ function encode(message) {
     const rotated = rotateBits(padded, off);
     const codons = bitsToSequence(rotated);
     const cds = codons.join('');
-    const hp = maxHomopolymer(NDEI + cds + XHOI);
+    const hp = maxHomopolymer(cds);
     if (hp < bestHP) { bestHP = hp; bestOffset = off; bestCodons = codons; bestSeq = cds; }
     if (hp <= 4) break;
   }
-
-  const fullInsert = NDEI + bestSeq + XHOI;
 
   const extractedBits = sequenceToBits(bestCodons);
   const unrotated = unrotateBits(extractedBits, bestOffset);
@@ -1081,14 +1083,28 @@ function encode(message) {
   const changed = bestCodons.filter((c, i) => c !== defaultCodons[i]).length;
   const modRate = changed / SFGFP_AA.length;
 
+  // Track which codon positions carry real message bits vs zero padding
+  // After rotation by bestOffset, bit j in rotated stream came from padded[(j+bestOffset)%CAPACITY]
+  // A bit is "real" if its source position in padded is < rawBits.length
+  let bitCursor = 0;
+  const codonIsReal = SFGFP_AA.split('').map(aa => {
+    const b = bitsFor(aa);
+    let hasReal = false;
+    for (let j = 0; j < b; j++) {
+      if ((bitCursor + j + bestOffset) % CAPACITY < rawBits.length) hasReal = true;
+    }
+    bitCursor += b;
+    return hasReal;
+  });
+
   return {
-    insert: fullInsert,
     cds: bestSeq,
     codons: bestCodons,
+    codonIsReal,
     offset: bestOffset,
     huffCodes: codes,
     rawBitLen: rawBits.length,
-    gc: gcContent(fullInsert),
+    gc: gcContent(bestSeq),
     hp: bestHP,
     modRate,
     verified: verify === message,
@@ -1106,29 +1122,29 @@ function decode(dnaInput, metadataStr) {
   }
 
   const seq = dnaInput.replace(/[^ATCGatcg]/g, '').toUpperCase();
-  const cdsLen = SFGFP_AA.length * 3;
+  const cdsLen = SFGFP_AA.length * 3; // 714 nt = 238 codons, no stop
   let cds = null;
 
-  const prefixIdx = seq.indexOf('CATATG');
-  if (prefixIdx >= 0) {
-    const start = prefixIdx + 2; // skip CA, ATG starts the CDS
+  // Strategy 1: NdeI site (CATATG) in a Sanger read
+  const ndeiIdx = seq.indexOf('CATATG');
+  if (ndeiIdx >= 0) {
+    const start = ndeiIdx + 2;
     if (start + cdsLen <= seq.length) cds = seq.slice(start, start + cdsLen);
   }
 
+  // Strategy 2: scan for ATG, validate all 238 codons — no stop codon required
   if (!cds) {
     for (let i = 0; i <= seq.length - cdsLen; i++) {
-      if (seq.slice(i, i+3) === 'ATG') {
-        const candidate = seq.slice(i, i + cdsLen);
-        const lastCodon = candidate.slice(-3);
-        if (['TAA','TAG','TGA'].includes(lastCodon)) {
-          let match = true;
-          for (let j = 0; j < SFGFP_AA.length; j++) {
-            const codon = candidate.slice(j*3, j*3+3);
-            if (!CODON_TABLE[SFGFP_AA[j]].includes(codon)) { match = false; break; }
-          }
-          if (match) { cds = candidate; break; }
+      if (seq.slice(i, i+3) !== 'ATG') continue;
+      const candidate = seq.slice(i, i + cdsLen);
+      let match = true;
+      for (let j = 0; j < SFGFP_AA.length; j++) {
+        const codon = candidate.slice(j*3, j*3+3);
+        if (!CODON_TABLE[SFGFP_AA[j]] || !CODON_TABLE[SFGFP_AA[j]].includes(codon)) {
+          match = false; break;
         }
       }
+      if (match) { cds = candidate; break; }
     }
   }
 
@@ -1164,7 +1180,7 @@ function setSeqMode(mode) {
   currentSeqMode = mode;
   document.querySelectorAll('.seq-mode-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('mode-' + mode).classList.add('active');
-  ['dna','protein','changes'].forEach(m => {
+  ['dna','protein'].forEach(m => {
     document.getElementById('mode-desc-' + m).style.display = m === mode ? 'block' : 'none';
   });
   if (lastEncodeResult) renderSeqDisplay(lastEncodeResult, mode);
@@ -1175,32 +1191,18 @@ function renderSeqDisplay(result, mode) {
   el.innerHTML = '';
 
   if (mode === 'dna') {
-    // Formatted DNA: NdeI in green, CDS body, XhoI in red, 60 chars/line with position
-    const ins = result.insert;
-    const cdsStart = 2; // CA prefix (NdeI)
-    const cdsEnd = cdsStart + result.cds.length;
-    let html = '';
-    for (let i = 0; i < ins.length; i += 60) {
-      const lineNum = String(i + 1).padStart(4, ' ');
-      html += `<span style="color:var(--muted);user-select:none">${lineNum} </span>`;
-      for (let j = i; j < Math.min(i + 60, ins.length); j++) {
-        const ch = ins[j];
-        if (j < cdsStart) html += `<span style="color:#1a6b3c;font-weight:500">${ch}</span>`;
-        else if (j >= cdsEnd) html += `<span style="color:#922b21;font-weight:500">${ch}</span>`;
-        else html += `<span style="color:var(--green)">${ch}</span>`;
-      }
-      html += '\n';
-    }
+    // Show only the sfGFP CDS — no enzyme flanks, no line breaks
+    const seq = result.cds;
+    let html = `<span style="color:var(--green)">${seq}</span>`;
     el.style.color = '';
     el.innerHTML = html;
 
   } else if (mode === 'protein') {
-    // Amino acid sequence, 10 per line
+    // Amino acid sequence, 30 25 per line
     const aa = SFGFP_AA;
-    let html = `<div style="font-size:10px;color:var(--muted);margin-bottom:8px">238 amino acids · identical to canonical sfGFP · message is invisible at protein level</div>`;
-    html += `<div style="display:flex;flex-wrap:wrap;gap:3px">`;
+    let html = `<div style="display:flex;flex-wrap:wrap;gap:3px">`;
     for (let i = 0; i < aa.length; i++) {
-      const showNum = i % 10 === 0;
+      const showNum = i % 35 === 0;
       if (showNum && i > 0) html += `<div style="width:100%;height:0"></div>`;
       if (showNum) html += `<span style="color:var(--muted);font-size:9px;min-width:24px;padding-top:2px">${i+1}</span>`;
       html += `<span style="background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:2px 4px;font-size:11px;color:var(--text)">${aa[i]}</span>`;
@@ -1208,38 +1210,6 @@ function renderSeqDisplay(result, mode) {
     html += `</div>`;
     el.innerHTML = html;
 
-  } else if (mode === 'changes') {
-    // Codon chips — show which changed from default
-    const defaultCodons = [...SFGFP_AA].map(aa => CODON_TABLE[aa][0]);
-    let changed = 0, carrying = 0;
-    let html = `<div style="display:flex;flex-wrap:wrap;gap:3px;align-items:flex-end">`;
-    result.codons.forEach((codon, i) => {
-      const aa = SFGFP_AA[i];
-      const isDefault = codon === defaultCodons[i];
-      const hasWobble = bitsFor(aa) > 0;
-      const isChanged = hasWobble && !isDefault;
-      if (hasWobble) carrying++;
-      if (isChanged) changed++;
-      const showNum = i % 10 === 0;
-      if (showNum && i > 0) html += `<div style="width:100%;height:0;margin:2px 0"></div>`;
-      if (showNum) html += `<span style="color:var(--muted);font-size:9px;min-width:24px;align-self:center">${i+1}</span>`;
-      let bg, color, border;
-      if (!hasWobble)   { bg='rgba(0,0,0,0.03)'; color='var(--muted)'; border='var(--border)'; }
-      else if (isChanged) { bg='rgba(45,122,79,0.18)'; color='var(--green)'; border='rgba(45,122,79,0.4)'; }
-      else              { bg='rgba(45,122,79,0.06)'; color='var(--green-mid)'; border='rgba(45,122,79,0.15)'; }
-      html += `<div title="pos ${i+1} · ${aa} · ${codon}${isChanged?' · changed from '+defaultCodons[i]:''}" style="background:${bg};border:1px solid ${border};border-radius:3px;padding:2px 3px;text-align:center;cursor:default">
-        <div style="font-size:7px;color:var(--muted);line-height:1">${aa}</div>
-        <div style="font-size:9px;color:${color};font-weight:500;line-height:1.4">${codon}</div>
-      </div>`;
-    });
-    html += `</div>`;
-    // Prepend summary
-    const summaryHtml = `<div style="font-size:11px;color:var(--muted);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">
-      <span style="color:var(--green);font-weight:500">${changed}</span> codons changed from default to encode your message &nbsp;·&nbsp;
-      <span style="color:var(--muted)">${carrying - changed}</span> wobble positions used but unchanged &nbsp;·&nbsp;
-      <span style="color:var(--muted)">${238 - carrying}</span> fixed (Met, Trp)
-    </div>`;
-    el.innerHTML = summaryHtml + html;
   }
 }
 
@@ -1249,6 +1219,31 @@ function switchTab(name) {
   document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', tabs[i] === name));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-' + name).classList.add('active');
+}
+
+function updateCapacityPreview() {
+  const msg = document.getElementById('enc-message').value;
+  if (!msg) {
+    document.getElementById('enc-cap-bar').style.width = '0%';
+    document.getElementById('enc-cap-bar').style.background = '';
+    document.getElementById('enc-cap-label').textContent = '0 / ' + CAPACITY + ' bits';
+    document.getElementById('enc-cap-label').style.color = '';
+    document.getElementById('enc-cap-warn').style.display = 'none';
+    document.getElementById('enc-btn').disabled = false;
+    return;
+  }
+  // Estimate bits via Huffman (quick approximation: just build it)
+  const bytes = [...new TextEncoder().encode(msg)];
+  const codes = buildHuffman(bytes);
+  const bits = bytes.map(b => codes[b]).join('').length;
+  const pct = Math.min(bits / CAPACITY * 100, 100);
+  const over = bits > CAPACITY;
+  document.getElementById('enc-cap-bar').style.width = pct + '%';
+  document.getElementById('enc-cap-bar').style.background = over ? 'var(--red)' : '';
+  document.getElementById('enc-cap-label').textContent = bits + ' / ' + CAPACITY + ' bits';
+  document.getElementById('enc-cap-label').style.color = over ? 'var(--red)' : '';
+  document.getElementById('enc-cap-warn').style.display = over ? 'block' : 'none';
+  document.getElementById('enc-btn').disabled = over;
 }
 
 function encodeMessage() {
@@ -1264,7 +1259,7 @@ function encodeMessage() {
     lastEncodeResult = result;
     document.getElementById('enc-result').style.display = 'block';
 
-    document.getElementById('r-len').textContent = result.insert.length + ' nt';
+    document.getElementById('r-len').textContent = result.cds.length + ' nt';
     document.getElementById('r-gc').textContent = (result.gc * 100).toFixed(1) + '%';
     document.getElementById('r-bits').textContent = result.rawBitLen;
     document.getElementById('r-hp').textContent = result.hp;
@@ -1294,7 +1289,7 @@ function encodeMessage() {
     currentSeqMode = 'dna';
     document.querySelectorAll('.seq-mode-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('mode-dna').classList.add('active');
-    ['dna','protein','changes'].forEach(m => {
+    ['dna','protein'].forEach(m => {
       document.getElementById('mode-desc-' + m).style.display = m === 'dna' ? 'block' : 'none';
     });
     renderSeqDisplay(result, 'dna');
@@ -1341,7 +1336,7 @@ function decodeMessage() {
 function loadDecodeExample() {
   const sample = encode("Hello from inside a bacterium!");
   if (sample.error) return;
-  document.getElementById('dec-seq').value = sample.insert;
+  document.getElementById('dec-seq').value = sample.cds;
   document.getElementById('dec-meta').value = JSON.stringify(sample.metadata, null, 2);
 }
 
@@ -1350,7 +1345,9 @@ function renderCodonMap(result) {
   if (!map) return;
   map.innerHTML = '';
   const AA_NAMES = {M:'Methionine',S:'Serine',K:'Lysine',G:'Glycine',E:'Glutamate',L:'Leucine',F:'Phenylalanine',T:'Threonine',V:'Valine',I:'Isoleucine',D:'Aspartate',N:'Asparagine',H:'Histidine',Q:'Glutamine',R:'Arginine',P:'Proline',A:'Alanine',Y:'Tyrosine',C:'Cysteine',W:'Tryptophan'};
-  let wobbleCount = 0, fixedCount = 0;
+  let wobbleCount = 0, fixedCount = 0, realBitCount = 0;
+  const codonIsReal = result.codonIsReal || [];
+
   // Build per-position bit values by re-extracting from the sequence
   const extractedBits = sequenceToBits(result.codons);
   let bitCursor = 0;
@@ -1366,9 +1363,17 @@ function renderCodonMap(result) {
     const aa = SFGFP_AA[i];
     const b = bitsFor(aa);
     const opts = CODON_TABLE[aa];
+    const isReal = codonIsReal[i];
     const cell = document.createElement('div');
-    cell.className = 'codon-cell ' + (b === 2 ? 'bit2' : b === 1 ? 'bit1' : 'no-wobble');
-    if (b > 0) wobbleCount++; else fixedCount++;
+
+    // Class: real message bits vs padding vs fixed
+    let cls = 'codon-cell ';
+    if (b === 0) cls += 'no-wobble';
+    else if (isReal) cls += (b === 2 ? 'bit2' : 'bit1');
+    else cls += (b === 2 ? 'bit2 padding-bit' : 'bit1 padding-bit');
+    cell.className = cls;
+
+    if (b > 0) { wobbleCount++; if (isReal) realBitCount++; } else fixedCount++;
     const bitsVal = posBits[i];
     cell.innerHTML = `<span class="aa">${aa}</span><span class="cod">${codon}</span><span class="bts">${bitsVal || (b > 0 ? '·'.repeat(b) : '')}</span>`;
 
@@ -1398,13 +1403,13 @@ function renderCodonMap(result) {
             <span style="color:var(--muted);font-size:11px">→</span>
             ${inRange
               ? `<span style="display:inline-flex;gap:2px">${bitsDisplay}</span>`
-              : `<span style="color:var(--muted);font-size:10px">— beyond ${b}-bit capacity</span>`}
+              : `<span style="color:var(--muted);font-size:10px">synonym — encoder never picks this</span>`}
             ${isChosen ? '<span style="margin-left:auto;font-size:10px;color:var(--green)">← chosen</span>' : ''}
           </div>`;
         });
         mappingHtml += `</div>
           <div style="margin-top:8px;font-size:10px;color:var(--muted);border-top:1px solid var(--border);padding-top:6px">
-            ${opts.length} synonymous codons → ⌊log₂(${opts.length})⌋ = <strong style="color:var(--text)">${b} bit${b>1?'s':''}</strong> hidden at this position
+            ${opts.length} synonymous codons → ⌊log₂(${opts.length})⌋ = <strong style="color:var(--text)">${b} bit${b>1?'s':''}</strong> hidden here · encoder uses first ${usableCount} codons as bit carriers, remaining ${opts.length - usableCount} are valid synonyms but never chosen
           </div>
         </div>`;
       }
@@ -1418,7 +1423,10 @@ function renderCodonMap(result) {
           ${b > 0
             ? `<div style="text-align:right">
                 <div style="font-size:10px;color:var(--muted);margin-bottom:3px">bits encoded here</div>
-                <div style="display:flex;gap:2px;justify-content:flex-end">${bitsHtml || '<span style="color:var(--muted);font-size:10px">padding</span>'}</div>
+                <div style="display:flex;gap:2px;justify-content:flex-end;margin-bottom:4px">${bitsHtml || '<span style="color:var(--muted);font-size:10px">padding</span>'}</div>
+                <span style="font-size:10px;padding:2px 8px;border-radius:4px;${isReal
+                  ? 'background:rgba(45,122,79,0.12);color:var(--green);border:1px solid rgba(45,122,79,0.3)'
+                  : 'background:var(--bg);color:var(--muted);border:1px solid var(--border)'}">${isReal ? '✦ message bit' : '○ padding zero'}</span>
                </div>`
             : `<span style="font-size:10px;color:var(--muted);background:var(--bg);border:1px solid var(--border);padding:3px 8px;border-radius:4px">no bits — single codon</span>`}
         </div>
@@ -1429,9 +1437,13 @@ function renderCodonMap(result) {
 
   const statBits = document.getElementById('cm-stat-bits');
   const statWobble = document.getElementById('cm-stat-wobble');
+  const statChanged = document.getElementById('cm-stat-changed');
   const statFixed = document.getElementById('cm-stat-fixed');
+  const defaultCodons = [...SFGFP_AA].map(aa => CODON_TABLE[aa][0]);
+  const changedCount = result.codons.filter((c,i) => bitsFor(SFGFP_AA[i]) > 0 && c !== defaultCodons[i]).length;
   if (statBits) statBits.textContent = result.rawBitLen;
-  if (statWobble) statWobble.textContent = wobbleCount;
+  if (statWobble) statWobble.textContent = `${realBitCount} message · ${wobbleCount - realBitCount} padding`;
+  if (statChanged) statChanged.textContent = changedCount + ' / 238';
   if (statFixed) statFixed.textContent = fixedCount;
 }
 
@@ -1530,7 +1542,7 @@ function renderPlasmidMap(cdsBp) {
 
 function copySeq() {
   if (!lastEncodeResult) return;
-  navigator.clipboard.writeText(lastEncodeResult.insert).then(() => {
+  navigator.clipboard.writeText(lastEncodeResult.cds).then(() => {
     const btn = document.getElementById('copy-seq-btn');
     btn.style.background = 'var(--green-light)';
     setTimeout(() => btn.style.background = 'var(--surface)', 1200);
