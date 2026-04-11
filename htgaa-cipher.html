@@ -1191,21 +1191,22 @@ function renderSeqDisplay(result, mode) {
   el.innerHTML = '';
 
   if (mode === 'dna') {
-    // Show only the sfGFP CDS — no enzyme flanks, no line breaks
+    // Show CDS including stop codon TAA
     const seq = result.cds;
-    let html = `<span style="color:var(--green)">${seq}</span>`;
+    let html = `<span style="color:var(--green)">${seq.slice(0,-3)}</span><span style="color:var(--muted);font-weight:500">${seq.slice(-3)}</span>`;
     el.style.color = '';
     el.innerHTML = html;
 
   } else if (mode === 'protein') {
-    // Amino acid sequence, 30 25 per line
-    const aa = SFGFP_AA;
+    // Amino acid sequence + stop, 35 per line
+    const aa = SFGFP_AA + '*';
     let html = `<div style="display:flex;flex-wrap:wrap;gap:3px">`;
     for (let i = 0; i < aa.length; i++) {
       const showNum = i % 35 === 0;
       if (showNum && i > 0) html += `<div style="width:100%;height:0"></div>`;
       if (showNum) html += `<span style="color:var(--muted);font-size:9px;min-width:24px;padding-top:2px">${i+1}</span>`;
-      html += `<span style="background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:2px 4px;font-size:11px;color:var(--text)">${aa[i]}</span>`;
+      const isStop = aa[i] === '*';
+      html += `<span style="background:${isStop?'rgba(0,0,0,0.04)':'var(--surface)'};border:1px solid var(--border);border-radius:3px;padding:2px 4px;font-size:11px;color:${isStop?'var(--muted)':'var(--text)'}" title="${isStop?'Stop codon (TAA)':''}">${aa[i]}</span>`;
     }
     html += `</div>`;
     el.innerHTML = html;
@@ -1434,6 +1435,24 @@ function renderCodonMap(result) {
     });
     map.appendChild(cell);
   });
+
+  // Add stop codon cell
+  const stopCell = document.createElement('div');
+  stopCell.className = 'codon-cell no-wobble';
+  stopCell.title = 'Stop codon — signals end of translation';
+  stopCell.innerHTML = `<span class="aa">*</span><span class="cod">TAA</span><span class="bts"></span>`;
+  stopCell.addEventListener('mouseenter', () => {
+    document.querySelectorAll('.codon-cell.active-cell').forEach(c => c.classList.remove('active-cell'));
+    stopCell.classList.add('active-cell');
+    const detail = document.getElementById('codon-detail');
+    if (detail) detail.innerHTML = `
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px">
+        <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Position 239 — Stop codon</span>
+      </div>
+      <div style="font-family:var(--serif);font-size:18px;font-weight:300;color:var(--muted);margin-bottom:8px">* (stop) <span style="font-family:var(--mono);font-size:12px">TAA</span></div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.7">TAA signals the ribosome to stop translation. No amino acid is added. The protein is 238 aa long. This codon carries no hidden bits.</div>`;
+  });
+  map.appendChild(stopCell);
 
   const statBits = document.getElementById('cm-stat-bits');
   const statWobble = document.getElementById('cm-stat-wobble');
