@@ -1069,7 +1069,7 @@ function encode(message) {
     const codons = bitsToSequence(rotated);
     const cds = codons.join('');
     const hp = maxHomopolymer(cds);
-    if (hp < bestHP) { bestHP = hp; bestOffset = off; bestCodons = codons; bestSeq = cds; }
+    if (hp < bestHP) { bestHP = hp; bestOffset = off; bestCodons = codons; bestSeq = cds + 'TAA'; }
     if (hp <= 4) break;
   }
 
@@ -1259,7 +1259,7 @@ function encodeMessage() {
     lastEncodeResult = result;
     document.getElementById('enc-result').style.display = 'block';
 
-    document.getElementById('r-len').textContent = result.cds.length + ' nt';
+    document.getElementById('r-len').textContent = (result.cds.length) + ' nt';
     document.getElementById('r-gc').textContent = (result.gc * 100).toFixed(1) + '%';
     document.getElementById('r-bits').textContent = result.rawBitLen;
     document.getElementById('r-hp').textContent = result.hp;
