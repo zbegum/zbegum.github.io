@@ -30,7 +30,7 @@
   <main class="projects-page">
 
     <header class="projects-header">
-      <h1 class="about-kicker">PROJECTS</h1>
+      <h1 class="about-kicker">RESEARCH</h1>
     </header>
 
     <article class="project" data-year="2025">
@@ -52,65 +52,87 @@
       </div>
 
     </article>
+<article class="project" data-year="2026" id="lacy">
+  <div class="project-split">
+<aside class="project-poster">
+  <div class="pub-card">
+    <div class="pub-card-header">
+      <span class="pub-badge">// PUBLISHED</span>
+      <span class="pub-rank">CORE A*</span>
+    </div>
 
-    <article class="project" data-year="2025" id="lacy">
-      <div class="project-split">
-        <!-- LEFT: Poster -->
-        <aside class="project-poster">
-          <figure class="poster-card">
-            <a href="#lacy-poster" class="lb-link">
-              <img src="assets/projects/lacy/LacyPoster.jpg" alt="LACY project poster" class="poster-img"
-                loading="lazy">
-            </a>
-            <figcaption class="poster-caption">Project Poster</figcaption>
-          </figure>
+    <div class="pub-venue-line">
+      <span class="pub-venue-name">FSE '26</span>
+      <span class="pub-venue-track">Industry Track</span>
+    </div>
 
-          <p class="award-line">
-            <span class="award-icon" aria-hidden="true">🏆</span> <strong>Best Innovation Award</strong> at the Bilkent University CS Fair 2025 out of 44 projects
-          </p>
+    <h3 class="pub-card-title">
+      LACY: Simulating Expert Mentoring for Software Onboarding with Code Tours
+    </h3>
 
-        </aside>
+    <div class="pub-card-divider"></div>
 
-        <!-- RIGHT: Content -->
-        <section class="project-main">
-          <h2 class="project-title">LACY — Expert Guidance in Software Development</h2>
-          <div class="project-meta"><time datetime="2025">2024 — 2025</time> · Senior Design Project, Team Leader</div>
+    <p class="pub-card-authors">
+      <strong>Kara, Z. B.</strong>, İsmail, A., Ateş, E., Tamcı, İ. N.,
+      İyigün, Z., Aslangül, S. Ş., Devran, Ö., Uçar, B. M., &amp; Tüzün, E.
+    </p>
 
-          <p class="project-desc">
-            In collaboration with <a href="https://www.beko.com/" class="chip" target="_blank" rel="noopener">Beko</a>,
-            we examined current industry practices in legacy system maintenance and developer onboarding.
-            Based on these observations, I initiated, designed, and led a team of five to develop <strong>LACY</strong>
-            — an AI-assisted VS Code extension that simulates expert-to-learner mentorship within real development
-            environments.
-            The system integrates interactive code tours, contextual quizzes, and narrated walkthroughs to support
-            human–AI collaboration in knowledge transfer.
-            The project is currently ongoing as part of Beko&nbsp;R&amp;D.
-          </p>
+    <p class="pub-card-venue">
+      Companion Proceedings of the 34th ACM International Conference
+      on the Foundations of Software Engineering
+    </p>
 
-          <!-- 2×2 grid: 3 images + 1 embedded video -->
-          <div class="project-media-grid media-quad">
-            <!-- video tile -->
-            <figure class="video-tile">
-              <div class="embed-wrapper">
-                <iframe src="https://www.youtube.com/embed/TwHs3akSzr8?rel=0" title="LACY Demo Video"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen referrerpolicy="strict-origin-when-cross-origin">
-                </iframe>
-              </div>
-            </figure>
+    <p class="pub-card-meta">
+      <span class="meta-key">loc:</span> Montreal, Canada<br>
+      <span class="meta-key">date:</span> July 5–9, 2026
+    </p>
 
-            <!-- 3 image tiles -->
-            <figure><a href="#lacy-1" class="lb-link"><img src="assets/projects/lacy/lacy1.jpeg" alt="LACY UI"
-                  loading="lazy"></a></figure>
-            <figure><a href="#lacy-2" class="lb-link"><img src="assets/projects/lacy/lacy2.jpeg" alt="Pipeline"
-                  loading="lazy"></a></figure>
-            <figure><a href="#lacy-3" class="lb-link"><img src="assets/projects/lacy/lacy3.jpeg" alt="Results"
-                  loading="lazy"></a></figure>
-          </div>
+    <a href="https://arxiv.org/abs/2603.25391"
+       class="pub-link-btn"
+       target="_blank"
+       rel="noopener noreferrer">
+      $ open arxiv ↗
+    </a>
+  </div>
 
-        </section>
+  <p class="award-line">
+    <span class="award-icon" aria-hidden="true">🏆</span>
+    <strong>Best Innovation Award ($2,500 prize)</strong>,
+    Bilkent University CS Fair 2025 — 1st of 44 projects
+  </p>
+</aside>
+    <!-- RIGHT: Content -->
+    <section class="project-main">
+      <h2 class="project-title">LACY — Simulating Expert Mentoring for Software Onboarding</h2>
+      <div class="project-meta">
+        <time datetime="2024">2024</time>–<time datetime="2026">2026</time>
+        · First Author &amp; Project Lead
       </div>
-    </article>
+
+      <p class="project-desc">
+        Onboarding new developers into legacy codebases is one of the most
+        time-consuming responsibilities in software organizations, often relying on
+        senior developers to provide one-on-one mentorship that does not scale.
+        <strong>LACY</strong>, developed in collaboration with
+        <a href="https://www.beko.com/" class="chip" target="_blank" rel="noopener noreferrer">Beko</a>,
+        is a hybrid human–AI VS Code extension that captures expert mentoring as
+        reusable code tours. The system combines AI-generated explanations with
+        expert curation, integrating interactive walkthroughs, contextual quizzes,
+        and narrated podcasts so that expert knowledge can be authored once and
+        transferred across an organization asynchronously.
+      </p>
+
+      <div class="project-media-grid media-stack">
+        <figure>
+          <img src="assets/projects/lacy/lacy-code-tour-active.png"
+              alt="A code tour step in progress inside VS Code: narrated explanation on the left, highlighted code on the right, with an inline chat for follow-up questions."
+              loading="lazy">
+          <figcaption>A tour step in action: narration, highlighted code, and an inline channel for learner questions.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </div>
+</article>
 
     <article class="project" data-year="2025">
       <h2 class="project-title">A Case Study on Gemini’s MCQ Success - Defining Directed Multiple-Choice Questions</h2>
