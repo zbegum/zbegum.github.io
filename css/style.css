@@ -4,6 +4,7 @@
   --text-muted: #9a9ca4;
   --accent-violet: #b38cff;
   --accent-coral: #ff6f61;
+  --accent-ascii-yellow: #ffe45c;
 
   --intro-max: 960px;
   --intro-pad-x: 28px;
@@ -255,4 +256,28 @@ footer span {
   font-size: 0.1rem;
   margin-bottom: 1.5rem;
   text-align: left;
+}
+
+.site-name {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: clamp(1rem, 1.65vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.14em;
+  color: var(--accent-ascii-yellow);
+  text-transform: uppercase;
+  position: relative;
+  z-index: 0;
+  width: fit-content;
+}
+
+.site-name::before {
+  content: "";
+  position: absolute;
+  left: -0.28em;
+  right: -0.28em;
+  bottom: 0;
+  height: 0.72em;
+  background: rgba(255, 228, 92, 0.22);
+  z-index: -1;
 }

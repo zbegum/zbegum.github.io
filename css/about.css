@@ -38,6 +38,13 @@
     color: var(--text-muted);
     text-transform: uppercase;
   }
+
+  .about-kicker.site-name {
+    font-size: clamp(1rem, 1.65vw, 1.35rem);
+    letter-spacing: 0.14em;
+    line-height: 1.25;
+    color: var(--accent-ascii-yellow);
+  }
   
   /* =========================
      INLINE PORTRAIT
@@ -74,6 +81,7 @@
   }
   .about-links a{
     font-family: 'Karla', sans-serif;
+    font-size: 1.12rem;
     color: var(--accent-violet);
     text-decoration: none;
     font-weight: 500;
@@ -97,21 +105,19 @@
     justify-content: center;
     width: 100%;
     margin: 8px auto 0;      
-    padding: 0 8px;          
-    overflow-x: auto;
-    transform: translateX(-3rem);
+    padding: 0;
+    overflow: visible;
+    transform: translateX(clamp(-36px, -4vw, -18px));
   }
-  .ascii-wrap::-webkit-scrollbar { height: 6px; }
   
   .ascii-art {
-    font-size: clamp(8px, 1.9vw, 11px);
+    font-size: clamp(7px, 1.45vw, 10px);
     line-height: 1;
     white-space: pre;
     display: inline-block;
     text-align: left;
     margin: 0;
-    max-height: 26vh;
-    overflow: hidden;
+    max-width: 100%;
   }
   
   .ascii-credit {
@@ -166,11 +172,11 @@
   /* =========================
      RESPONSIVE BEHAVIOR
      ========================= */
-  
+
   @media (min-width: 981px){
-    body.about { overflow: hidden; }
+    body.about { overflow-y: auto; }
     .about-page{
-      height: calc(100svh - var(--nav-h));
+      min-height: calc(100svh - var(--nav-h));
       align-content: center;
     }
   }
@@ -196,10 +202,15 @@
     }
   
     .ascii-art{
-      font-size: clamp(7px, 2.6vw, 10px);
+      font-size: clamp(6px, 1.9vw, 9px);
       max-height: none;
+    }
+
+    .ascii-wrap {
+      transform: translateX(-10px);
     }
   
     .about-links{ gap: 8px; }
+    .about-links a{ font-size: 1rem; }
   }
   
