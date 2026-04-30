@@ -325,7 +325,7 @@
         <li><span class="pipe-num-badge">02</span><span><strong>Scan the protein</strong> amino-acid by amino-acid. At each position, count synonymous codons in <em>E. coli</em>. If n codons exist, ⌊log₂(n)⌋ bits can be hidden here. Total capacity depends on the active protein (see selector above).</span></li>
         <li><span class="pipe-num-badge">03</span><span><strong>Map bits → codons.</strong> Read ⌊log₂(n)⌋ bits from the stream; use the integer value as an index into the sorted codon list.</span></li>
         <li><span class="pipe-num-badge">04</span><span><strong>Bit rotation.</strong> Try all offsets; pick the one that minimises the longest homopolymer run. Store chosen offset in metadata.json.</span></li>
-        <li><span class="pipe-num-badge">05</span><span><strong>Output</strong> the 714 nt insert — 237 codons (positions 2–238) followed by a TAA stop. The leading ATG is omitted because pET-28a(+)'s NdeI site (CATATG) restores it on ligation. Order from Twist, clone into pET-28a(+) NdeI/XhoI; the vector also supplies the T7 promoter, RBS, and terminator. Transform <em>E. coli</em> BL21(DE3). Induce with IPTG.</span></li>
+        <li><span class="pipe-num-badge">05</span><span><strong>Output</strong> the 714 nt insert — 237 codons (positions 2–238) followed by a TAA stop. The leading ATG is omitted because pET-28a(+)'s NdeI site (CATATG) restores it on ligation. Order from Twist with NdeI / XhoI overhangs, then <strong>digest &amp; ligate</strong> into pET-28a(+) cut with the same pair. The vector also supplies the T7 promoter, RBS, and terminator. Transform <em>E. coli</em> BL21(DE3). Induce with IPTG.</span></li>
       </ul>
     </div>
 
