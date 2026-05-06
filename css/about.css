@@ -119,6 +119,9 @@
     margin: 0;
     max-width: 100%;
   }
+
+  /* Neutralize legacy <font size="+1"> so our responsive sizing wins */
+  .ascii-art font { font-size: inherit; }
   
   .ascii-credit {
     font-size: 0.72rem;
@@ -193,24 +196,43 @@
   @media (max-width: 700px){
     .about-kicker{ margin: 2rem 0 6px 0; }
     .about-text{ font-size: .98rem; line-height: 1.8; }
-  
+
     .about-inline-photo{
       float: none;
       display: block;
       width: clamp(140px, 58vw, 260px);
       margin: 6px auto 12px auto;
     }
-  
+
     .ascii-art{
-      font-size: clamp(6px, 1.9vw, 9px);
+      font-size: clamp(6px, 1.55vw, 9px);
       max-height: none;
     }
 
     .ascii-wrap {
-      transform: translateX(-10px);
+      transform: none;
+      justify-content: center;
     }
-  
+
     .about-links{ gap: 8px; }
     .about-links a{ font-size: 1rem; }
+  }
+
+  @media (max-width: 480px){
+    .about-page{
+      padding: 14px;
+    }
+    .about-kicker.site-name{
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+    }
+    .about-text{ font-size: .92rem; line-height: 1.7; }
+    .about-inline-photo{
+      width: clamp(130px, 55vw, 200px);
+    }
+    .ascii-art{
+      font-size: clamp(5px, 1.7vw, 7px);
+    }
+    .about-links a{ font-size: 0.92rem; }
   }
   

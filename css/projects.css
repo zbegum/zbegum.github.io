@@ -346,6 +346,18 @@ body.projects {
   position: relative;
 }
 
+/* Per-card accent overrides */
+.pub-card.pub-card--teal {
+  --pub-accent: #5eead4;
+  --pub-accent-soft: rgba(94, 234, 212, 0.10);
+}
+
+/* Yellow callout for paper hook lines */
+.q-yellow {
+  color: var(--accent-ascii-yellow);
+  font-style: italic;
+}
+
 .pub-card-header {
   display: flex;
   align-items: center;
