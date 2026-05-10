@@ -1,0 +1,2409 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FATİH.exe: The Tablet Dream and the Classroom That Wouldn't Load</title>
+<meta name="description" content="A critical reflection on technosolutionism, told through the FATİH project — for an HCI course assignment." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Major+Mono+Display&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Special+Elite&family=VT323&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Caveat:wght@400;700&family=Caveat+Brush&family=Permanent+Marker&family=Homemade+Apple&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+<style>
+/* =========================================================
+   ON TABLETS, TABLETLER, AND THE THINGS WE COULDN'T HAND OUT
+   palette: peach + purple-ink + magenta + pink + orange + yellow
+   typography: dactilo-first (mono) with handwritten as accent only
+   ========================================================= */
+
+:root{
+  /* base palette */
+  --peach:     #ffdac5;
+  --peach-lt:  #ffe7d6;
+  --peach-dk:  #ffc4a4;
+  --peach-vlt: #fff1e3;
+  --ink:       #390099;     /* deep purple */
+  --ink-lt:    #5a1bb3;
+  --ink-dk:    #1f0054;
+  --magenta:   #9e0059;
+  --pink:      #ff0054;
+  --orange:    #ff5400;
+  --yellow:    #ffbd00;
+  --offwhite:  #fff5e6;
+  --paper-card:#fff5e6;
+
+  /* tape (with alpha so they layer like real tape) */
+  --tape-yellow:  rgba(255, 189,   0, 0.62);
+  --tape-pink:    rgba(255,   0,  84, 0.50);
+  --tape-orange:  rgba(255,  84,   0, 0.52);
+  --tape-magenta: rgba(158,   0,  89, 0.45);
+  --tape-purple:  rgba( 57,   0, 153, 0.35);
+
+  /* highlight stripes */
+  --hl-yellow: #ffbd00;
+  --hl-pink:   #ff0054;
+  --hl-orange: #ff5400;
+
+  /* fonts — dactilo first */
+  --mono:       'Space Mono', 'Courier Prime', 'Courier New', monospace;
+  --mono-tall:  'Major Mono Display', 'Space Mono', monospace;
+  --courier:    'Courier Prime', 'Courier New', monospace;
+  --plex:       'IBM Plex Mono', monospace;
+  --pixel:      'VT323', monospace;
+  --typewriter: 'Special Elite', monospace;
+  /* supporting handwritten — accents only */
+  --hand:       'Caveat', cursive;
+  --brush:      'Caveat Brush', cursive;
+  --marker:     'Permanent Marker', cursive;
+  --signed:     'Homemade Apple', cursive;
+  --serif:      'DM Serif Display', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--peach);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* clean white dot-grid paper — like a notebook page */
+body{
+  background-color: #fbfaf6;
+  background-image:
+    radial-gradient(circle, rgba(57,0,153,0.20) 1px, transparent 1.6px);
+  background-size: 22px 22px;
+  background-attachment: fixed;
+  background-position: 0 0;
+}
+
+/* very subtle paper grain on top */
+body::before{
+  content:""; position: fixed; inset: 0;
+  pointer-events: none; z-index: 1;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.22  0 0 0 0 0   0 0 0 0 0.6  0 0 0 0.06 0'/></filter><rect width='600' height='600' filter='url(%23n)'/></svg>");
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+body::after{ display: none; }
+
+main { position: relative; z-index: 3; }
+
+/* selection */
+::selection { background: var(--yellow); color: var(--ink); }
+
+/* ---------- text accents ---------- */
+
+.hl       { background: linear-gradient(180deg, transparent 55%, var(--hl-yellow) 55% 92%, transparent 92%); padding: 0 .12em; }
+.hl-pk    { background: linear-gradient(180deg, transparent 55%, var(--hl-pink)   55% 92%, transparent 92%); padding: 0 .12em; color: #fff; }
+.hl-or    { background: linear-gradient(180deg, transparent 55%, var(--hl-orange) 55% 92%, transparent 92%); padding: 0 .12em; color: #fff; }
+
+.red      { color: var(--pink); }
+.purple   { color: var(--ink); }
+.orange   { color: var(--orange); }
+.magenta  { color: var(--magenta); }
+
+.crossed  { text-decoration: line-through; text-decoration-color: var(--pink); text-decoration-thickness: 2px; }
+
+.under-pk{
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='10' viewBox='0 0 200 10'><path d='M2 6 Q 50 1, 100 5 T 198 4' stroke='%23ff0054' stroke-width='2.4' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% .35em;
+  padding-bottom: .25em;
+}
+.under-or{
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='10' viewBox='0 0 200 10'><path d='M2 6 Q 50 1, 100 5 T 198 4' stroke='%23ff5400' stroke-width='2.4' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% .35em;
+  padding-bottom: .25em;
+}
+.circled  {
+  position: relative; display: inline-block; padding: .1em .55em;
+}
+.circled::after{
+  content:""; position: absolute; inset: -.05em -.1em -.05em -.1em;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80' preserveAspectRatio='none'><path d='M30 40 C 30 10, 170 5, 175 35 C 180 65, 30 75, 25 50 C 23 35, 35 18, 80 16' stroke='%23ff0054' stroke-width='2.6' fill='none' stroke-linecap='round'/></svg>") center/100% 100% no-repeat;
+  pointer-events: none;
+}
+
+/* color block behind a word */
+.block{
+  display: inline-block;
+  padding: 0 .35em;
+  background: var(--ink);
+  color: var(--peach);
+  transform: rotate(-1.5deg);
+  margin: 0 .1em;
+}
+.block.pink   { background: var(--pink); color: #ffffff; }
+.block.orange { background: var(--orange); color: #ffffff; }
+.block.yellow { background: var(--yellow); color: var(--ink); }
+.block.magenta{ background: var(--magenta); color: #ffffff; }
+
+/* ---------- WASHI TAPE — patterned bands ---------- */
+
+.tape{
+  position: absolute;
+  width: 110px; height: 26px;
+  background: var(--tape-yellow);
+  box-shadow: 0 1px 3px rgba(31,0,84,0.10);
+  z-index: 5;
+}
+.tape::before, .tape::after{
+  content:""; position:absolute; top:0; bottom:0; width: 4px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.55), transparent);
+}
+.tape.pink    { background: var(--tape-pink); }
+.tape.orange  { background: var(--tape-orange); }
+.tape.magenta { background: var(--tape-magenta); }
+.tape.purple  { background: var(--tape-purple); }
+
+.tape.thin { height: 14px; width: 70px; }
+.tape.long { width: 180px; }
+.tape.xl   { width: 240px; height: 30px; }
+
+/* dotted */
+.tape.dot{
+  background-image:
+    radial-gradient(circle, rgba(57,0,153,0.55) 1.5px, transparent 2.2px);
+  background-size: 8px 8px;
+  background-color: var(--tape-yellow);
+}
+.tape.dot.pink{
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.85) 1.5px, transparent 2.2px);
+  background-color: var(--tape-pink);
+}
+/* striped diagonal */
+.tape.stripe{
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 4px, rgba(57,0,153,0.45) 4px 7px);
+  background-color: var(--tape-yellow);
+}
+.tape.stripe.pink{
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 4px, rgba(255,255,255,0.55) 4px 7px);
+  background-color: var(--tape-pink);
+}
+.tape.stripe.orange{
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 4px, rgba(57,0,153,0.55) 4px 7px);
+  background-color: var(--tape-orange);
+}
+/* checks (gingham) */
+.tape.check{
+  background-image:
+    linear-gradient(45deg, transparent 25%, rgba(57,0,153,0.35) 25% 50%, transparent 50% 75%, rgba(57,0,153,0.35) 75%);
+  background-size: 10px 10px;
+  background-color: var(--tape-yellow);
+}
+/* zigzag */
+.tape.zig{
+  background-image:
+    linear-gradient(135deg, transparent 33%, rgba(57,0,153,0.45) 33% 66%, transparent 66%);
+  background-size: 12px 12px;
+  background-color: var(--tape-pink);
+}
+/* hearts (svg) */
+.tape.hearts{
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><path d='M7 11 L1.8 6 C0.5 4.7 1.5 2.5 3.5 2.5 C 5 2.5 6 3.5 7 5 C 8 3.5 9 2.5 10.5 2.5 C 12.5 2.5 13.5 4.7 12.2 6 Z' fill='%23390099' opacity='0.55'/></svg>");
+  background-size: 14px 14px;
+  background-color: var(--tape-yellow);
+}
+/* full-width band as section divider */
+.washi-band{
+  position: relative;
+  width: 100%;
+  height: 14px;
+  margin: 24px 0;
+  background:
+    repeating-linear-gradient(135deg,
+      var(--ink) 0 8px,
+      #fbfaf6 8px 16px);
+  z-index: 5;
+  transform: rotate(-0.4deg);
+  box-shadow: 0 3px 8px rgba(31,0,84,0.10);
+}
+.washi-band.dot,
+.washi-band.stripe,
+.washi-band.air{
+  background:
+    repeating-linear-gradient(135deg,
+      var(--ink) 0 8px,
+      #fbfaf6 8px 16px);
+  height: 14px;
+}
+
+/* ---------- PINS ---------- */
+
+.pin{
+  position: absolute;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe5e5, var(--pink) 65%, #6b1015 100%);
+  box-shadow:
+    inset -2px -2px 4px rgba(0,0,0,0.35),
+    inset 2px 2px 3px rgba(255,255,255,0.45),
+    0 4px 6px rgba(31,0,84,0.25);
+  z-index: 6;
+}
+.pin.purple { background: radial-gradient(circle at 35% 30%, #c0a8ff, var(--ink) 65%, #15003a 100%); }
+.pin.yellow { background: radial-gradient(circle at 35% 30%, #fff0a8, var(--yellow) 65%, #6b4e00 100%); }
+.pin.orange { background: radial-gradient(circle at 35% 30%, #ffd0a8, var(--orange) 65%, #5b1d00 100%); }
+.pin.magenta{ background: radial-gradient(circle at 35% 30%, #ffb0d8, var(--magenta) 65%, #3d0020 100%); }
+
+/* ---------- STICKERS — round badges, star bursts ---------- */
+
+.sticker{
+  position: absolute;
+  display: grid; place-items: center;
+  font-family: var(--typewriter);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 11px;
+  z-index: 7;
+  box-shadow: 0 6px 14px rgba(31,0,84,0.22);
+  line-height: 1;
+}
+.sticker.round{
+  width: 84px; height: 84px;
+  border-radius: 50%;
+  background: var(--pink);
+  color: #ffffff;
+  border: 4px double #ffffff;
+}
+.sticker.round.yellow { background: var(--yellow);  color: var(--ink); border-color: var(--ink); }
+.sticker.round.purple { background: var(--ink);     color: #ffffff; }
+.sticker.round.orange { background: var(--orange);  color: #ffffff; }
+.sticker.round.magenta{ background: var(--magenta); color: #ffffff; }
+
+/* star-burst shape via clip-path */
+.sticker.starburst{
+  width: 110px; height: 110px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-family: var(--mono-tall);
+  font-size: 14px;
+  padding: 12px;
+  clip-path: polygon(
+    50% 0%, 60% 18%, 80% 8%, 75% 28%, 95% 28%,
+    82% 42%, 100% 50%, 82% 58%, 95% 72%, 75% 72%,
+    80% 92%, 60% 82%, 50% 100%, 40% 82%, 20% 92%,
+    25% 72%, 5% 72%, 18% 58%, 0% 50%, 18% 42%,
+    5% 28%, 25% 28%, 20% 8%, 40% 18%
+  );
+}
+.sticker.starburst.pink   { background: var(--pink);    color: #ffffff; }
+.sticker.starburst.orange { background: var(--orange);  color: #ffffff; }
+.sticker.starburst.purple { background: var(--ink);     color: #ffffff; }
+
+/* tear-off price tag style sticker */
+.sticker.tag{
+  background: #ffffff;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 8px 14px 8px 24px;
+  border: 2px solid var(--ink);
+  letter-spacing: 0.15em;
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 12px 50%);
+}
+.sticker.tag::before{
+  content:""; position: absolute;
+  left: 6px; top: 50%; transform: translateY(-50%);
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ink);
+}
+
+/* peeling-corner sticker */
+.sticker.peel{
+  width: 130px; padding: 14px;
+  background: var(--pink);
+  color: #ffffff;
+  font-family: var(--mono-tall);
+  font-size: 14px;
+  position: relative;
+}
+.sticker.peel::after{
+  content:""; position: absolute;
+  bottom: 0; right: 0;
+  width: 26px; height: 26px;
+  background: var(--peach-dk);
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  filter: drop-shadow(-2px -2px 2px rgba(0,0,0,0.18));
+}
+
+/* "stamp" rectangular */
+.stamp{
+  position: absolute;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 18px;
+  border: 3px solid var(--ink);
+  color: var(--ink);
+  font-family: var(--typewriter);
+  font-size: 14px; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: rgba(255,241,227,0.05);
+  transform: rotate(-7deg);
+  opacity: 0.85;
+  mix-blend-mode: multiply;
+  filter: contrast(1.1);
+  z-index: 7;
+}
+.stamp.pink    { color: var(--pink);    border-color: var(--pink); }
+.stamp.orange  { color: var(--orange);  border-color: var(--orange); }
+.stamp.magenta { color: var(--magenta); border-color: var(--magenta); }
+.stamp.double {
+  box-shadow: inset 0 0 0 2px var(--peach), inset 0 0 0 5px currentColor;
+  border: none;
+  padding: 14px 22px;
+}
+
+/* ---------- SCRAPED / TORN PAPER LAYERS ---------- */
+
+.scraped{
+  position: relative;
+}
+.scraped::before{
+  /* a torn paper layer behind the element */
+  content:""; position: absolute;
+  inset: -14px -10px -10px -14px;
+  background: var(--yellow);
+  z-index: -1;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' preserveAspectRatio='none' viewBox='0 0 400 400'><path d='M2,12 Q15,4 30,8 T58,4 T88,10 T120,5 T155,11 T190,3 T225,12 T260,6 T295,9 T330,4 T365,12 T398,8 L394,388 Q380,396 365,392 T335,396 T305,390 T270,394 T235,388 T200,396 T165,390 T130,394 T100,388 T70,392 T35,388 T2,394 Z'/></svg>") center/100% 100% no-repeat;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' preserveAspectRatio='none' viewBox='0 0 400 400'><path d='M2,12 Q15,4 30,8 T58,4 T88,10 T120,5 T155,11 T190,3 T225,12 T260,6 T295,9 T330,4 T365,12 T398,8 L394,388 Q380,396 365,392 T335,396 T305,390 T270,394 T235,388 T200,396 T165,390 T130,394 T100,388 T70,392 T35,388 T2,394 Z'/></svg>") center/100% 100% no-repeat;
+}
+.scraped.pink::before  { background: var(--pink); }
+.scraped.orange::before{ background: var(--orange); }
+.scraped.purple::before{ background: var(--ink); }
+.scraped.magenta::before{background: var(--magenta); }
+
+.torn-edge{
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' preserveAspectRatio='none' viewBox='0 0 400 400'><path d='M0,8 Q20,0 40,6 T80,4 T120,7 T160,3 T200,8 T240,2 T280,7 T320,4 T360,8 T400,5 L400,395 Q380,400 360,394 T320,396 T280,393 T240,397 T200,392 T160,398 T120,393 T80,396 T40,392 T0,395 Z'/></svg>");
+  -webkit-mask-size: 100% 100%;
+          mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' preserveAspectRatio='none' viewBox='0 0 400 400'><path d='M0,8 Q20,0 40,6 T80,4 T120,7 T160,3 T200,8 T240,2 T280,7 T320,4 T360,8 T400,5 L400,395 Q380,400 360,394 T320,396 T280,393 T240,397 T200,392 T160,398 T120,393 T80,396 T40,392 T0,395 Z'/></svg>");
+          mask-size: 100% 100%;
+}
+
+/* ---------- coffee / mark ---------- */
+
+.coffee{
+  position: absolute;
+  width: 140px; height: 140px; border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 38%, rgba(158,0,89,0.18) 39% 44%, rgba(158,0,89,0.08) 45% 55%, transparent 56%);
+  filter: blur(0.4px);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* divider — barcode-ish stripe */
+.barcode-divider{
+  display: block;
+  margin: 50px auto;
+  width: 220px; height: 30px;
+  background:
+    repeating-linear-gradient(90deg,
+      var(--ink) 0 3px, transparent 3px 6px,
+      var(--ink) 6px 8px, transparent 8px 12px,
+      var(--ink) 12px 17px, transparent 17px 19px,
+      var(--ink) 19px 22px, transparent 22px 28px);
+}
+
+/* ---------- sections ---------- */
+
+section{
+  position: relative;
+  width: 100%;
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.page{
+  position: relative;
+  margin: 0 auto;
+  max-width: 1280px;
+  min-height: 100vh;
+}
+
+.section-tag{
+  position: absolute;
+  top: 18px; left: 28px;
+  font-family: var(--typewriter);
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.section-tag::before{ content:"§ "; color: var(--pink); }
+
+.page-num{
+  position: absolute;
+  bottom: 24px; right: 36px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--magenta);
+  letter-spacing: 0.15em;
+}
+
+/* essay column shared */
+.column{
+  width: min(680px, 90%);
+  margin: 0 auto;
+  font-family: var(--mono);
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+.column p{ margin: 0 0 1.4em; }
+.column p.lead{
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin-bottom: 1.6em;
+}
+.column p.lead::first-letter{
+  font-family: var(--mono-tall);
+  float: left;
+  font-size: 84px;
+  line-height: 0.85;
+  margin: 6px 14px 0 0;
+  color: var(--pink);
+  background: var(--ink);
+  padding: 8px 14px;
+}
+.column h3{
+  font-family: var(--mono-tall);
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1.05;
+  color: var(--ink);
+  margin: 60px 0 16px;
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
+}
+.column h4{
+  font-family: var(--typewriter);
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  color: var(--pink);
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+.column blockquote{
+  margin: 30px 0;
+  padding: 24px 28px;
+  border-left: 6px solid var(--pink);
+  background: #ffffff;
+  font-family: var(--mono);
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink);
+  position: relative;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.column blockquote cite{
+  display: block;
+  font-family: var(--signed);
+  font-size: 18px;
+  font-style: normal;
+  color: var(--magenta);
+  margin-top: 14px;
+}
+.column blockquote cite::before{ content:"— "; }
+
+/* margin notes — supporting handwritten font here */
+.column .margin-note{
+  position: relative;
+  background: var(--yellow);
+  padding: 12px 14px;
+  font-family: var(--hand);
+  font-size: 19px;
+  line-height: 1.2;
+  color: var(--ink);
+  width: 200px;
+  box-shadow: 4px 6px 10px rgba(31,0,84,0.18);
+  z-index: 4;
+}
+.column .margin-note.left{
+  float: left;
+  margin: 6px 22px 14px -240px;
+  transform: rotate(-3deg);
+}
+.column .margin-note.right{
+  float: right;
+  margin: 6px -240px 14px 22px;
+  transform: rotate(2deg);
+}
+.column .margin-note.pink   { background: var(--pink); color: #ffffff; }
+.column .margin-note.purple { background: var(--ink); color: #ffffff; }
+.column .margin-note.orange { background: var(--orange); color: #ffffff; }
+
+/* draft tag */
+.draft-tag{
+  display: inline-block;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  background: var(--pink);
+  color: #ffffff;
+  padding: 4px 10px;
+  margin-left: 8px;
+  vertical-align: middle;
+  transform: rotate(-2deg);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+/* ===========================================================
+   1.  COVER
+   =========================================================== */
+
+#cover .page{ min-height: max(980px, 100vh); padding-top: 30px; }
+
+.cover-kicker{
+  text-align: center;
+  font-family: var(--typewriter);
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  color: var(--pink);
+  text-transform: uppercase;
+  margin-top: 30px;
+}
+
+.cover-title{
+  position: relative;
+  text-align: center;
+  margin: 30px auto 0;
+  width: min(980px, 88%);
+  z-index: 9;
+}
+.cover-title .line-1{
+  display: block;
+  font-family: var(--mono);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(24px, 3.5vw, 44px);
+  color: var(--magenta);
+  line-height: 1;
+  letter-spacing: 0;
+}
+.cover-title .line-2{
+  display: block;
+  font-family: var(--mono-tall);
+  font-size: clamp(54px, 9vw, 132px);
+  line-height: 0.95;
+  letter-spacing: 0;
+  color: var(--ink);
+  margin: 14px 0 6px;
+  text-transform: lowercase;
+}
+.cover-title .line-3{
+  display: block;
+  font-family: var(--mono-tall);
+  font-size: clamp(34px, 6.2vw, 84px);
+  line-height: 0.95;
+  color: var(--pink);
+  text-transform: lowercase;
+  letter-spacing: 0;
+}
+.cover-title .amp{
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--orange);
+  padding: 0 .15em;
+}
+.cover-title .subtitle-strip{
+  display: inline-block;
+  margin-top: 18px;
+  padding: 8px 18px;
+  font-family: var(--typewriter);
+  font-size: clamp(11px, 1.5vw, 14px);
+  line-height: 1.35;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: var(--ink);
+  box-shadow: 5px 5px 0 var(--yellow);
+  transform: rotate(-1.5deg);
+}
+.cover-sub{
+  max-width: 640px;
+  margin: 54px auto 0;
+  font-family: var(--mono);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  text-align: center;
+  position: relative;
+  z-index: 9;
+}
+.cover-sub em{
+  font-style: normal;
+  background: var(--yellow);
+  padding: 0 .2em;
+  color: var(--ink);
+}
+
+.cover-meta{
+  position: absolute;
+  bottom: 78px; left: 7%;
+  font-family: var(--typewriter);
+  font-size: 12px;
+  color: var(--ink);
+  line-height: 1.9;
+  transform: rotate(-2deg);
+}
+.cover-meta .by{
+  font-family: var(--signed);
+  font-size: 22px;
+  color: var(--pink);
+  display: block;
+  margin-top: 6px;
+}
+
+.cover-stamp{
+  position: absolute;
+  bottom: 100px; right: 10%;
+  transform: rotate(7deg);
+}
+
+.scroll-cue{
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  font-family: var(--brush);
+  font-size: 28px;
+  color: var(--ink);
+  text-align: center;
+}
+.scroll-cue svg{ display:block; margin: 4px auto 0; }
+
+.cover-clip{
+  position: absolute;
+  top: auto; bottom: 270px; left: 5%;
+  width: 205px;
+  background: #ffffff;
+  padding: 14px 16px 16px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink);
+  transform: rotate(-6deg);
+  box-shadow: 6px 6px 0 var(--ink), 0 12px 22px rgba(31,0,84,0.22);
+  z-index: 5;
+}
+.cover-clip .kicker{
+  font-family: var(--typewriter);
+  font-size: 10px; letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+.cover-clip .heading{
+  font-family: var(--mono-tall);
+  font-size: 18px; line-height: 1.05;
+  margin: 8px 0 8px;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+}
+
+.cover-photo{
+  position: absolute;
+  bottom: 268px; right: 5%;
+  width: 205px; height: 170px;
+  transform: rotate(6deg);
+  background: #ffffff;
+  padding: 10px 10px 38px;
+  box-shadow: 8px 8px 0 var(--ink), 0 12px 24px rgba(31,0,84,0.28);
+  z-index: 5;
+}
+.cover-photo .img{
+  width: 100%; height: 100%;
+  background:
+    linear-gradient(135deg, var(--ink), var(--magenta)),
+    var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.cover-photo .img::before{
+  content:""; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle, rgba(255,189,0,0.25) 1.5px, transparent 2.2px);
+  background-size: 8px 8px;
+}
+.cover-photo .img::after{
+  content: "e-tab5, in circulation.";
+  position: absolute; left: 0; right: 0; bottom: 14px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,241,227,0.7);
+  letter-spacing: 0.15em;
+}
+.cover-photo .device{
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 70%; height: 60%;
+  background: rgba(255,241,227,0.08);
+  border: 2px solid rgba(255,241,227,0.4);
+  border-radius: 8px;
+}
+.cover-photo .label{
+  position: absolute;
+  bottom: 8px; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--signed);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+/* ===========================================================
+   2. CAMBRIDGE DEFINITION
+   =========================================================== */
+
+#define .page{ min-height: auto; padding-top: 40px; }
+
+.define-wrap{
+  width: min(960px, 92%);
+  margin: 0 auto;
+  position: relative;
+}
+
+.define-eyebrow{
+  text-align: center;
+  font-family: var(--typewriter);
+  font-size: 12px;
+  letter-spacing: 0.4em;
+  color: var(--pink);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.define-headline{
+  text-align: center;
+  font-family: var(--mono);
+  font-style: italic;
+  font-size: clamp(22px, 3vw, 32px);
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0 0 50px;
+  font-weight: 700;
+}
+
+.dictionary{
+  position: relative;
+  background: #ffffff;
+  padding: 44px 50px 50px;
+  box-shadow:
+    8px 8px 0 var(--ink),
+    0 14px 34px rgba(31,0,84,0.22);
+  transform: rotate(-0.7deg);
+  border: 2px solid var(--ink);
+}
+.dictionary::before{
+  content:"";
+  position:absolute; inset:0;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence baseFrequency='0.7' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.22  0 0 0 0 0  0 0 0 0 0.6  0 0 0 0.10 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");
+  pointer-events:none; opacity: 0.5; mix-blend-mode: multiply;
+}
+
+.dict-source{
+  font-family: var(--typewriter);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--pink);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  border-bottom: 2px dashed var(--ink);
+  padding-bottom: 10px;
+}
+
+.dict-word{
+  font-family: var(--mono-tall);
+  font-weight: 400;
+  font-size: clamp(36px, 5.5vw, 56px);
+  line-height: 1;
+  margin: 0 0 4px;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+}
+.dict-pron{
+  font-family: var(--mono);
+  color: var(--magenta);
+  font-size: 15px;
+  margin-bottom: 22px;
+}
+.dict-pos{
+  font-style: italic; color: var(--magenta);
+  font-family: var(--mono); margin-right: 8px;
+}
+.dict-num{
+  color: var(--pink); font-weight: 700; margin-right: 8px;
+  font-family: var(--mono);
+}
+.dict-def{
+  margin: 0 0 14px;
+  font-family: var(--mono);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.dict-ex{
+  font-style: italic; color: var(--magenta);
+  font-size: 15px;
+  font-family: var(--mono);
+  margin-bottom: 4px;
+  padding-left: 14px;
+  border-left: 3px solid var(--pink);
+}
+
+.dict-margin{
+  position: absolute;
+  font-family: var(--marker);
+  font-size: 24px;
+  color: var(--pink);
+  line-height: 1.05;
+  z-index: 4;
+}
+.dict-margin.dm-1{
+  top: -36px; right: -110px;
+  width: 200px;
+  transform: rotate(8deg);
+}
+.dict-margin.dm-2{
+  bottom: -50px; left: -90px;
+  width: 240px;
+  transform: rotate(-5deg);
+  color: var(--ink);
+  font-family: var(--brush);
+  font-size: 32px;
+}
+
+/* ===========================================================
+   3. ESSAY OPENING
+   =========================================================== */
+
+#open .page{ min-height: auto; padding-top: 60px; padding-bottom: 80px; }
+
+.section-headline{
+  text-align: center;
+  width: min(900px, 92%);
+  margin: 0 auto 40px;
+  position: relative;
+}
+.section-headline .num{
+  font-family: var(--typewriter);
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  color: var(--pink);
+  display: block;
+  margin-bottom: 8px;
+}
+.section-headline h2{
+  font-family: var(--mono-tall);
+  font-size: clamp(40px, 6.5vw, 88px);
+  line-height: 0.95;
+  margin: 0;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+}
+.section-headline .deck{
+  font-family: var(--brush);
+  font-size: 32px;
+  color: var(--pink);
+  margin-top: 18px;
+  display: inline-block;
+  transform: rotate(1.5deg);
+}
+
+/* ===========================================================
+   4. THE EVENT — fatih projesi
+   =========================================================== */
+
+#event{ padding-bottom: 60px; }
+#event .page{ min-height: auto; }
+
+.event-collage{
+  position: relative;
+  width: min(1200px, 95%);
+  margin: 30px auto 50px;
+  height: 820px;
+}
+
+.collage-photo{
+  position: absolute;
+  background: #ffffff;
+  padding: 12px 12px 38px;
+  box-shadow: 6px 6px 0 var(--ink), 0 14px 30px rgba(31,0,84,0.22);
+}
+.collage-photo .frame{
+  width: 100%; aspect-ratio: 4/3;
+  position: relative;
+  overflow: hidden;
+  background: var(--ink-dk);
+}
+/* halftone overlay on photos */
+.collage-photo .frame::after{
+  content:""; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,189,0,0.18) 1.5px, transparent 2.2px);
+  background-size: 8px 8px;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.collage-photo .caption{
+  position: absolute;
+  bottom: 8px; left: 12px; right: 12px;
+  text-align: center;
+  font-family: var(--typewriter);
+  font-size: 12px;
+  color: var(--ink);
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+}
+
+/* real photos — lightly desaturated, faint purple wash so the image is clearly visible */
+.frame.real{
+  background: #ffffff;
+  position: relative;
+}
+.frame.real img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.55) contrast(1.05);
+}
+.frame.real::after{
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(57,0,153,0.08), rgba(158,0,89,0.10));
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: multiply;
+}
+
+.frame.components{
+  background:
+    radial-gradient(circle at 24% 26%, rgba(255,189,0,0.28), transparent 0 12%, transparent 13%),
+    linear-gradient(135deg, var(--ink), var(--magenta));
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+.component-map{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  align-items: stretch;
+}
+.component-map span{
+  min-height: 112px;
+  display: grid;
+  place-items: center;
+  padding: 8px 6px;
+  border: 2px solid rgba(255,245,230,0.75);
+  background: rgba(255,245,230,0.10);
+  color: var(--offwhite);
+  font-family: var(--typewriter);
+  font-size: 10px;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  box-shadow: inset 0 0 0 3px rgba(255,189,0,0.16);
+}
+.component-map span:nth-child(2n){
+  transform: translateY(12px);
+  color: var(--yellow);
+}
+
+/* "photo" frames built with css */
+.frame.classroom{
+  background:
+    linear-gradient(180deg, var(--ink) 0 60%, var(--ink-dk) 60% 100%);
+}
+.frame.classroom::before{
+  content:"";
+  position:absolute; left:18%; right:18%; top:14%; height:42%;
+  background: var(--magenta);
+  border: 4px solid var(--orange);
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+}
+
+.frame.tablet-stack{
+  background: linear-gradient(135deg, var(--magenta), var(--ink-dk));
+}
+.frame.tablet-stack .stack{
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%; height: 70%;
+}
+.frame.tablet-stack .t{
+  position: absolute; left: 0; right: 0;
+  height: 24%;
+  background: rgba(255,189,0,0.25);
+  border: 2px solid var(--yellow);
+  border-radius: 4px;
+}
+.frame.tablet-stack .t:nth-child(1){ top: 0;   transform: rotate(-3deg); }
+.frame.tablet-stack .t:nth-child(2){ top: 28%; transform: rotate(2deg); }
+.frame.tablet-stack .t:nth-child(3){ top: 56%; transform: rotate(-1deg); }
+
+.frame.tablet-hand{
+  background: linear-gradient(160deg, var(--orange), var(--pink) 60%, var(--magenta));
+}
+.frame.tablet-hand::before{
+  content:"";
+  position: absolute; left: 22%; right: 22%; top: 18%; bottom: 18%;
+  background: var(--ink-dk);
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 6px rgba(255,189,0,0.35);
+}
+.frame.tablet-hand .label-fatih{
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-family: var(--mono-tall);
+  font-size: 32px;
+  color: var(--yellow);
+  letter-spacing: 0.1em;
+  z-index: 2;
+}
+
+.frame.cabinet{
+  background: linear-gradient(180deg, var(--orange) 0 35%, var(--magenta) 35% 100%);
+}
+.frame.cabinet::before{
+  content:"";
+  position:absolute; left: 10%; right: 10%; top: 15%; bottom: 18%;
+  background: var(--ink-dk);
+  border: 3px solid var(--ink);
+}
+.frame.cabinet .lock{
+  position: absolute; left: 50%; top: 48%;
+  transform: translate(-50%, -50%);
+  width: 30px; height: 26px;
+  background: var(--yellow);
+  border-radius: 4px;
+  z-index: 3;
+}
+.frame.cabinet .lock::before{
+  content:"";
+  position: absolute; left: 50%; top: -10px;
+  transform: translateX(-50%);
+  width: 16px; height: 18px;
+  border: 3px solid var(--yellow);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+}
+
+/* placement / rotation */
+.cp-1{ top: 14px;  left: 0;      width: 310px; transform: rotate(-3deg); }
+.cp-2{ top: 92px;  left: 405px;  width: 340px; transform: rotate(2deg); }
+.cp-3{ top: 18px;  right: 0;     width: 320px; transform: rotate(-2deg); }
+.cp-4{ top: 455px; left: 72px;   width: 320px; transform: rotate(2.5deg); }
+.cp-5{ top: 500px; left: 470px;  width: 300px; transform: rotate(-1.5deg); }
+.cp-6{ top: 438px; right: 16px;  width: 310px; transform: rotate(2.5deg); }
+
+.event-margin{
+  position: absolute;
+  font-family: var(--marker);
+  color: var(--pink);
+  z-index: 8;
+  text-shadow: 2px 2px 0 var(--peach);
+}
+.event-margin.em-1{ top: 355px; left: 36%; font-size: 28px; transform: rotate(-6deg); }
+.event-margin.em-2{ top: 700px; left: 18%; font-size: 24px; transform: rotate(3deg); color: var(--ink); }
+
+/* fact strip */
+.fact-strip{
+  width: min(1100px, 92%);
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.fact{
+  background: #ffffff;
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: 5px 5px 0 var(--ink);
+  position: relative;
+  border: 2px solid var(--ink);
+}
+.fact:nth-child(1){ transform: rotate(-1.5deg); }
+.fact:nth-child(2){ transform: rotate(1deg); }
+.fact:nth-child(3){ transform: rotate(-1deg); }
+.fact:nth-child(4){ transform: rotate(1.8deg); }
+.fact .num{
+  font-family: var(--mono-tall);
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.fact:nth-child(1) .num{ color: var(--ink); }
+.fact:nth-child(2) .num{ color: var(--magenta); }
+.fact:nth-child(3) .num{ color: var(--orange); }
+.fact:nth-child(4) .num{ color: var(--ink); }
+.fact .label{
+  font-family: var(--typewriter);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 10px;
+  display: block;
+  line-height: 1.4;
+}
+
+/* ===========================================================
+   4.5  PRESS CLIPPINGS — the public record
+   =========================================================== */
+
+#press{ padding-top: 60px; padding-bottom: 60px; }
+#press .page{ min-height: auto; }
+
+.clip-grid{
+  width: min(1280px, 96%);
+  margin: 40px auto 0;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 36px 24px;
+}
+
+.news-clip{
+  grid-column: span 2;
+  position: relative;
+  background: #ffffff;
+  padding: 16px 18px 20px;
+  box-shadow: 5px 5px 0 var(--ink), 0 12px 24px rgba(31,0,84,0.16);
+  border: 1.5px solid var(--ink);
+  font-family: var(--mono);
+  color: var(--ink);
+}
+.news-clip:nth-child(1){ transform: rotate(-1.6deg); }
+.news-clip:nth-child(2){ transform: rotate(1.2deg); margin-top: 22px; }
+.news-clip:nth-child(3){ transform: rotate(-1deg); }
+.news-clip:nth-child(4){ transform: rotate(1.8deg); margin-top: 16px; }
+.news-clip:nth-child(5){ transform: rotate(-2deg); }
+.news-clip:nth-child(6){ transform: rotate(1.4deg); margin-top: 20px; }
+.news-clip:nth-child(7){ transform: rotate(-1.8deg); }
+.news-clip:nth-child(5){ grid-column: 2 / span 2; }
+.news-clip:nth-child(6){ grid-column: 4 / span 2; }
+.news-clip:nth-child(7){ grid-column: 6 / span 2; }
+
+.news-clip .meta{
+  font-family: var(--typewriter);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  display: flex; justify-content: space-between;
+  border-bottom: 1px dashed var(--ink);
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+.news-clip .meta .src{ color: var(--pink); font-weight: 700; }
+.news-clip .meta .date{ color: var(--magenta); }
+
+.news-clip h4{
+  font-family: var(--mono-tall);
+  font-size: 17px;
+  line-height: 1.1;
+  margin: 0 0 10px;
+  letter-spacing: -0.015em;
+  text-transform: lowercase;
+  color: var(--ink);
+}
+.news-clip .blurb{ font-size: 12px; }
+
+.news-clip .article-img{
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: var(--peach-dk);
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(31,0,84,0.2);
+}
+.news-clip .article-img img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.55) contrast(1.05);
+}
+.news-clip .article-img::after{
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(57,0,153,0.08), rgba(158,0,89,0.10));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.news-clip .blurb{
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0;
+}
+
+.news-clip .source-link{
+  display: block;
+  font-family: var(--typewriter);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--magenta);
+  margin-top: 10px;
+  word-break: break-all;
+  text-decoration: none;
+}
+.news-clip .source-link:hover{ text-decoration: underline; }
+
+@media (max-width: 900px){
+  .clip-grid{ grid-template-columns: 1fr; }
+  .news-clip{ grid-column: auto !important; transform: rotate(0) !important; margin-top: 0 !important; }
+}
+
+/* ===========================================================
+   5. THE CRITIQUE
+   =========================================================== */
+
+#critique{
+  padding-top: 100px;
+}
+#critique .page{ min-height: auto; }
+
+.critique-hero{
+  width: min(1080px, 92%);
+  margin: 0 auto 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.critique-hero .text h2{
+  font-family: var(--mono-tall);
+  font-size: clamp(48px, 6.5vw, 84px);
+  line-height: 0.95;
+  color: var(--ink);
+  margin: 0 0 14px;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+}
+.critique-hero .text p{
+  font-family: var(--mono);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--magenta);
+  margin: 0;
+  font-weight: 700;
+}
+.critique-hero .photo-card{
+  position: relative;
+  background: #ffffff;
+  padding: 14px 14px 50px;
+  box-shadow: 8px 8px 0 var(--ink), 0 16px 32px rgba(31,0,84,0.22);
+  transform: rotate(2deg);
+  border: 2px solid var(--ink);
+}
+.critique-hero .photo-card .frame{
+  aspect-ratio: 5/4;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--magenta), var(--ink-dk));
+}
+.critique-hero .photo-card .frame::after{
+  content:""; position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,189,0,0.18) 1.5px, transparent 2.2px);
+  background-size: 8px 8px;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.critique-hero .photo-card .frame .device{
+  position: absolute; left: 18%; right: 18%; top: 22%; bottom: 22%;
+  background: var(--ink-dk);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 4px var(--yellow);
+}
+.critique-hero .photo-card .frame .device::after{
+  content: "no signal";
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-family: var(--mono);
+  color: var(--yellow);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.critique-hero .photo-card .caption{
+  position: absolute;
+  bottom: 12px; left: 14px; right: 14px;
+  text-align: center;
+  font-family: var(--typewriter);
+  font-size: 12px;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+}
+
+/* hero pull-quote (ministerial admission, etc.) — placed prominently */
+.hero-quote{
+  width: min(880px, 92%);
+  margin: 50px auto 60px;
+  background: #ffffff;
+  border: 2px solid var(--ink);
+  padding: 52px 44px 38px;
+  position: relative;
+  box-shadow: 8px 8px 0 var(--ink), 0 14px 32px rgba(31,0,84,0.18);
+  transform: rotate(-0.4deg);
+}
+.hero-quote::before{
+  content: "“";
+  position: absolute;
+  top: -18px; left: 22px;
+  font-family: var(--mono-tall);
+  font-size: 96px;
+  line-height: 1;
+  color: var(--orange);
+  opacity: 0.22;
+  background: transparent;
+  padding: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-quote .quote-text{
+  position: relative;
+  z-index: 1;
+  font-family: var(--mono-tall);
+  font-size: clamp(26px, 3.6vw, 40px);
+  line-height: 1.18;
+  color: var(--ink);
+  margin: 0 0 22px;
+  letter-spacing: -0.018em;
+  text-transform: lowercase;
+}
+.hero-quote .quote-cite{
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--magenta);
+  margin: 0 0 22px;
+  border-top: 1px dashed var(--ink);
+  padding-top: 16px;
+  font-style: italic;
+}
+.hero-quote .quote-eval{
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* pull-quote */
+.pull{
+  width: min(900px, 92%);
+  margin: 60px auto;
+  font-family: var(--mono-tall);
+  font-size: clamp(34px, 4.8vw, 60px);
+  line-height: 1.05;
+  text-align: center;
+  color: var(--ink);
+  transform: rotate(-0.8deg);
+  position: relative;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+}
+.pull::before, .pull::after{
+  content: "";
+  display: block;
+  height: 6px; width: 80px;
+  background: var(--pink);
+  margin: 18px auto;
+}
+.pull em{
+  font-style: normal;
+  background: var(--yellow);
+  padding: 0 .15em;
+}
+
+/* ===========================================================
+   6. THE REFRAME
+   =========================================================== */
+
+#reframe{
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,189,0,0.30), transparent 65%);
+  padding-top: 100px;
+}
+#reframe .page{ min-height: auto; }
+
+.reframe-cards{
+  width: min(1100px, 92%);
+  margin: 50px auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px;
+}
+.rcard{
+  position: relative;
+  background: #ffffff;
+  padding: 32px 32px 36px;
+  box-shadow: 6px 6px 0 var(--ink), 0 14px 30px rgba(31,0,84,0.18);
+  border: 2px solid var(--ink);
+}
+.rcard:nth-child(1){ transform: rotate(-1.2deg); }
+.rcard:nth-child(2){ transform: rotate(1.5deg); }
+.rcard:nth-child(3){ transform: rotate(1deg); }
+.rcard:nth-child(4){ transform: rotate(-1.5deg); }
+
+.rcard .num{
+  font-family: var(--mono-tall);
+  font-size: 56px;
+  color: var(--pink);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.rcard:nth-child(2) .num{ color: var(--magenta); }
+.rcard:nth-child(3) .num{ color: var(--orange); }
+.rcard:nth-child(4) .num{ color: var(--ink); }
+
+.rcard h3{
+  font-family: var(--mono-tall);
+  font-size: 30px;
+  line-height: 1.05;
+  margin: 8px 0 16px;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+}
+.rcard p{
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+.rcard .from{
+  font-family: var(--typewriter);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  display: block;
+  margin-top: 10px;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+/* ===========================================================
+   7. CLOSING
+   =========================================================== */
+
+#close{ padding: 90px 0 80px; }
+#close .page{ min-height: auto; }
+
+.closing{
+  width: min(1080px, 92%);
+  margin: 0 auto;
+  position: relative;
+  padding: clamp(34px, 5vw, 58px) clamp(28px, 5vw, 70px);
+  text-align: left;
+  font-family: var(--mono);
+  font-size: clamp(17px, 1.65vw, 22px);
+  line-height: 1.62;
+  color: var(--ink);
+  letter-spacing: 0;
+  text-transform: none;
+  background:
+    linear-gradient(90deg, rgba(255,0,84,0.12) 0 2px, transparent 2px 100%) 34px 0 / 100% 100% no-repeat,
+    repeating-linear-gradient(180deg, #ffffff 0 36px, rgba(57,0,153,0.10) 37px, #ffffff 38px);
+  border: 2px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--ink), 0 18px 38px rgba(31,0,84,0.22);
+  transform: rotate(-0.8deg);
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='420' viewBox='0 0 900 420' preserveAspectRatio='none'><path d='M5 14 Q35 5 70 12 T140 8 T210 14 T280 7 T350 12 T420 6 T490 13 T560 8 T630 15 T700 7 T770 13 T895 10 L890 405 Q850 415 810 407 T730 413 T650 406 T570 414 T490 407 T410 413 T330 405 T250 414 T170 407 T90 413 T6 406 Z'/></svg>") center/100% 100% no-repeat;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='420' viewBox='0 0 900 420' preserveAspectRatio='none'><path d='M5 14 Q35 5 70 12 T140 8 T210 14 T280 7 T350 12 T420 6 T490 13 T560 8 T630 15 T700 7 T770 13 T895 10 L890 405 Q850 415 810 407 T730 413 T650 406 T570 414 T490 407 T410 413 T330 405 T250 414 T170 407 T90 413 T6 406 Z'/></svg>") center/100% 100% no-repeat;
+}
+.closing::before{
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 9%;
+  width: 210px;
+  height: 34px;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 7px, rgba(57,0,153,0.40) 7px 11px),
+    var(--tape-orange);
+  box-shadow: 0 4px 8px rgba(31,0,84,0.16);
+  transform: rotate(-3deg);
+}
+.closing::after{
+  content: "final note";
+  position: absolute;
+  right: 42px;
+  top: -26px;
+  padding: 8px 16px;
+  border: 3px solid var(--pink);
+  background: #ffffff;
+  color: var(--pink);
+  font-family: var(--typewriter);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transform: rotate(5deg);
+}
+.closing .lead{
+  display: block;
+  margin: 0 0 18px;
+  font-family: var(--brush);
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 0.98;
+  color: var(--pink);
+  text-transform: none;
+}
+.closing .note-line{
+  display: block;
+  max-width: 920px;
+  margin: 0 0 14px;
+}
+.closing .strike-note{
+  display: inline;
+  font-family: var(--hand);
+  font-size: 1.25em;
+  line-height: 1;
+  color: var(--magenta);
+  background: linear-gradient(180deg, transparent 54%, rgba(255,189,0,0.75) 54% 86%, transparent 86%);
+  padding: 0 .1em;
+}
+.closing .signoff{
+  display: block;
+  margin-top: 30px;
+  font-family: var(--signed);
+  font-size: 24px;
+  color: var(--pink);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ===========================================================
+   8. COLOPHON
+   =========================================================== */
+
+#colophon{ padding-bottom: 120px; }
+#colophon .page{ min-height: auto; }
+
+.colophon-card{
+  width: min(720px, 92%);
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 40px 44px 50px;
+  position: relative;
+  box-shadow: 8px 8px 0 var(--ink), 0 14px 32px rgba(31,0,84,0.22);
+  transform: rotate(-1deg);
+  font-family: var(--mono);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.75;
+  border: 2px solid var(--ink);
+}
+.colophon-card h3{
+  font-family: var(--mono-tall);
+  font-size: 32px;
+  color: var(--ink);
+  margin: 0 0 8px;
+  text-transform: lowercase;
+  letter-spacing: -0.02em;
+}
+.colophon-card .row{
+  display: flex; justify-content: space-between;
+  border-bottom: 1px dashed var(--ink);
+  padding: 6px 0;
+}
+.colophon-card .row span:first-child{
+  color: var(--pink);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-family: var(--typewriter);
+}
+.colophon-card .signoff{
+  font-family: var(--signed);
+  font-size: 22px;
+  color: var(--pink);
+  margin-top: 24px;
+  text-align: right;
+}
+.colophon-card .filed{
+  position: absolute;
+  bottom: -16px; right: 24px;
+  font-family: var(--typewriter);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--pink);
+  border: 3px solid var(--pink);
+  padding: 6px 14px;
+  background: var(--peach);
+  transform: rotate(-6deg);
+  text-transform: uppercase;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+}
+
+.footer-sources{
+  width: min(900px, 90%);
+  margin: 50px auto 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  line-height: 1.75;
+  columns: 2;
+  column-gap: 40px;
+}
+.footer-sources strong{
+  color: var(--pink);
+  display: block;
+  margin-top: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-family: var(--typewriter);
+}
+
+/* ===========================================================
+   PROGRESS RIBBON — top bookmark
+   =========================================================== */
+
+.bookmark, .section-tag, .page-num{ display: none !important; }
+
+/* ===========================================================
+   ANIMATIONS — many flavors
+   =========================================================== */
+
+/* base reveal */
+.reveal,
+.reveal-stagger > *{
+  opacity: 0;
+  transform: translateY(40px) rotate(0deg) scale(0.96);
+  transition:
+    opacity 0.7s ease,
+    transform 0.85s cubic-bezier(.2,.9,.25,1);
+  will-change: transform, opacity;
+}
+.reveal.in,
+.reveal-stagger.in > *{
+  opacity: 1;
+  transform: translateY(0) rotate(var(--r,0deg)) scale(1);
+}
+.reveal-stagger > *{
+  transition-delay: calc(var(--stagger, 0) * 90ms);
+}
+
+/* drop from above */
+.drop{
+  opacity: 0;
+  transform: translateY(-100px) rotate(0deg) scale(0.9);
+  transition:
+    opacity 0.55s ease,
+    transform 1s cubic-bezier(.32,1.55,.4,1);
+}
+.drop.in{
+  opacity: 1;
+  transform: translateY(0) rotate(var(--r,0deg)) scale(1);
+}
+
+/* slide-in */
+.slide-l{ opacity: 0; transform: translateX(-100px) rotate(var(--r,0deg)); transition: opacity .7s ease, transform .9s cubic-bezier(.2,.9,.25,1); }
+.slide-r{ opacity: 0; transform: translateX(100px)  rotate(var(--r,0deg)); transition: opacity .7s ease, transform .9s cubic-bezier(.2,.9,.25,1); }
+.slide-l.in, .slide-r.in{ opacity: 1; transform: translateX(0) rotate(var(--r,0deg)); }
+
+/* pop-in: scale from 0 with bounce */
+.pop{
+  opacity: 0;
+  transform: rotate(var(--r,0deg)) scale(0);
+  transition: opacity .35s ease, transform .65s cubic-bezier(.34,1.65,.56,1);
+}
+.pop.in{
+  opacity: 1;
+  transform: rotate(var(--r,0deg)) scale(1);
+}
+
+/* spin-in: rotate from -180 + scale */
+.spin{
+  opacity: 0;
+  transform: rotate(-180deg) scale(0.4);
+  transition: opacity .4s ease, transform .9s cubic-bezier(.3,1.3,.4,1);
+}
+.spin.in{
+  opacity: 1;
+  transform: rotate(var(--r,0deg)) scale(1);
+}
+
+/* peel-in: rotateX flip */
+.peel{
+  opacity: 0;
+  transform-origin: center bottom;
+  transform: perspective(800px) rotateX(-80deg) translateY(20px);
+  transition: opacity .5s ease, transform .9s cubic-bezier(.3,1.2,.4,1);
+}
+.peel.in{
+  opacity: 1;
+  transform: perspective(800px) rotateX(0deg) translateY(0) rotate(var(--r,0deg));
+}
+
+/* swing-in: rotate from a direction with slight overshoot */
+.swing-l{
+  opacity: 0;
+  transform: rotate(-25deg) translate(-60px, -30px);
+  transform-origin: top left;
+  transition: opacity .5s ease, transform 1.1s cubic-bezier(.4,1.5,.5,1);
+}
+.swing-l.in{
+  opacity: 1;
+  transform: rotate(var(--r,0deg)) translate(0,0);
+}
+.swing-r{
+  opacity: 0;
+  transform: rotate(25deg) translate(60px, -30px);
+  transform-origin: top right;
+  transition: opacity .5s ease, transform 1.1s cubic-bezier(.4,1.5,.5,1);
+}
+.swing-r.in{
+  opacity: 1;
+  transform: rotate(var(--r,0deg)) translate(0,0);
+}
+
+/* stamp landing */
+.stamp-in{
+  opacity: 0;
+  transform: rotate(var(--r,0deg)) scale(2.5);
+  transition: opacity .25s ease, transform .35s cubic-bezier(.7,-0.4,.4,1.4);
+}
+.stamp-in.in{
+  opacity: .85;
+  transform: rotate(var(--r,0deg)) scale(1);
+}
+
+/* tape unfurls */
+.tape-in{
+  opacity: 0;
+  transform: rotate(var(--r,0deg)) scaleX(0);
+  transform-origin: left center;
+  transition: opacity .25s ease, transform .55s cubic-bezier(.3,1.2,.4,1);
+}
+.tape-in.in{
+  opacity: 1;
+  transform: rotate(var(--r,0deg)) scaleX(1);
+}
+
+/* sticker plops in (extra bouncy) */
+.sticker-in{
+  opacity: 0;
+  transform: rotate(calc(var(--r,0deg) - 25deg)) scale(0);
+  transition: opacity .3s ease, transform .8s cubic-bezier(.3,1.7,.4,1);
+}
+.sticker-in.in{
+  opacity: 1;
+  transform: rotate(var(--r,0deg)) scale(1);
+}
+
+/* fade only */
+.fade{
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.fade.in{ opacity: 1; }
+
+/* highlighter sweep */
+.highlight-sweep{
+  background: linear-gradient(90deg, var(--hl-yellow) 0%, var(--hl-yellow) 50%, transparent 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  padding: 0 .15em;
+  transition: background-position 1.4s ease 0.3s;
+}
+.highlight-sweep.in{ background-position: 0 0; }
+
+/* parallax */
+[data-parallax]{
+  transform: translate(var(--mx, 0), var(--my, 0)) rotate(var(--r,0deg));
+  transition: transform 0.18s ease-out;
+}
+
+/* continuous wobble for stickers */
+@keyframes wobble {
+  0%, 100% { transform: rotate(var(--r,0deg)) translate(0,0); }
+  25%      { transform: rotate(calc(var(--r,0deg) + 1.5deg)) translate(1px,-1px); }
+  50%      { transform: rotate(var(--r,0deg)) translate(0,1px); }
+  75%      { transform: rotate(calc(var(--r,0deg) - 1.5deg)) translate(-1px,-1px); }
+}
+.wobble{
+  animation: wobble 5s ease-in-out infinite;
+}
+
+/* sway for sticker pull-tabs */
+@keyframes sway-1 { 0%,100%{ transform: rotate(var(--r,0deg)) translate(0,0); } 50% { transform: rotate(calc(var(--r,0deg) + 0.5deg)) translate(2px,-1px); } }
+.sway-1{ animation: sway-1 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation: none !important;
+    transition: opacity .2s ease !important;
+  }
+  .reveal, .reveal-stagger > *, .drop, .slide-l, .slide-r, .stamp-in, .tape-in,
+  .pop, .spin, .peel, .swing-l, .swing-r, .sticker-in, .fade{
+    opacity: 1; transform: rotate(var(--r,0deg)) !important;
+  }
+}
+
+@media (min-width: 901px) and (max-height: 880px){
+  #cover .page{ min-height: 900px; }
+  .cover-clip{
+    bottom: 245px;
+    left: 3%;
+    width: 190px;
+  }
+  .cover-photo{
+    bottom: 245px;
+    right: 3%;
+    width: 190px;
+    height: 158px;
+  }
+  .cover-title{ width: min(900px, 82%); }
+  .cover-title .line-2{ font-size: clamp(50px, 8.2vw, 112px); }
+  .cover-title .line-3{ font-size: clamp(32px, 5.6vw, 74px); }
+}
+
+/* responsive scaffolding */
+@media (max-width: 900px){
+  .column .margin-note{ float: none !important; margin: 16px auto !important; display: block; }
+  .event-collage{ height: auto; }
+  .collage-photo{ position: relative !important; width: 100% !important; top:auto !important; left:auto !important; right:auto !important; margin: 0 0 28px; transform: rotate(0) !important; }
+  .event-margin{ display:none; }
+  .fact-strip{ grid-template-columns: 1fr 1fr; }
+  .critique-hero{ grid-template-columns: 1fr; }
+  .reframe-cards{ grid-template-columns: 1fr; }
+  .footer-sources{ columns: 1; }
+  .bookmark{ display:none; }
+  .dict-margin{ position: relative !important; right: auto !important; left: auto !important; top: auto !important; bottom: auto !important; margin: 18px auto !important; display: block; width: auto !important; }
+  .cover-photo, .cover-clip{ display:none; }
+  #cover .page{ padding-bottom: 180px; }
+  .cover-meta{
+    left: 50%;
+    bottom: 72px;
+    width: min(320px, 86%);
+    text-align: center;
+    transform: translateX(-50%) rotate(-1deg);
+  }
+  .cover-title .subtitle-strip{
+    max-width: min(420px, 92vw);
+    letter-spacing: 0.16em;
+  }
+  .closing{
+    padding: 42px 24px 34px;
+    font-size: 16px;
+    line-height: 1.58;
+  }
+  .closing::after{
+    right: 18px;
+    font-size: 10px;
+  }
+  .closing::before{
+    left: 28px;
+    width: 150px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="bookmark"><span>scroll</span><span class="pct" id="pct">0%</span></div>
+
+<main>
+
+<!-- =================== 1. COVER =================== -->
+<section id="cover">
+  <div class="page">
+    <span class="section-tag">Field journal · vol. 01</span>
+
+    <!-- pinned newspaper clipping -->
+    <div class="cover-clip swing-l" style="--r:-6deg">
+      <div class="kicker">Bulletin · Ankara, 2011</div>
+      <div class="heading">"every student will get a tablet."</div>
+      <div>and we did. the tablet was the easy part.</div>
+      <div class="pin purple" style="top:-10px; left:50%; transform: translateX(-50%);"></div>
+    </div>
+
+    <!-- real photo pinned bottom right: General Mobile E-TAB 5 -->
+    <div class="cover-photo swing-r" style="--r:6deg" data-parallax="6">
+      <div class="img" style="background:#ffffff; padding:0; overflow:hidden;">
+        <img src="https://zeytinburnu.meb.gov.tr/meb_iys_dosyalar/2019_11/21180841_meb-etab5-tablet-aktivasyonu-root-atma.jpg" alt="MEB E-TAB5 standard issue tablet" loading="lazy" referrerpolicy="no-referrer" style="width:100%; height:100%; object-fit:contain; filter: grayscale(0.55) contrast(1.05);">
+      </div>
+      <div class="label">general mobile e-tab 5.</div>
+      <div class="tape orange stripe tape-in" style="--r:-8deg; top:-12px; left:50%; margin-left:-55px; height: 28px;"></div>
+    </div>
+
+    <div class="cover-kicker reveal">dtes 551 · spring 2026</div>
+
+    <div class="cover-title">
+      <span class="line-1 reveal">FATİH.exe</span>
+      <span class="line-2 reveal">the tablet dream</span>
+      <span class="line-3 reveal"><span class="amp">&amp;</span> the classroom that wouldn't load</span>
+      <span class="subtitle-strip reveal">a technosolutionism field file</span>
+    </div>
+
+    <p class="cover-sub reveal">
+      a reflection on <em>technosolutionism</em> — told through a national classroom, a multi-billion-lira procurement, and a cabinet full of unused devices.
+    </p>
+
+    <div class="coffee" style="top: 54%; left: 22%;"></div>
+
+    <div class="cover-meta reveal" style="--r:-2deg">
+      dtes 551 · spring 2026<br>
+      assignment · technosolutionism critique<br>
+      <span class="by">— begüm k.</span>
+    </div>
+
+    <span class="page-num">001 — cover</span>
+  </div>
+</section>
+
+<!-- full-width washi divider -->
+<div class="washi-band air"></div>
+
+<!-- =================== 2. CAMBRIDGE DEFINITION =================== -->
+<section id="define">
+  <div class="page">
+    <span class="section-tag">Entry · the word itself</span>
+
+    <div class="define-wrap">
+      <div class="define-eyebrow reveal">first, the word</div>
+
+      <div class="dictionary peel" style="--r:-0.7deg" data-parallax="4">
+        <div class="dict-source">from the cambridge dictionary</div>
+        <p class="dict-word">techno&middot;solutionism</p>
+        <p class="dict-pron">/ˌtɛk.noʊ.səˈluː.ʃən.ɪzəm/ &nbsp;·&nbsp; noun</p>
+
+        <p class="dict-def"><span class="dict-num">1.</span><span class="dict-pos">n.</span> the idea that all problems can be solved by technology, although the truth may be <span class="under-pk">more complicated</span>:</p>
+
+        <p class="dict-ex">"this oversimplified reduction of complex problems into technological puzzles is known as <em>techno-solutionism</em>."</p>
+
+        <p class="dict-ex">"the first principle of technosolutionism is the notion that a machine, a software program, or an algorithm offers the <em>best solution</em> to any complicated problem."</p>
+
+        <div class="tape orange stripe tape-in" style="--r:-8deg; top:-14px; left:30px;"></div>
+        <div class="tape stripe orange tape-in" style="--r:8deg; top:-14px; right:50px;"></div>
+
+        <div class="dict-margin dm-1 reveal" style="--r:8deg">"although the truth may be more complicated" — <br>noted.</div>
+      </div>
+
+      <div class="barcode-divider" style="margin-top: 60px;"></div>
+    </div>
+
+    <span class="page-num">002 — definition</span>
+  </div>
+</section>
+
+<!-- =================== 4. THE EVENT — FATİH PROJESİ =================== -->
+<section id="event">
+  <div class="page">
+    <span class="section-tag">Exhibit A · the event</span>
+
+    <div class="section-headline reveal">
+      <span class="num">002 / the event</span>
+      <h2 style="--r:-1.5deg">FATIH.</h2>
+      <span class="deck" style="--r:1.5deg">— a fourteen-year national tablet program.</span>
+    </div>
+
+    <div class="event-collage">
+      <div class="collage-photo cp-1 drop" style="--r:-4deg" data-parallax="5">
+        <div class="frame real"><img src="https://yegitek.meb.gov.tr/meb_iys_dosyalar/2015_05/25110124_img_3312.jpg" alt="FATİH 700,000 tablet distribution event, 22 May 2015" loading="lazy" referrerpolicy="no-referrer"></div>
+        <div class="caption">launch event. ankara, may 2015. [meb / yeğitek]</div>
+        <div class="tape orange stripe tape-in" style="--r:-6deg; top:-12px; left:50%; margin-left:-55px;"></div>
+      </div>
+
+      <div class="collage-photo cp-2 spin" style="--r:2.5deg" data-parallax="8">
+        <div class="frame real"><img src="https://www.teknolojikogretmenler.com/wp-content/uploads/2020/11/500_bin_tablet_dagitimi_bu_hafta_1602493622_7878.jpg" alt="500,000 tablet distribution, 2020" loading="lazy" referrerpolicy="no-referrer"></div>
+        <div class="caption">500,000 tablets, 2020 covid wave. [teknolojikogretmenler]</div>
+        <div class="tape orange stripe tape-in" style="--r:8deg; top:-12px; right:30px;"></div>
+        <div class="sticker round yellow sticker-in" style="top:-22px; left:-22px; --r:-10deg;">10.6<br>M</div>
+      </div>
+
+      <div class="collage-photo cp-3 swing-r" style="--r:-3deg" data-parallax="6">
+        <div class="frame real"><img src="https://f.invest.gov.tr/en/News/News-from-Turkey/PublishingImages/20.05.13_fatih.jpg" alt="FATİH project classroom technology image" loading="lazy" referrerpolicy="no-referrer"></div>
+        <div class="caption">FATİH classroom technology, official image. [invest in türkiye]</div>
+        <span class="stamp pink stamp-in" style="--r:8deg; bottom:24%; right:-14px;">approved</span>
+      </div>
+
+      <div class="collage-photo cp-4 slide-l" style="--r:3deg" data-parallax="4">
+        <div class="frame real"><img src="https://konya.meb.gov.tr/meb_iys_dosyalar/2015_05/22140808_6.jpg" alt="FATİH tablet distribution in Konya, May 2015" loading="lazy" referrerpolicy="no-referrer"></div>
+        <div class="caption">tablet distribution ceremony. konya, may 2015. [meb]</div>
+        <div class="tape dot pink tape-in" style="--r:6deg; top:-12px; left:34px;"></div>
+      </div>
+
+      <div class="collage-photo cp-5 drop" style="--r:-2deg" data-parallax="6">
+        <div class="frame real"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Fatih_Smart_Board.jpg" alt="FATİH project interactive smart board in a Turkish classroom" loading="lazy"></div>
+        <div class="caption">FATİH smart board, in situ. wikimedia commons.</div>
+        <div class="sticker tag sticker-in" style="top: -18px; right: 10px; --r:6deg;">"smart"</div>
+      </div>
+
+      <div class="collage-photo cp-6 spin" style="--r:4deg" data-parallax="8">
+        <div class="frame real"><img src="https://zeytinburnu.meb.gov.tr/meb_iys_dosyalar/2019_11/21180841_meb-etab5-tablet-aktivasyonu-root-atma.jpg" alt="MEB E-TAB5 standard issue tablet" loading="lazy" referrerpolicy="no-referrer"></div>
+        <div class="caption">the standard issue: e-tab5. [meb]</div>
+        <span class="stamp magenta stamp-in" style="--r:-9deg; bottom:30%; left:-12px;">filed</span>
+      </div>
+
+      <div class="event-margin em-1 reveal" style="--r:-6deg">↑ remember these?</div>
+    </div>
+
+    <div class="fact-strip reveal-stagger">
+      <div class="fact">
+        <div class="num">2010</div>
+        <span class="label">program announced<br>by the ministry</span>
+      </div>
+      <div class="fact">
+        <div class="num">10.6M</div>
+        <span class="label">tablets<br>promised</span>
+      </div>
+      <div class="fact">
+        <div class="num">~2.4M</div>
+        <span class="label">tablets actually<br>distributed (by 2024)</span>
+      </div>
+      <div class="fact">
+        <div class="num">~11.5B&nbsp;TL</div>
+        <span class="label">total project cost<br>by 2023</span>
+      </div>
+    </div>
+
+    <div class="column">
+      <p class="reveal" style="font-family: var(--mono); font-size: 16px; line-height: 1.7; color: var(--ink);">
+        The FATİH program (launched 2010, Ministry of National Education) is Turkey's national education-technology initiative. Its design target group is the country's K–12 student population — approximately 17 million children and one million teachers and administrators. Its stated objective is the reduction of educational inequality through technology integration. The deployed solution has three components: tablets for students and teachers, interactive whiteboards in classrooms, and a national content network (EBA, on a state-managed VPN). The program was personally championed by the prime minister at launch and branded as <em>Asrın Projesi</em> — "the project of the century" — before any educational outcome existed to assess.
+      </p>
+      <p class="reveal" style="font-family: var(--mono); font-size: 16px; line-height: 1.7; color: var(--ink);">
+        My position relative to the program is not external. I was one of the students the promise was addressed to: a child in the Turkish state-education system while the rollout was being announced, celebrated, and unevenly delivered. As a student, the program assumed that access to a device would translate into access to better learning. Through my brother, who is neurodiverse, I saw a second assumption: that the same tablet, interface, content structure, and classroom routine would work for students with different cognitive and sensory needs without serious adaptation. His school received FATİH tablets, but the devices did not become part of meaningful classroom practice; they existed more as objects that had arrived than as tools that changed learning. At home, the program was also visible through my parents, both teachers. For teachers, the program assumed that educators could absorb new hardware, platforms, and policy language into their work without the corresponding infrastructure, training, repair support, or pedagogical redesign. So this critique comes from several points inside the target group — student, neurodiverse sibling, and teacher household — and from the gap between the program's promise and what it actually made possible.
+      </p>
+    </div>
+
+    <span class="page-num">004 — the event</span>
+  </div>
+</section>
+
+<!-- =================== 4.5  PRESS CLIPPINGS =================== -->
+<section id="press">
+  <div class="page">
+    <span class="section-tag">Exhibit A.5 · the press record</span>
+
+    <div class="section-headline reveal">
+      <span class="num">002½ / in the press</span>
+      <h2 style="--r:-1deg">the archive was already speaking.</h2>
+      <span class="deck" style="--r:1deg">— the program in the public record, 2012–2022.</span>
+    </div>
+
+    <div class="clip-grid reveal-stagger">
+
+      <!-- ROW 1 — the official narrative track (chronological) -->
+
+      <!-- 2012 · Sabah -->
+      <div class="news-clip">
+        <div class="meta"><span class="src">Sabah</span><span class="date">15 apr 2012</span></div>
+        <h4>students cracked the FATİH tablet passwords.</h4>
+        <div class="article-img"><img src="https://itkn.tmgrup.com.tr/2012/04/15/400x279/fatih-projesi-cercevesinde-okullara-dagitilan-tabl-735602619885400279.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"></div>
+        <p class="blurb">students bypassed the security firewalls on the new tablets within months of distribution. officials reframed the breach as "an opportunity to harden security before software export."</p>
+        <a class="source-link" href="https://www.sabah.com.tr/teknokulis/haberler/2012/04/15/ogrenciler-fatihin-sifresini-kirdi" target="_blank" rel="noopener">→ sabah.com.tr</a>
+        <div class="tape orange stripe tape-in" style="--r:-6deg; top:-12px; left:30px;"></div>
+      </div>
+
+      <!-- 2014 · Daily Sabah -->
+      <div class="news-clip">
+        <div class="meta"><span class="src">Daily Sabah</span><span class="date">02 jul 2014</span></div>
+        <h4>FATİH project distributes 732,000 tablets.</h4>
+        <div class="article-img"><img src="https://idsb.tmgrup.com.tr/2014/07/02/HaberDetay/1404248720097.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"></div>
+        <p class="blurb">the ministry reports 732,000 tablets distributed to students and teachers in grades 5–12 — the official mid-rollout progress claim.</p>
+        <a class="source-link" href="https://www.dailysabah.com/education/2014/07/02/fatih-project-distributes-732000-tablets" target="_blank" rel="noopener">→ dailysabah.com</a>
+        <div class="tape orange stripe tape-in" style="--r:5deg; top:-12px; right:30px;"></div>
+      </div>
+
+      <!-- 2016 · turansahin blog -->
+      <div class="news-clip">
+        <div class="meta"><span class="src">Blog · Turan Şahin</span><span class="date">01 oct 2016</span></div>
+        <h4>technology in education — the official frame.</h4>
+        <div class="article-img"><img src="https://i0.wp.com/s1.trthaber.com/resimler/412000/412615.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"></div>
+        <p class="blurb">a defender's account: the program enables teachers to deliver technology-integrated lessons using interactive boards and tablets, with curriculum-aligned content. the official narrative, in summary.</p>
+        <a class="source-link" href="https://turansahin92.wordpress.com/2016/10/01/egitimde-fatih-projesi/" target="_blank" rel="noopener">→ turansahin92.wordpress.com</a>
+        <div class="tape stripe tape-in" style="--r:4deg; top:-12px; right:30px;"></div>
+      </div>
+
+      <!-- 2022 · AA -->
+      <div class="news-clip">
+        <div class="meta"><span class="src">Anadolu Agency</span><span class="date">03 mar 2022</span></div>
+        <h4>over 2 million tablets distributed by FATİH.</h4>
+        <div class="article-img"><img src="https://web-cdnprod.aa.com.tr/uploads/Contents/2022/03/03/thumbs_b_c_d14127886068dd7f09da74723adbc5d4.jpg?v=184200" alt="" loading="lazy" referrerpolicy="no-referrer"></div>
+        <p class="blurb">2,125,607 tablets distributed in total: 1,437,800 in 2013–2015, 681,307 during covid-19, 6,500 in early 2022. the program's own headline number, twelve years in.</p>
+        <a class="source-link" href="https://www.aa.com.tr/tr/egitim/fatih-projesi-ile-2-milyonu-askin-tablet-bilgisayar-seti-ogrencilere-dagitildi/2522791" target="_blank" rel="noopener">→ aa.com.tr</a>
+        <div class="tape orange stripe tape-in" style="--r:-5deg; top:-12px; left:30px;"></div>
+      </div>
+
+      <!-- ROW 2 — the critical reckoning track (chronological) -->
+
+      <!-- 2015 · Onedio -->
+      <div class="news-clip">
+        <div class="meta"><span class="src">Onedio</span><span class="date">31 dec 2015</span></div>
+        <h4>students are reselling free FATİH tablets online.</h4>
+        <div class="article-img"><img src="https://img-s2.onedio.com/id-568511ac6893b8e74664eea1/rev-0/w-600/h-631/f-jpg/s-badf5db05f263f6fafbcc7691c8aff797064c638.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"></div>
+        <p class="blurb">tablets distributed by the ministry appearing on second-hand sites at 199–500 TL. buyers are removing the MEB logo before resale. the devices are leaving the education system entirely.</p>
+        <a class="source-link" href="https://onedio.com/haber/ogrencilerden-satilik-fatih-projesi-tableti-650931" target="_blank" rel="noopener">→ onedio.com</a>
+        <div class="tape dot tape-in" style="--r:-7deg; top:-12px; left:50%; margin-left:-55px;"></div>
+        <div class="sticker round pink sticker-in" style="top:-22px; right:-18px; --r:14deg; width:60px; height:60px; font-size:9px;">resold</div>
+      </div>
+
+      <!-- 2019 · SiyasetCafe -->
+      <div class="news-clip">
+        <div class="meta"><span class="src">SiyasetCafe</span><span class="date">18 jul 2019</span></div>
+        <h4>"the FATİH project collapsed — billions wasted."</h4>
+        <div class="article-img" style="display:flex; align-items:center; justify-content:center; background: var(--ink); color: var(--yellow); font-family: var(--mono-tall); padding: 14px; text-align:center;">
+          <div>
+            <div style="font-size: 28px; line-height: 1; letter-spacing: -0.02em;">1.439M</div>
+            <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; margin-top: 8px; text-transform: uppercase;">tablets distributed</div>
+            <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; margin-top: 4px; color: var(--pink);">"nearly none in use"</div>
+          </div>
+        </div>
+        <p class="blurb">1.439 million tablets distributed but reportedly almost none in active use. by 2022 the program is described in critical press as "a black hole in the education budget."</p>
+        <a class="source-link" href="https://siyasetcafe.com/egitimde-fatih-projesi-coktu-milyarlarca-lira-buhar-oldu-hesabini-kim-verecek-53316h.htm" target="_blank" rel="noopener">→ siyasetcafe.com</a>
+        <div class="tape orange stripe tape-in" style="--r:6deg; top:-12px; right:30px;"></div>
+      </div>
+
+      <!-- 2022 · YouTube broadcast -->
+      <div class="news-clip">
+        <div class="meta"><span class="src">YouTube · broadcast</span><span class="date">2022</span></div>
+        <h4>"a black hole in the education budget."</h4>
+        <div class="article-img"><img src="https://img.youtube.com/vi/Wv5ZtBKSHdg/hqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"></div>
+        <p class="blurb">broadcast segment: ~15 billion TL spent, 432,288 smart boards purchased — only ~197,520 installed. former minister Z. Selçuk: "you cannot solve non-tech problems with tech."</p>
+        <a class="source-link" href="https://www.youtube.com/watch?v=Wv5ZtBKSHdg" target="_blank" rel="noopener">→ youtube.com</a>
+        <div class="tape stripe tape-in" style="--r:-4deg; top:-12px; left:50%; margin-left:-55px;"></div>
+        <div class="sticker round purple sticker-in" style="top:-22px; right:-18px; --r:14deg; width:60px; height:60px; font-size:9px;">15B<br>TL</div>
+      </div>
+
+    </div>
+
+
+    <span class="page-num">004½ — press</span>
+  </div>
+</section>
+
+<!-- washi divider -->
+<div class="washi-band air"></div>
+
+<!-- =================== 5. THE CRITIQUE =================== -->
+<section id="critique">
+  <div class="page">
+    <span class="section-tag">Exhibit B · looking back</span>
+
+    <div class="section-headline reveal">
+      <span class="num">003 / the critique</span>
+      <h2 style="--r:-1.2deg">what the tablet could not&nbsp;carry.</h2>
+      <span class="deck" style="--r:1.5deg">— reading the program by what it actually built and measured.</span>
+    </div>
+
+    <div class="critique-hero">
+      <div class="text">
+        <h2 class="reveal" style="--r:-1.5deg">a device is not a pedagogy.</h2>
+        <p class="reveal">the program treated the gap between hardware and learning as something the hardware would, on its own, eventually close. the gap is what this critique is about.</p>
+      </div>
+      <div class="photo-card peel" style="--r:2deg" data-parallax="6">
+        <div class="frame" style="aspect-ratio:5/4; position:relative; overflow:hidden; background:#ffffff;">
+          <img src="https://zeytinburnu.meb.gov.tr/meb_iys_dosyalar/2019_11/21180841_meb-etab5-tablet-aktivasyonu-root-atma.jpg" alt="MEB E-TAB5 standard issue tablet" loading="lazy" referrerpolicy="no-referrer" style="width:100%; height:100%; object-fit:contain; filter: grayscale(0.55) contrast(1.05);">
+        </div>
+        <div class="tape dot tape-in" style="--r:-7deg; top:-12px; left:50%; margin-left:-55px;"></div>
+      </div>
+    </div>
+
+    <!-- hero pull-quote: the ministerial admission -->
+    <aside class="hero-quote reveal">
+      <p class="quote-text">"You cannot solve non-technological problems with technology."</p>
+      <p class="quote-cite">— Ziya Selçuk, then Minister of National Education, addressing an education union — about the program his own ministry was administering.</p>
+      <p class="quote-eval">From an HCI perspective, this statement crystallizes the central technosolutionist mistake: education — a relational, infrastructural, deeply political practice — was treated as if a deployed artifact (a tablet, a board, a content network) could replace it. That a former Minister of National Education names this limit publicly is itself notable. It places Selçuk among the program's critics rather than its defenders, and signals how widely the technosolutionist diagnosis is recognized — including by people who have held responsibility for state-tech programs of this kind.</p>
+    </aside>
+
+    <div class="column">
+
+      <h3 class="reveal">hardware as the deliverable.</h3>
+      <p class="reveal">
+        From a user-centered design standpoint, the FATİH program is a successful procurement output and a failed designed interaction. The HCI distinction is foundational: a sociotechnical system is not the artifact, it is the workflow the artifact enables. The 2012 pilot already documented activation failures, missing content, untrained teachers, and broken supply chains; subsequent court-of-accounts audits re-flagged the same issues at scale across the next decade. By 2024 the ministry reported 2,406,716 tablets distributed against an original "tablet for every student" goal — roughly 7.69% of the declared target. Of approximately 432,288 interactive whiteboards purchased, only ~197,520 were ever installed; by 2022 four of every ten classrooms still lacked a board. Spending crossed 15 billion lira against a 68.7% realization rate. These are procurement metrics, not pedagogical ones.
+      </p>
+
+      <aside class="margin-note left purple">
+        Twelve years of audits. Same findings. The program kept its shape.
+      </aside>
+
+      <h3 class="reveal">technology as a power symbol.</h3>
+      <p class="reveal">
+        The structural pattern is not technical. Procurement decisions, ministerial offices, and vendor leadership — overwhelmingly male, drawn from a narrow set of established institutions — sat upstream of the school. The teaching profession (heavily feminized in Turkey), schoolchildren, and the mothers tasked with supporting device-mediated learning at home sat structurally downstream. Decision-making power moved top-down; unpaid adaptation work moved bottom-up. From a feminist HCI standpoint, the asymmetry reproduces, rather than redistributes, existing patterns of authority and labor. The longer lineage matters: the word "robot" derives from the Czech <em>robota</em> — forced labor — and modern technology has, from its industrial origins, been imagined as a means of organizing labor on someone else's behalf. The framing here is equality and modernization; the structure in practice is dominance distributed downward.
+      </p>
+
+      <h3 class="reveal">the COVID stress test.</h3>
+      <p class="reveal">
+        The 2020 pandemic functioned, accidentally, as the first large-scale stress test of what the program had actually built. The ministry's own statistics show that most students could not access online instruction at all; among those who could, many attended via personal mobile phones rather than FATİH-issued tablets. From an HCI standpoint this is the predictable outcome of conflating two distinct properties — device existence and device functional availability to the target user — that any adequate evaluation framework treats separately. Read alongside the audit findings and the ministerial admission above, the diagnostic finding is straightforward: the structural critique of the program was understood at the level of authority required to change it, and the program continued at the same shape regardless.
+      </p>
+
+      <aside class="margin-note right">
+        Diagnosis: known. Response: none.
+      </aside>
+
+    </div>
+
+    <span class="page-num">005 — critique</span>
+  </div>
+</section>
+
+<!-- washi divider -->
+<div class="washi-band stripe"></div>
+
+<!-- =================== 6. THE REFRAME =================== -->
+<section id="reframe">
+  <div class="page">
+    <span class="section-tag">Exhibit C · approaching it again</span>
+
+    <div class="section-headline reveal">
+      <span class="num">004 / the reframe</span>
+      <h2 style="--r:-1.2deg">what was not&nbsp;done.</h2>
+      <span class="deck" style="--r:1.5deg">— four things a real education investment would have required.</span>
+    </div>
+
+    <div class="column">
+      <p class="lead reveal">
+        A values-sensitive version of the program would have inverted its order of operations. The four commitments below correspond to specific HCI subdisciplines the program declined.
+      </p>
+    </div>
+
+    <div class="reframe-cards reveal-stagger">
+
+      <div class="rcard pop">
+        <div class="num">01</div>
+        <h3>contextual inquiry first.</h3>
+        <p>Ethnographic fieldwork in classrooms across the design target group's full range — rural, urban, well-resourced, under-resourced — before any procurement decision, to determine whether hardware is the appropriate intervention at all.</p>
+        <p><em>What the program did instead:</em> the 2012 pilot was a deployment test, not design research.</p>
+        <span class="from">— contextual inquiry / ethnographic HCI</span>
+        <div class="tape orange stripe tape-in" style="--r:-6deg; top:-12px; left:30px;"></div>
+      </div>
+
+      <div class="rcard pop">
+        <div class="num">02</div>
+        <h3>participatory design with binding authority.</h3>
+        <p>Teachers, students, parents, IT coordinators, and repair technicians at the design table with decisional power — not advisory consultation. User-centered design studies users; participatory design involves them as designers.</p>
+        <p><em>What the program did instead:</em> consulted teachers as users-to-be-trained; excluded students, parents, and local technical staff.</p>
+        <span class="from">— participatory design / co-design</span>
+        <div class="tape orange stripe tape-in" style="--r:5deg; top:-12px; right:30px;"></div>
+      </div>
+
+      <div class="rcard pop">
+        <div class="num">03</div>
+        <h3>infrastructure as the deliverable.</h3>
+        <p>Reliable broadband, repair capacity, electricity, content management, and accessible technical support as phase one. A device shipped into infrastructure that does not yet exist is an artifact placed onto a hope, not a sociotechnical system.</p>
+        <p><em>What the program did instead:</em> shipped hardware first; billed schools for VPN they could not pay.</p>
+        <span class="from">— infrastructure studies / sustainable HCI</span>
+        <div class="tape stripe tape-in" style="--r:-4deg; top:-12px; left:50%; margin-left:-55px;"></div>
+      </div>
+
+      <div class="rcard pop">
+        <div class="num">04</div>
+        <h3>repair, refusal, reversibility.</h3>
+        <p>Right-to-repair for local technicians, opt-out for schools where the tool is not working, contracts permitting non-renewal on poor metrics, public outcome reporting tied to the program's original promise.</p>
+        <p><em>What the program did instead:</em> IMEI-locked devices; ~234,000 boards lost between purchase and installation; metrics tracked publicly were units shipped.</p>
+        <span class="from">— repair &amp; maintenance HCI / feminist HCI</span>
+        <div class="tape dot tape-in" style="--r:7deg; top:-12px; right:30px;"></div>
+      </div>
+
+    </div>
+
+    <div class="column" style="margin-top: 60px;">
+      <p class="reveal">
+        These commitments did not require hidden expertise. The 2012 pilot identified them; the audits confirmed them; the responsible minister acknowledged the underlying diagnosis. <span class="under-or">The program continued at the same shape for over a decade.</span> Their absence is the design.
+      </p>
+    </div>
+
+    <span class="page-num">006 — reframe</span>
+  </div>
+</section>
+
+<!-- =================== 7. CLOSING =================== -->
+<section id="close">
+  <div class="page">
+    <span class="section-tag">Coda · a small thought to end on</span>
+
+    <p class="closing reveal">
+      <span class="lead">FATIH is technosolutionism at national scale.</span>
+      <span class="note-line">Its record clarifies the pattern: treating education as a logistics problem produced a procurement system, not a learning system.</span>
+      <span class="note-line">Treating teachers, students, and parents as recipients rather than co-designers reproduced existing asymmetries instead of addressing them.</span>
+      <span class="note-line">Treating units shipped as the metric meant the program continued meeting the metrics it set for itself, while failing the metrics it had originally named.</span>
+      <span class="note-line">After fourteen years and over fifteen billion lira, the case is not closed because the program has ended <span class="strike-note">it has not</span> but because what it does has become legible.</span>
+    </p>
+
+    <span class="page-num">007 — coda</span>
+  </div>
+</section>
+
+</main>
+
+<script>
+/* reveal on scroll */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+document.querySelectorAll(
+  '.reveal, .reveal-stagger, .drop, .slide-l, .slide-r, .stamp-in, .tape-in, .pop, .spin, .peel, .swing-l, .swing-r, .sticker-in, .fade, .highlight-sweep'
+).forEach(el => io.observe(el));
+
+document.querySelectorAll('.reveal-stagger').forEach(parent => {
+  [...parent.children].forEach((child, i) => {
+    child.style.setProperty('--stagger', i);
+  });
+});
+
+/* gentle mouse parallax */
+let mx = 0, my = 0, tx = 0, ty = 0;
+window.addEventListener('mousemove', (e) => {
+  mx = (e.clientX / window.innerWidth - 0.5) * 2;
+  my = (e.clientY / window.innerHeight - 0.5) * 2;
+});
+const parallaxEls = [...document.querySelectorAll('[data-parallax]')];
+function loop(){
+  tx += (mx - tx) * 0.06;
+  ty += (my - ty) * 0.06;
+  parallaxEls.forEach(el => {
+    const d = parseFloat(el.dataset.parallax) || 4;
+    el.style.setProperty('--mx', (tx * d).toFixed(2) + 'px');
+    el.style.setProperty('--my', (ty * d).toFixed(2) + 'px');
+  });
+  requestAnimationFrame(loop);
+}
+loop();
+
+/* scroll % bookmark */
+const pctEl = document.getElementById('pct');
+function updatePct(){
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const p = Math.min(100, Math.max(0, Math.round((window.scrollY / max) * 100)));
+  pctEl.textContent = p + '%';
+}
+window.addEventListener('scroll', updatePct, { passive: true });
+updatePct();
+</script>
+
+</body>
+</html>
