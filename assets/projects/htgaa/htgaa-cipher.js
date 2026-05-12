@@ -404,14 +404,38 @@ function setSeqMode(mode) {
   if (lastEncodeResult) renderSeqDisplay(lastEncodeResult, mode);
 }
 
+// Physicochemical amino-acid palette (background + text) for the protein view.
+const AA_PALETTE = {
+  // Hydrophobic / aliphatic — green
+  A: { bg: '#e6f4ea', fg: '#1b5e20' }, V: { bg: '#e6f4ea', fg: '#1b5e20' },
+  L: { bg: '#e6f4ea', fg: '#1b5e20' }, I: { bg: '#e6f4ea', fg: '#1b5e20' },
+  M: { bg: '#e6f4ea', fg: '#1b5e20' }, P: { bg: '#e6f4ea', fg: '#1b5e20' },
+  // Aromatic — amber
+  F: { bg: '#fff3e0', fg: '#bf5a00' }, Y: { bg: '#fff3e0', fg: '#bf5a00' },
+  W: { bg: '#fff3e0', fg: '#bf5a00' },
+  // Polar uncharged — purple
+  S: { bg: '#f3e5f5', fg: '#6a1b9a' }, T: { bg: '#f3e5f5', fg: '#6a1b9a' },
+  N: { bg: '#f3e5f5', fg: '#6a1b9a' }, Q: { bg: '#f3e5f5', fg: '#6a1b9a' },
+  C: { bg: '#fff8c4', fg: '#7a5a00' },
+  // Special — grey
+  G: { bg: '#f0f0f0', fg: '#555555' },
+  // Positive — blue
+  K: { bg: '#e3f2fd', fg: '#0d47a1' }, R: { bg: '#e3f2fd', fg: '#0d47a1' },
+  H: { bg: '#e3f2fd', fg: '#0d47a1' },
+  // Negative — red
+  D: { bg: '#ffebee', fg: '#b71c1c' }, E: { bg: '#ffebee', fg: '#b71c1c' },
+};
+
 function renderSeqDisplay(result, mode) {
   const el = document.getElementById('r-seq-display');
   el.innerHTML = '';
+  const protKey = result.proteinKey || activeKey;
+  const protColor = (PROTEINS[protKey] && PROTEINS[protKey].color) || 'var(--green)';
 
   if (mode === 'dna') {
     const seq = result.cds;
     el.style.color = '';
-    el.innerHTML = `<span style="color:var(--green)">${seq.slice(0,-3)}</span><span style="color:var(--muted);font-weight:500">${seq.slice(-3)}</span>`;
+    el.innerHTML = `<span style="color:${protColor}">${seq.slice(0,-3)}</span><span style="color:var(--muted);font-weight:500">${seq.slice(-3)}</span>`;
 
   } else if (mode === 'protein') {
     const aa = result.aaSeq || currentAA;
@@ -420,9 +444,19 @@ function renderSeqDisplay(result, mode) {
       const showNum = i % 35 === 0;
       if (showNum && i > 0) html += `<div style="width:100%;height:0"></div>`;
       if (showNum) html += `<span style="color:var(--muted);font-size:9px;min-width:24px;padding-top:2px">${i+1}</span>`;
-      html += `<span style="background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:2px 4px;font-size:11px;color:var(--text)">${aa[i]}</span>`;
+      const c = AA_PALETTE[aa[i]] || { bg: 'var(--surface)', fg: 'var(--text)' };
+      html += `<span style="background:${c.bg};border:1px solid ${c.fg}1f;border-radius:3px;padding:2px 5px;font-size:11px;color:${c.fg};font-weight:500" title="${aa[i]}">${aa[i]}</span>`;
     }
     html += `</div>`;
+    html += `<div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:10px;font-size:10px;color:var(--muted)">
+      <span><span style="display:inline-block;width:9px;height:9px;background:#e6f4ea;border:1px solid #1b5e201f;border-radius:2px;vertical-align:middle;margin-right:4px"></span>hydrophobic</span>
+      <span><span style="display:inline-block;width:9px;height:9px;background:#fff3e0;border:1px solid #bf5a001f;border-radius:2px;vertical-align:middle;margin-right:4px"></span>aromatic</span>
+      <span><span style="display:inline-block;width:9px;height:9px;background:#f3e5f5;border:1px solid #6a1b9a1f;border-radius:2px;vertical-align:middle;margin-right:4px"></span>polar</span>
+      <span><span style="display:inline-block;width:9px;height:9px;background:#e3f2fd;border:1px solid #0d47a11f;border-radius:2px;vertical-align:middle;margin-right:4px"></span>positive</span>
+      <span><span style="display:inline-block;width:9px;height:9px;background:#ffebee;border:1px solid #b71c1c1f;border-radius:2px;vertical-align:middle;margin-right:4px"></span>negative</span>
+      <span><span style="display:inline-block;width:9px;height:9px;background:#fff8c4;border:1px solid #7a5a001f;border-radius:2px;vertical-align:middle;margin-right:4px"></span>cysteine</span>
+      <span><span style="display:inline-block;width:9px;height:9px;background:#f0f0f0;border:1px solid #5555551f;border-radius:2px;vertical-align:middle;margin-right:4px"></span>glycine</span>
+    </div>`;
     el.innerHTML = html;
   }
 }
@@ -1038,6 +1072,22 @@ function refreshProteinUI() {
   if (infoAa) infoAa.textContent = p.aa.length + ' aa → glows ' + p.glow;
   const infoTitle = document.getElementById('hg-insert-title');
   if (infoTitle) infoTitle.textContent = p.name + ' CDS';
+
+  // Dynamic labels in the Encode result cards.
+  const plasmidTitle = document.getElementById('hg-plasmid-title');
+  if (plasmidTitle) plasmidTitle.textContent = 'Plasmid map — pET-28a + ' + p.name + ' insert';
+  const legendDot = document.getElementById('hg-legend-dot');
+  if (legendDot) legendDot.style.background = p.color;
+  const legendLabel = document.getElementById('hg-legend-label');
+  if (legendLabel) legendLabel.textContent = p.name + ' (message)';
+  const cdsBarLabel = document.getElementById('hg-cds-bar-label');
+  if (cdsBarLabel) cdsBarLabel.textContent = p.name + ' CDS — message hidden here';
+  const encodedTitle = document.getElementById('hg-encoded-title');
+  if (encodedTitle) encodedTitle.textContent = 'Your encoded ' + p.name;
+  const descDna = document.getElementById('mode-desc-dna');
+  if (descDna) descDna.textContent = 'The ' + p.name + ' coding sequence with your message hidden in synonymous codon choices.';
+  const descProtein = document.getElementById('mode-desc-protein');
+  if (descProtein) descProtein.textContent = 'The translated protein — always identical to canonical ' + p.name + ' no matter what message you encoded.';
 
   // Host-gene card on "How it works" tab.
   const card = document.getElementById('host-gene-card');

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The most ancient cipher — HTGAA 2026</title>
+<title>Hidden in the Codons — A Communication Pipeline Through E. Coli</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/projects/htgaa/htgaa-cipher.css">
 </head>
@@ -16,7 +16,7 @@
   <header>
     <div class="logo-block">
       <div class="logo-eyebrow">HTGAA 2026</div>
-      <h1>The most ancient cipher:<br><em>hide a message inside bacteria</em></h1>
+      <h1>Hidden in the Codons — <em>A Communication Pipeline Through E. Coli</em></h1>
     </div>
   </header>
 
@@ -32,7 +32,6 @@
     <div class="card">
       <div class="card-title">Choose a host protein</div>
       <div id="protein-picker" class="protein-picker"></div>
-      <div style="font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.6">The protein scaffold determines capacity, color, and the canonical reference sequence.</div>
     </div>
 
     <div class="card">
@@ -71,12 +70,12 @@
       </div>
 
       <div class="card">
-        <div class="card-title">Plasmid map — pET-28a + sfGFP insert</div>
+        <div class="card-title" id="hg-plasmid-title">Plasmid map — pET-28a + sfGFP insert</div>
         <div style="display:flex;justify-content:center;align-items:center;padding:8px 0 4px">
           <svg id="plasmid-svg" width="300" height="300" viewBox="0 0 300 300" style="overflow:visible"></svg>
         </div>
         <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:4px;font-size:10px;font-family:var(--mono);color:var(--muted)">
-          <span><span style="display:inline-block;width:10px;height:10px;background:#4aab72;border-radius:2px;margin-right:4px;vertical-align:middle"></span>sfGFP (message)</span>
+          <span><span id="hg-legend-dot" style="display:inline-block;width:10px;height:10px;background:#4aab72;border-radius:2px;margin-right:4px;vertical-align:middle"></span><span id="hg-legend-label">sfGFP (message)</span></span>
           <span><span style="display:inline-block;width:10px;height:10px;background:#60a5fa;border-radius:2px;margin-right:4px;vertical-align:middle"></span>T7 promoter</span>
           <span><span style="display:inline-block;width:10px;height:10px;background:#f59e0b;border-radius:2px;margin-right:4px;vertical-align:middle"></span>KanR</span>
           <span><span style="display:inline-block;width:10px;height:10px;background:#a78bfa;border-radius:2px;margin-right:4px;vertical-align:middle"></span>T7 terminator</span>
@@ -86,7 +85,7 @@
         <div style="margin-top:20px">
           <div style="display:flex;height:36px;border-radius:6px;overflow:hidden;font-size:10px;font-weight:500">
             <div style="background:#e8f5ee;color:#1a6b3c;display:flex;align-items:center;justify-content:center;min-width:40px;padding:0 6px;border-right:1px solid rgba(0,0,0,0.08)">NdeI</div>
-            <div style="background:#fff8e8;color:#7d5a0a;display:flex;align-items:center;justify-content:center;flex:1;border-right:1px solid rgba(0,0,0,0.08)">sfGFP CDS — message hidden here</div>
+            <div id="hg-cds-bar-label" style="background:#fff8e8;color:#7d5a0a;display:flex;align-items:center;justify-content:center;flex:1;border-right:1px solid rgba(0,0,0,0.08)">sfGFP CDS — message hidden here</div>
             <div style="background:#fdf0ee;color:#922b21;display:flex;align-items:center;justify-content:center;min-width:40px;padding:0 6px">XhoI</div>
           </div>
           <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;font-size:11px;font-family:var(--mono)">
@@ -104,7 +103,7 @@
       </div>
 
       <div class="card">
-        <div class="card-title">Your encoded sfGFP</div>
+        <div class="card-title" id="hg-encoded-title">Your encoded sfGFP</div>
 
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
           <div style="font-family:var(--mono);font-size:11px;color:var(--muted)" id="seq-summary">—</div>
@@ -114,8 +113,8 @@
           </div>
         </div>
 
-        <div id="mode-desc-dna"     style="font-size:11px;color:var(--muted);margin-bottom:8px">The sfGFP coding sequence with your message hidden in synonymous codon choices.</div>
-        <div id="mode-desc-protein" style="font-size:11px;color:var(--muted);margin-bottom:8px;display:none">The translated protein — always identical to canonical sfGFP no matter what message you encoded.</div>
+        <div id="mode-desc-dna"     style="font-size:11px;color:var(--muted);margin-bottom:8px">The coding sequence with your message hidden in synonymous codon choices.</div>
+        <div id="mode-desc-protein" style="font-size:11px;color:var(--muted);margin-bottom:8px;display:none">The translated protein — always identical to the canonical sequence no matter what message you encoded.</div>
 
         <div style="position:relative">
           <div id="r-seq-display" style="background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:12px 102px 12px 12px;font-family:var(--mono);font-size:11px;line-height:1.9;word-break:break-all"></div>
