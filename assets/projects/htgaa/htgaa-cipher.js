@@ -439,13 +439,16 @@ function renderSeqDisplay(result, mode) {
 
   } else if (mode === 'protein') {
     const aa = result.aaSeq || currentAA;
-    let html = `<div style="display:flex;flex-wrap:wrap;gap:3px">`;
-    for (let i = 0; i < aa.length; i++) {
-      const showNum = i % 35 === 0;
-      if (showNum && i > 0) html += `<div style="width:100%;height:0"></div>`;
-      if (showNum) html += `<span style="color:var(--muted);font-size:9px;min-width:24px;padding-top:2px">${i+1}</span>`;
-      const c = AA_PALETTE[aa[i]] || { bg: 'var(--surface)', fg: 'var(--text)' };
-      html += `<span style="background:${c.bg};border:1px solid ${c.fg}1f;border-radius:3px;padding:2px 5px;font-size:11px;color:${c.fg};font-weight:500" title="${aa[i]}">${aa[i]}</span>`;
+    const PER_LINE = 28;
+    let html = `<div style="display:flex;flex-direction:column;gap:4px">`;
+    for (let start = 0; start < aa.length; start += PER_LINE) {
+      html += `<div style="display:flex;align-items:center;gap:3px">`;
+      html += `<span style="color:var(--muted);font-size:9px;min-width:30px;text-align:right;padding-right:4px">${start + 1}</span>`;
+      for (let i = start; i < Math.min(start + PER_LINE, aa.length); i++) {
+        const c = AA_PALETTE[aa[i]] || { bg: 'var(--surface)', fg: 'var(--text)' };
+        html += `<span style="background:${c.bg};border:1px solid ${c.fg}1f;border-radius:3px;padding:2px 5px;font-size:11px;color:${c.fg};font-weight:500" title="${aa[i]}">${aa[i]}</span>`;
+      }
+      html += `</div>`;
     }
     html += `</div>`;
     html += `<div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:10px;font-size:10px;color:var(--muted)">
@@ -582,8 +585,8 @@ function decodeMessage() {
     }
 
     document.getElementById('dec-message').textContent = result.message;
-    document.getElementById('dec-alerts').innerHTML = '<div class="alert success"><div class="alert-dot"></div>Message successfully decoded from DNA sequence</div>';
-    document.getElementById('dec-stats').textContent = `${result.bitsUsed} bits extracted from ${result.codonsRead} codons`;
+    document.getElementById('dec-alerts').innerHTML = '';
+    document.getElementById('dec-stats').textContent = '';
     document.getElementById('dec-result-card').classList.add('glow');
     document.getElementById('dec-result').scrollIntoView({ behavior: 'smooth' });
   }, 100);
