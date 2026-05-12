@@ -32,7 +32,7 @@ body {
   top: 0; left: 0; right: 0; bottom: 0;
   pointer-events: none;
   overflow: hidden;
-  opacity: 0.035;
+  opacity: 0.22;
   z-index: 0;
 }
 
@@ -40,12 +40,14 @@ body {
   position: absolute;
   top: -20px;
   font-family: var(--mono);
-  font-size: 11px;
-  color: var(--green);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--green-mid);
+  text-shadow: 0 0 6px rgba(74, 171, 114, 0.55);
   writing-mode: vertical-lr;
   animation: fall linear infinite;
   white-space: nowrap;
-  letter-spacing: 4px;
+  letter-spacing: 5px;
 }
 
 @keyframes fall {
