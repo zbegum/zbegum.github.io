@@ -284,14 +284,19 @@
 
 .about-main .about-kicker { margin-top: 0; }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .about-split {
     grid-template-columns: 1fr;
-    gap: 24px;
-    margin-top: 3rem;
+    gap: 36px;
+    margin-top: 2.5rem;
   }
-  .about-side { position: static; }
-  .about-hero { width: min(260px, 70%); }
+  .about-side {
+    position: static;
+    width: min(320px, 100%);
+    margin: 0 auto;
+  }
+  .about-hero { width: 100%; }
+  .about-side .ascii-wrap { margin-top: 32px; }
 }
 
 /* Contact icons */
