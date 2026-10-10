@@ -15,9 +15,10 @@
   <link rel="stylesheet" href="css/style.css?v=1" />
   <link rel="stylesheet" href="css/about.css?v=1" />
   <link rel="stylesheet" href="css/projects.css?v=2" />
+  <link rel="stylesheet" href="css/research.css?v=1" />
 </head>
 
-<body class="projects">
+<body class="projects research">
   <nav class="navbar">
     <ul>
       <li><a href="index.html">ABOUT</a></li>
@@ -26,336 +27,216 @@
     </ul>
   </nav>
 
-  <main class="projects-page">
+  <main class="research-page">
 
-    <header class="projects-header">
-      <h1 class="about-kicker">RESEARCH</h1>
-    </header>
+    <!-- ================= PUBLICATIONS ================= -->
+    <h2 class="section-label">PUBLICATIONS</h2>
 
-    <article class="project" data-year="2025">
-      <h2 class="project-title">Research @ Intelligent User Interfaces Lab, Koç University</h2>
-      <div class="project-meta">
-        <time datetime="2025">2025 — present</time> · Human–AI Interaction
-      </div>
-      <p class="project-desc">
-        MSc student with <span class="wavy-key">KU Graduate Fellowship</span>,
-        (tuition + stipend + waiver).
-        Conducting research under
-        <a href="https://www.ku.edu.tr/en/academic/metin-sezgin/" class="chip" target="_blank" rel="noopener">
-          &nbsp;Prof. Metin&nbsp;Sezgin
-        </a>
-        on creativity, machine learning, and sketch-based interfaces.
-      </p>
-      <div class="project-links">
-        <a href="https://iui.ku.edu.tr" class="term-chip" target="_blank" rel="noopener">IUI Lab&nbsp;Website</a>
-      </div>
-
-    </article>
-<article class="project" data-year="2026" id="sketch-review">
-  <div class="project-split">
-    <aside class="project-poster">
-      <div class="pub-card pub-card--teal">
-        <div class="pub-card-header">
-          <span class="pub-badge">// PUBLISHED</span>
-        </div>
-
-        <div class="pub-venue-line">
-          <span class="pub-venue-name">C&amp;G '26</span>
-          <span class="pub-venue-track">Critical Review</span>
-        </div>
-
-        <h3 class="pub-card-title">
-          A Critical Review of Sketch Collection Methods:
-          Remembering How Humans Really Sketch
+    <article class="pub pub--teal" id="sketch-review">
+      <a class="pub-thumb pub-thumb--fig" href="https://www.sciencedirect.com/science/article/pii/S0097849326000749" target="_blank" rel="noopener">
+        <img src="assets/projects/sketch-review/scene-sketch.jpg"
+          alt="A quick, informal scene sketch from the authors' exploratory study, with arrows, figures, and scribbled labels."
+          loading="lazy">
+      </a>
+      <div class="pub-body">
+        <h3 class="pub-title">
+          <a href="https://www.sciencedirect.com/science/article/pii/S0097849326000749" target="_blank" rel="noopener">
+            A Critical Review of Sketch Collection Methods: Remembering How Humans Really Sketch
+          </a>
         </h3>
-
-        <div class="pub-card-divider"></div>
-
-        <p class="pub-card-authors">
-          Dede, E., <strong>Kara, Z. B.</strong>, &amp; Sezgin, T. M.
+        <p class="pub-authors">
+          E. Dede, <span class="me">Zeynep Begüm Kara</span>, and T. M. Sezgin
         </p>
+        <p class="pub-venue">Computers &amp; Graphics (Elsevier), 2026</p>
+        <div class="pub-links">
+          <a href="https://www.sciencedirect.com/science/article/pii/S0097849326000749" target="_blank" rel="noopener">Paper</a>
+        </div>
+        <div class="pub-desc">
+          <p><span class="q-yellow">Do the sketch datasets capture how people actually sketch, or only what is easier to collect?</span> Sketching is a natural way of expressing, processing, and communicating ideas — but as data needs for intelligent systems grow, sketch collection has often shifted toward what is <strong>easy</strong> to collect rather than what is <strong>ecologically valid</strong>.</p>
+          <p>In this paper, we argue that sketch datasets are systematically shaped by their collection protocols and experimental conditions, and therefore should be reported transparently and interpreted in light of the conditions that produced them.</p>
+          <p>We structure this discussion around six contextual factors — time, tools, background, audience, multimodality, and elicitation. Through these factors, we analyze <strong>86 sketch datasets from 2002&ndash;2025</strong>, suggest practices for collecting sketch data that better reflect the diversity of human sketching, and include sketches from our exploratory study to show how different collection conditions can lead to very different kinds of sketches.</p>
+        </div>
+      </div>
+    </article>
 
-        <p class="pub-card-venue">
-          Computers &amp; Graphics, Elsevier
+    <article class="pub pub--magenta" id="lacy">
+      <a class="pub-thumb" href="https://dl.acm.org/doi/10.1145/3803437.3805218" target="_blank" rel="noopener">
+        <img src="assets/projects/lacy/lacy-code-tour-active.png"
+          alt="A LACY code tour step inside VS Code: narration on the left, highlighted code on the right."
+          loading="lazy">
+      </a>
+      <div class="pub-body">
+        <h3 class="pub-title">
+          <a href="https://dl.acm.org/doi/10.1145/3803437.3805218" target="_blank" rel="noopener">
+            LACY: Simulating Expert Mentoring for Software Onboarding with Code Tours
+          </a>
+        </h3>
+        <p class="pub-authors">
+          <span class="me">Zeynep Begüm Kara</span>, A. İsmail, E. Ateş, İ. N. Tamcı, Z. İyigün,
+          S. Ş. Aslangül, Ö. Devran, B. M. Uçar, and E. Tüzün
         </p>
-
-        <a href="https://authors.elsevier.com/a/1n2CtMFvIKLfj"
-           class="pub-link-btn"
-           target="_blank"
-           rel="noopener noreferrer">
-          > read paper ↗
-        </a>
+        <p class="pub-venue">FSE 2026, Industry Track<span class="rank">CORE A*</span></p>
+        <div class="pub-links">
+          <a href="https://dl.acm.org/doi/10.1145/3803437.3805218" target="_blank" rel="noopener">Paper</a>
+        </div>
+        <div class="pub-desc">
+          <p>Onboarding new developers into legacy codebases is one of the most time-consuming responsibilities in software organizations, often relying on senior developers to provide one-on-one mentorship that does not scale. <strong>LACY</strong>, developed in collaboration with <a href="https://www.beko.com/" class="chip" target="_blank" rel="noopener noreferrer">Beko</a>, is a hybrid human–AI VS Code extension that captures expert mentoring as reusable code tours. The system combines AI-generated explanations with expert curation, integrating interactive walkthroughs, contextual quizzes, and narrated podcasts so that expert knowledge can be authored once and transferred across an organization asynchronously.</p>
+        </div>
       </div>
-    </aside>
+    </article>
 
-    <section class="project-main">
-      <h2 class="project-title">
-        How Do People Actually Sketch?
-      </h2>
-      <div class="project-meta">
-        <time datetime="2025">2025</time>&ndash;<time datetime="2026">2026</time>
-        · Co-Author &amp; Corresponding Author
+    <!-- ================= RESEARCH PROJECTS ================= -->
+    <h2 class="section-label">SELECTED PROJECTS</h2>
+
+    <article class="pub pub--emerald" id="sgi">
+      <a class="pub-thumb" href="https://github.com/zbegum/neurrative" target="_blank" rel="noopener">
+        <img src="assets/projects/sgi/mood-surface.png"
+          alt="A 3-D mood surface built from the paragraphs of Alice in Wonderland, colored by emotion, with the story's arc drawn across it."
+          loading="lazy">
+      </a>
+      <div class="pub-body">
+        <h3 class="pub-title">
+          <a href="https://github.com/zbegum/neurrative" target="_blank" rel="noopener">Narrative Tension Field: Reading a Book as Geometry</a>
+        </h3>
+        <p class="pub-venue">MIT Summer Geometry Initiative (SGI), 2026 · <a href="https://sgi.mit.edu/sgi-fellows/sgi-2026-fellows/" target="_blank" rel="noopener">SGI 2026 Fellow</a></p>
+        <div class="pub-links">
+          <a href="https://github.com/zbegum/neurrative" target="_blank" rel="noopener">Code</a>
+          <a href="https://drive.google.com/drive/folders/1e7Bp79dD-s7VlD2bO09AVZsq2iGEcIuq?usp=sharing" target="_blank" rel="noopener">Figures</a>
+        </div>
+        <div class="pub-desc">
+          <p>One of my projects at MIT SGI. This project, mentored by <a href="https://congyue-deng.github.io/" target="_blank" rel="noopener">Congyue Deng</a>, explores how the semantic structure of a story can be turned into readable geometric visualizations. The approach treats a novel as a route through its own meaning space, placed on a surface that captures its emotional tone. The goal is to show how a story’s ideas, mood and reading order change together, using geometry processing to make narrative structure easier to see.</p>
+        </div>
       </div>
+    </article>
 
-      <p class="project-desc">
-        <span class="q-yellow">Do the sketch datasets capture how people actually sketch,
-        or only what is easier to collect?</span>
-        Sketching is a natural way of expressing, processing, and
-        communicating ideas — but as data needs for intelligent systems
-        grow, sketch collection has often shifted toward what is
-        <strong>easy</strong> to collect rather than what is
-        <strong>ecologically valid</strong>.
-      </p>
-
-      <p class="project-desc">
-        In this paper, we argue that sketch datasets are systematically
-        shaped by their collection protocols and experimental
-        conditions, and therefore should be reported transparently and
-        interpreted in light of the conditions that produced them.
-      </p>
-
-      <p class="project-desc">
-        We structure this discussion around six contextual factors —
-        time, tools, background, audience, multimodality, and
-        elicitation. Through these factors, we analyze
-        <strong>86 sketch datasets from 2002&ndash;2025</strong>,
-        suggest practices for collecting sketch data that better
-        reflect the diversity of human sketching, and include sketches
-        from our exploratory study to show how different collection
-        conditions can lead to very different kinds of sketches.
-      </p>
-
-      <!--
-        Drop figures into assets/projects/sketch-review/ and uncomment.
-        Suggested: a teaser comparing sketches across conditions, and
-        the six-factor diagram.
-      -->
-      <!--
-      <div class="project-media-grid media-stack">
-        <figure>
-          <img src="assets/projects/sketch-review/teaser-conditions.png"
-               alt="Side-by-side sketches collected under different conditions show how protocol shapes the data."
-               loading="lazy">
-          <figcaption>Sketches of the same prompt collected under different conditions — protocol visibly shapes the data.</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/projects/sketch-review/six-factors.png"
-               alt="Diagram of the six contextual factors: time, tools, background, audience, multimodality, elicitation."
-               loading="lazy">
-          <figcaption>The six contextual factors used to analyze 86 sketch datasets from 2002 to 2025.</figcaption>
-        </figure>
+    <article class="pub pub--pink" id="htgaa">
+      <a class="pub-thumb pub-thumb--fig" href="htgaa-cipher.html" target="_blank" rel="noopener">
+        <img src="assets/projects/htgaa/mscarlet3-plasmid.png"
+          alt="Sequence map and annotated plasmid map of mScarlet3 in pET-28a(+), 5962 bp, with the message-encoding insert highlighted."
+          loading="lazy">
+      </a>
+      <div class="pub-body">
+        <h3 class="pub-title">
+          <a href="htgaa-cipher.html" target="_blank" rel="noopener">Message in the Codons: A Working Protein, A Hidden Message</a>
+        </h3>
+        <p class="pub-venue">MIT How to Grow (Almost) Anything (HTGAA), 2026</p>
+        <div class="pub-links">
+          <a href="htgaa-cipher.html" target="_blank" rel="noopener">Demo</a>
+          <a href="https://pages.htgaa.org/2026a/zeynep-begum-kara/" target="_blank" rel="noopener">HTGAA Page</a>
+        </div>
+        <div class="pub-desc">
+          <p>My individual final project for MIT’s How to Grow (Almost) Anything (HTGAA) 2026, which I took as a Committed Listener. The genetic code has 64 codons but only 20 amino acids, so many amino acids can be
+          written with several synonymous codons. This tool hides a message in those choices: the
+          text is Huffman-compressed into a bit stream, and each bit picks a codon while the protein
+          stays the same. The encoded mScarlet3 or sfGFP still works and glows, and the message can
+          be decoded back from the DNA.</p>
+        </div>
       </div>
-      -->
-    </section>
-  </div>
-</article>
+    </article>
 
-<article class="project" data-year="2026" id="lacy">
-  <div class="project-split">
-<aside class="project-poster">
-  <div class="pub-card">
-    <div class="pub-card-header">
-      <span class="pub-badge">// PUBLISHED</span>
-      <span class="pub-rank">CORE A*</span>
-    </div>
 
-    <div class="pub-venue-line">
-      <span class="pub-venue-name">FSE '26</span>
-      <span class="pub-venue-track">Industry Track</span>
-    </div>
-
-    <h3 class="pub-card-title">
-      LACY: Simulating Expert Mentoring for Software Onboarding with Code Tours
-    </h3>
-
-    <div class="pub-card-divider"></div>
-
-    <p class="pub-card-authors">
-      <strong>Kara, Z. B.</strong>, İsmail, A., Ateş, E., Tamcı, İ. N.,
-      İyigün, Z., Aslangül, S. Ş., Devran, Ö., Uçar, B. M., &amp; Tüzün, E.
-    </p>
-
-    <p class="pub-card-venue">
-      Companion Proceedings of the 34th ACM International Conference
-      on the Foundations of Software Engineering
-    </p>
-
-    <p class="pub-card-meta">
-      <span class="meta-key">loc:</span> Montreal, Canada<br>
-      <span class="meta-key">date:</span> July 5–9, 2026
-    </p>
-
-    <a href="https://arxiv.org/abs/2603.25391"
-       class="pub-link-btn"
-       target="_blank"
-       rel="noopener noreferrer">
-      > open arxiv ↗
-    </a>
-  </div>
-
-  <p class="award-line">
-    <span class="award-icon" aria-hidden="true">🏆</span>
-    <strong>Best Innovation Award ($2,500)</strong>,
-    Bilkent University CS Fair 2025, (1st / 44)
-  </p>
-</aside>
-    <!-- RIGHT: Content -->
-    <section class="project-main">
-      <h2 class="project-title">LACY — Simulating Expert Mentoring for Software Onboarding</h2>
-      <div class="project-meta">
-        <time datetime="2024">2024</time>–<time datetime="2026">2026</time>
-        · First Author &amp; Project Lead
+    <article class="pub pub--yellow">
+      <div class="pub-thumb pub-thumb--type" aria-hidden="true">
+        <span><b>DMCQ</b>A ✗ &nbsp; B ✓ &nbsp; C ✗ &nbsp; D ?</span>
       </div>
-
-      <p class="project-desc">
-        Onboarding new developers into legacy codebases is one of the most
-        time-consuming responsibilities in software organizations, often relying on
-        senior developers to provide one-on-one mentorship that does not scale.
-        <strong>LACY</strong>, developed in collaboration with
-        <a href="https://www.beko.com/" class="chip" target="_blank" rel="noopener noreferrer">Beko</a>,
-        is a hybrid human–AI VS Code extension that captures expert mentoring as
-        reusable code tours. The system combines AI-generated explanations with
-        expert curation, integrating interactive walkthroughs, contextual quizzes,
-        and narrated podcasts so that expert knowledge can be authored once and
-        transferred across an organization asynchronously.
-      </p>
-
-      <div class="project-media-grid media-stack">
-        <figure>
-          <img src="assets/projects/lacy/lacy-code-tour-active.png"
-              alt="A code tour step in progress inside VS Code: narrated explanation on the left, highlighted code on the right, with an inline chat for follow-up questions."
-              loading="lazy">
-          <figcaption>A tour step in action: narration, highlighted code, and an inline channel for learner questions.</figcaption>
-        </figure>
+      <div class="pub-body">
+        <h3 class="pub-title">A Case Study on Gemini's MCQ Success: Defining Directed Multiple-Choice Questions</h3>
+        <p class="pub-venue">Individual Research, Bilkent University, 2023–2024</p>
+        <div class="pub-desc">
+          <p>Individual Research under supervision of <a href="https://www.cs.bilkent.edu.tr/~guvenir/" class="chip" target="_blank" rel="noopener">Prof.&nbsp;H.&nbsp;Altay&nbsp;Guvenir</a> I designed a Directed MCQ (DMCQ) system to evaluate how Large Language Models like Gemini perform under human-informed guidance. The study simulates collaborative test-solving scenarios, where human cues and AI analysis jointly contribute to the elimination of options. The goal is to understand how such directed interaction influences model reasoning and accuracy in structured evaluation settings.</p>
+        </div>
       </div>
-    </section>
-  </div>
-</article>
-
-    <article class="project" data-year="2025">
-      <h2 class="project-title">A Case Study on Gemini’s MCQ Success - Defining Directed Multiple-Choice Questions</h2>
-      <div class="project-meta">
-        <time datetime="2024">2023 - 2024</time> · Individual Research
-      </div>
-      <p class="project-desc">
-        Individual Research under supervision of <a href="https://www.cs.bilkent.edu.tr/~guvenir/" class="chip"
-          target="_blank" rel="noopener">Prof.&nbsp;H.&nbsp;Altay&nbsp;Guvenir</a>
-        I designed a Directed MCQ (DMCQ) system to
-        evaluate how Large Language Models like Gemini perform under human-informed guidance. The study simulates
-        collaborative test-solving scenarios, where human cues and AI analysis jointly contribute to the elimination of
-        options. The goal is to understand how such directed interaction influences model reasoning and accuracy in
-        structured evaluation settings. </p>
-
-      <div class="project-slides">
+      <div class="pub-embed">
         <iframe
           src="https://docs.google.com/presentation/d/15SLUoIjxFbva_8eolX_lBtHR3-phKBGiylkDk47Jbd8/embed?start=false&loop=false&delayms=3000"
-          frameborder="0" width="100%" height="480" allowfullscreen="true" mozallowfullscreen="true"
-          webkitallowfullscreen="true">
-        </iframe>
+          title="DMCQ presentation slides" loading="lazy" allowfullscreen></iframe>
       </div>
     </article>
 
-    <article class="project" data-year="2022">
-      <h2 class="project-title">Mathematics Volunteering</h2>
-      <div class="project-meta"><time datetime="2022">2019—2025</time> · Community</div>
-      <p class="project-desc">
-        Mathematics has always been a shared space for curiosity.
-        Over the years, I’ve taken part in several math communities in Turkey, contributing as a student, volunteer, and
-        organizer — supporting both learning and outreach efforts.
-      </p>
-
-      <!-- NESIN MATHEMATICS VILLAGE -->
-      <section class="subproject">
-        <div class="sub-flex">
-          <img src="assets/projects/math/nmk.jpg" alt="Nesin Mathematics Village" class="subphoto">
-          <div class="subtext">
-            <h3 class="sub-title">Nesin Mathematics Village <span class="sub-date">(Summers since 2019)</span></h3>
-            <p>
-              I first arrived as a student, spending long summer days studying, thinking, and daydreaming under the
-              trees.
-              Over time, I also became a volunteer — helping in the library and kitchen so the village could keep
-              running
-              for students to learn, grow, and discover who they are.
-              It’s a place where I met some of the most inspiring and important people in my life.
-            </p>
-            <a href="https://nesinkoyleri.org/en/main-page/" target="_blank" rel="noopener" class="sublink">Visit site
-              →</a>
-          </div>
+    <article class="pub pub--coral">
+      <div class="pub-thumb pub-thumb--type" aria-hidden="true">
+        <span><b>♩ ♪ ♫</b>– u u | – u u | – –</span>
+      </div>
+      <div class="pub-body">
+        <h3 class="pub-title">
+          <a href="https://drive.google.com/file/d/1WxrjX1tR_E_At0xExvC3LUl4PoH9Oyod/view?usp=sharing"
+            target="_blank" rel="noopener">A Literary Approach to Computer Music: Translation of Words</a>
+        </h3>
+        <p class="pub-venue">Hobby Project, 2022</p>
+        <div class="pub-links">
+          <a href="https://drive.google.com/file/d/1WxrjX1tR_E_At0xExvC3LUl4PoH9Oyod/view?usp=sharing"
+            target="_blank" rel="noopener">Report</a>
         </div>
-      </section>
-
-      <!-- TURKEY MATHEMATICS CLUB -->
-      <section class="subproject">
-        <div class="sub-flex">
-          <img src="assets/projects/math/matematikturkiye.jpg" alt="Turkey Mathematics Club" class="subphoto">
-          <div class="subtext">
-            <h3 class="sub-title">Turkiye Mathematics Club <span class="sub-date">(2020–2022)</span></h3>
-            <p>
-              Served as board member and head of public relations; built the club’s identity and communication network.
-              Together, we organized academic and popular events to promote mathematical culture, both online and
-              face-to-face.
-            </p>
-            <a href="https://matematikturkiye.com/" target="_blank" rel="noopener" class="sublink">Visit site →</a>
-          </div>
+        <div class="pub-desc">
+          <p>This project aims to generate computer music by transforming input text, specifically its rhythmic and harmonic aspects, into synthesized instrument sounds. The core idea is to correlate language and music by analyzing language syntax through rhythm and phonetics through harmony and sound combinations. The project creates two-channel music, with one channel producing drum sounds from individual letters (vowels, consonants, spaces) and the other generating piano chords from grouped syllables, offering an <span class="kw kw-cyan">experimental exploration of how diverse texts translate into musical compositions using computers</span> , drawing inspiration from historical rhythmic structures such as the dactylic hexameter of the Iliad and Arabic prosody (Aruz ölçüsü).</p>
         </div>
-      </section>
-
-      <!-- MATEMATIK DUNYASI -->
-      <section class="subproject">
-        <div class="sub-flex">
-          <img src="assets/projects/math/md.jpg" alt="Matematik Dünyası Journal" class="subphoto">
-          <div class="subtext">
-            <h3 class="sub-title">Matematik Dünyası (Journal) <span class="sub-date">(2021–2023)</span></h3>
-            <p>
-              Helped digitize and preserve old issues of Matematik Dünyası, contributing to the journal’s online archive
-              and continuity of mathematical culture in Turkiye.
-            </p>
-            <a href="https://www.matematikdunyasi.org/" target="_blank" rel="noopener" class="sublink">Visit site →</a>
-          </div>
-        </div>
-      </section>
-    </article>
-
-    <article class="project" data-year="2023">
-      <h2 class="project-title">A Literary Approach to Computer Music: Translation of Words</h2>
-      <div class="project-meta"><time datetime="2022">2022</time> · Hobby Project</div>
-      <p class="project-desc">
-        This project aims to generate computer music by transforming input text, specifically its rhythmic and harmonic
-        aspects, into synthesized instrument sounds. The core idea is to correlate language and music by analyzing
-        language syntax through rhythm and phonetics through harmony and sound combinations. The project creates
-        two-channel music, with one channel producing drum sounds from individual letters
-        (vowels, consonants, spaces) and the other generating piano chords from grouped syllables, offering an
-        <span class="kw kw-cyan">experimental exploration of how diverse texts translate into musical compositions using
-          computers</span>
-        , drawing inspiration from
-        historical rhythmic structures such as the dactylic hexameter of the Iliad and Arabic prosody (Aruz ölçüsü).
-      </p>
-      <div class="project-links">
-        <a href="https://drive.google.com/file/d/1iRcaMf5bIiHLK9jKgp5u0tkP4HM_zLeg/view?usp=sharing" class="term-chip"
-          target="_blank" rel="noopener">Project Report</a>
       </div>
     </article>
+
+    <!-- ================= COMMUNITY ================= -->
+    <h2 class="section-label">MATHEMATICS COMMUNITY</h2>
+    <p class="section-intro">Mathematics has always been a shared space for curiosity. Over the years, I’ve taken part in several math communities in Turkey, contributing as a student, volunteer, and organizer — supporting both learning and outreach efforts.</p>
+
+    <article class="pub pub--sky">
+      <a class="pub-thumb" href="https://nesinkoyleri.org/en/main-page/" target="_blank" rel="noopener">
+        <img src="assets/projects/math/nmk.jpg" alt="Nesin Mathematics Village" loading="lazy">
+      </a>
+      <div class="pub-body">
+        <h3 class="pub-title">
+          <a href="https://nesinkoyleri.org/en/main-page/" target="_blank" rel="noopener">Nesin Mathematics Village</a>
+        </h3>
+        <p class="pub-venue">Student &amp; Volunteer, summers since 2019</p>
+        <div class="pub-links">
+          <a href="https://nesinkoyleri.org/en/main-page/" target="_blank" rel="noopener">Website</a>
+        </div>
+        <div class="pub-desc">
+          <p>I first arrived as a student, spending long summer days studying, thinking, and daydreaming under the trees. Over time, I also became a volunteer — helping in the library and kitchen so the village could keep running for students to learn, grow, and discover who they are. It’s a place where I met some of the most inspiring and important people in my life. In 2018, the village’s founder Ali Nesin received the International Mathematical Union’s <a href="https://www.mathunion.org/imu-awards/leelavati-prize/leelavati-prize-2018" target="_blank" rel="noopener">Leelavati Prize</a> for his work in creating the Mathematical Village and raising public awareness of mathematics in Turkey.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="pub pub--lime">
+      <a class="pub-thumb" href="https://matematikturkiye.com/" target="_blank" rel="noopener">
+        <img src="assets/projects/math/matematikturkiye.jpg" alt="Turkiye Mathematics Club" loading="lazy">
+      </a>
+      <div class="pub-body">
+        <h3 class="pub-title">
+          <a href="https://matematikturkiye.com/" target="_blank" rel="noopener">Türkiye Mathematics Club</a>
+        </h3>
+        <p class="pub-venue">Board Member &amp; Head of PR, 2020–2022</p>
+        <div class="pub-links">
+          <a href="https://matematikturkiye.com/" target="_blank" rel="noopener">Website</a>
+        </div>
+        <div class="pub-desc">
+          <p>Served as board member and head of public relations; built the club’s identity and communication network. Together, we organized academic and popular events to promote mathematical culture, both online and face-to-face.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="pub pub--orange">
+      <a class="pub-thumb" href="https://www.matematikdunyasi.org/" target="_blank" rel="noopener">
+        <img src="assets/projects/math/md.jpg" alt="Matematik Dünyası Journal" loading="lazy">
+      </a>
+      <div class="pub-body">
+        <h3 class="pub-title">
+          <a href="https://www.matematikdunyasi.org/" target="_blank" rel="noopener">Matematik Dünyası (Journal)</a>
+        </h3>
+        <p class="pub-venue">Archive Volunteer, 2021–2023</p>
+        <div class="pub-links">
+          <a href="https://www.matematikdunyasi.org/" target="_blank" rel="noopener">Website</a>
+        </div>
+        <div class="pub-desc">
+          <p>Helped digitize and preserve old issues of Matematik Dünyası, contributing to the journal’s online archive and continuity of mathematical culture in Turkiye.</p>
+        </div>
+      </div>
+    </article>
+
     <footer>
-      © ZBK &nbsp;•&nbsp; Last updated May 2026
+      © ZBK &nbsp;•&nbsp; Last updated October 2026
     </footer>
 
-    <!-- Lightbox targets -->
-    <!-- Lightbox targets (can sit at end of <main>) -->
-    <a href="#" class="lightbox" id="lacy-poster" aria-label="Close image">
-      <span class="lightbox__content">
-        <img src="assets/projects/lacy/LacyPoster.jpg" alt="">
-        <span class="lightbox__close" aria-hidden="true">×</span>
-      </span>
-    </a>
-
-    <!-- Images -->
-    <a href="#" class="lightbox" id="lacy-1" aria-label="Close image"><span class="lightbox__content"><img
-          src="assets/projects/lacy/lacy1.jpeg" alt=""><span class="lightbox__close">×</span></span></a>
-    <a href="#" class="lightbox" id="lacy-2" aria-label="Close image"><span class="lightbox__content"><img
-          src="assets/projects/lacy/lacy2.jpeg" alt=""><span class="lightbox__close">×</span></span></a>
-    <a href="#" class="lightbox" id="lacy-3" aria-label="Close image"><span class="lightbox__content"><img
-          src="assets/projects/lacy/lacy3.jpeg" alt=""><span class="lightbox__close">×</span></span></a>
   </main>
+
 </body>
 
 </html>

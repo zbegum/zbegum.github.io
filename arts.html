@@ -187,430 +187,235 @@
   <!-- ===== LIGHTBOXES (same IDs referenced above) ===== -->
 
   <!-- NMK Library Courtyard — Lightbox -->
-  <dialog id="lb-nmk-painting" class="lb lb--gallery-only" aria-labelledby="nmk-t">
-    <div class="lb-head">
-      <div>
-        <h2 id="nmk-t" class="lb-title">NMK Library Courtyard</h2>
-        <div class="lb-meta">Oil on Canvas · 2023</div>
-      </div>
+  <dialog id="lb-nmk-painting" class="lb" aria-labelledby="nmk-t">
+    <div class="lb-stage" data-viewport>
+      <img src="/assets/arts/NMK2023.jpg" alt="Oil painting of the NMK Library courtyard, 2023">
     </div>
-    <button class="lb-btn-close" data-close>✕</button>
-
-    <div class="lb-body" data-gallery>
-      <div class="lb-view" data-viewport>
-        <img src="/assets/arts/NMK2023.jpg" alt="Oil painting of the NMK Library courtyard, 2023" />
-      </div>
-    </div>
+    <aside class="lb-side">
+      <button class="lb-close" data-close aria-label="Close">✕</button>
+      <h2 id="nmk-t" class="lb-title">NMK Library Courtyard</h2>
+      <div class="lb-meta">Oil on Canvas · 2023</div>
+    </aside>
   </dialog>
 
   <!-- SELF PORTRAIT — Lightbox -->
   <dialog id="lb-selfportrait" class="lb" aria-labelledby="sp-t">
-    <div class="lb-head">
-      <div>
-        <h2 id="sp-t" class="lb-title">Self Portrait</h2>
-        <div class="lb-meta">Serigraphy · 2024</div>
-      </div>
+    <div class="lb-stage" data-viewport>
+      <img src="/assets/arts/selfportrait/selfportrait.jpg" alt="Self Portrait serigraphy print">
+      <button class="lb-nav lb-nav--prev" data-prev aria-label="Previous image">←</button>
+      <button class="lb-nav lb-nav--next" data-next aria-label="Next image">→</button>
     </div>
-    <button class="lb-btn-close" data-close>✕</button>
-
-
-    <div class="lb-body" data-gallery>
-      <div class="lb-view" data-viewport>
-        <img src="/assets/arts/selfportrait/selfportrait.jpg" alt="Self Portrait serigraphy print" />
-        <div class="lb-ctrls">
-          <button class="lb-btn" data-prev>←</button>
-          <button class="lb-btn" data-next>→</button>
-        </div>
+    <aside class="lb-side">
+      <button class="lb-close" data-close aria-label="Close">✕</button>
+      <h2 id="sp-t" class="lb-title">Self Portrait</h2>
+      <div class="lb-meta">Serigraphy · 2024</div>
+      <p class="lb-desc">Bing-generated self-portrait template, reclaimed through hand-drawn manipulation, layering, and color composition — revealing the human trace within a generative image and merging digital generation with tactile process.</p>
+      <div class="lb-thumbs" data-thumbs>
+        <button aria-label="Show image 1" data-src="/assets/arts/selfportrait/selfportrait.jpg" data-alt="Self Portrait serigraphy print" aria-current="true"><img src="/assets/arts/selfportrait/selfportrait.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 2" data-src="/assets/arts/selfportrait/layers.jpg" data-alt="Self Portrait layers"><img src="/assets/arts/selfportrait/layers.jpg" alt="" loading="lazy"></button>
       </div>
-
-      <aside class="lb-aside">
-        <p class="lb-desc">
-          Bing-generated self-portrait template, reclaimed through hand-drawn manipulation, layering, and color
-          composition — revealing the human trace within a generative image and merging digital generation with tactile
-          process.
-        </p>
-
-        <div class="lb-thumbs" data-thumbs>
-          <button data-src="/assets/arts/selfportrait/selfportrait.jpg">
-            <img src="/assets/arts/selfportrait/selfportrait.jpg" alt="Self Portrait primary print">
-          </button>
-          <button data-src="/assets/arts/selfportrait/layers.jpg">
-            <img src="/assets/arts/selfportrait/layers.jpg" alt="Self Portrait layers">
-          </button>
-        </div>
-      </aside>
-    </div>
+      <div class="lb-count" data-count>1 / 2</div>
+    </aside>
   </dialog>
 
   <!-- ELECTRONIC SWAN — Lightbox -->
   <dialog id="lb-swan" class="lb" aria-labelledby="swan-t">
-    <div class="lb-head">
-      <div>
-        <h2 id="swan-t" class="lb-title">Electronic Swan</h2>
-        <div class="lb-meta">Symbol Design · 2025</div>
-      </div>
+    <div class="lb-stage" data-viewport>
+      <img src="/assets/arts/swan/swan.jpg" alt="Electronic Swan">
+      <button class="lb-nav lb-nav--prev" data-prev aria-label="Previous image">←</button>
+      <button class="lb-nav lb-nav--next" data-next aria-label="Next image">→</button>
     </div>
-    <button class="lb-btn-close" data-close>✕</button>
-
-    <div class="lb-body" data-gallery>
-      <div class="lb-view" data-viewport>
-        <img src="/assets/arts/swan/swan.jpg" alt="Electronic Swan" />
-        <div class="lb-ctrls">
-          <button class="lb-btn" data-prev>←</button>
-          <button class="lb-btn" data-next>→</button>
-        </div>
+    <aside class="lb-side">
+      <button class="lb-close" data-close aria-label="Close">✕</button>
+      <h2 id="swan-t" class="lb-title">Electronic Swan</h2>
+      <div class="lb-meta">Symbol Design · 2025</div>
+      <p class="lb-desc">Originating from hand sketches and generative AI explorations during an ideathon, Electronic Swan evolved into a final digital composition merging mechanical and natural aesthetics.</p>
+      <div class="lb-thumbs" data-thumbs>
+        <button aria-label="Show image 1" data-src="/assets/arts/swan/swan.jpg" data-alt="Electronic Swan" aria-current="true"><img src="/assets/arts/swan/swan.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 2" data-src="/assets/arts/swan/swan2.jpg" data-alt="Swan ideathon"><img src="/assets/arts/swan/swan2.jpg" alt="" loading="lazy"></button>
       </div>
-
-      <aside class="lb-aside">
-        <p class="lb-desc">
-          Originating from hand sketches and generative AI explorations during an ideathon, Electronic Swan evolved into
-          a final digital composition merging mechanical and natural aesthetics.</p>
-
-        <div class="lb-thumbs" data-thumbs>
-          <button data-src="/assets/arts/swan/swan.jpg">
-            <img src="/assets/arts/swan/swan.jpg" alt="Electronic Swan main composition">
-          </button>
-          <button data-src="/assets/arts/swan/swan2.jpg">
-            <img src="/assets/arts/swan/swan2.jpg" alt="Swan ideathon">
-          </button>
-        </div>
-      </aside>
-    </div>
+      <div class="lb-count" data-count>1 / 2</div>
+    </aside>
   </dialog>
 
 
   <!-- MUSÉE D’ORSAY — Lightbox -->
-  <dialog id="lb-musedorsay" class="lb lb--gallery-only" aria-labelledby="orsay-t">
-    <div class="lb-head">
-      <div>
-        <h2 id="orsay-t" class="lb-title">Musée&nbsp;d’Orsay</h2>
-        <div class="lb-meta">Serigraphy · 2024</div>
-      </div>
+  <dialog id="lb-musedorsay" class="lb" aria-labelledby="orsay-t">
+    <div class="lb-stage" data-viewport>
+      <img src="/assets/arts/orsay/musedorsay.jpg" alt="Musée d’Orsay serigraphy print">
+      <button class="lb-nav lb-nav--prev" data-prev aria-label="Previous image">←</button>
+      <button class="lb-nav lb-nav--next" data-next aria-label="Next image">→</button>
     </div>
-    <button class="lb-btn-close" data-close>✕</button>
-
-    <div class="lb-body" data-gallery>
-      <div class="lb-view lb-view--with-rail" data-viewport>
-        <img src="/assets/arts/orsay/musedorsay.jpg" alt="Musée d’Orsay serigraphy print">
-
-        <div class="lb-rail-v" data-thumbs>
-          <button data-src="/assets/arts/orsay/musedorsay.jpg" aria-current="true">
-            <img src="/assets/arts/orsay/musedorsay.jpg" alt="Muse d'Orsay serigraphy print">
-          </button>
-          <button data-src="/assets/arts/orsay/musedorsay2.jpg" aria-current="true">
-            <img src="/assets/arts/orsay/musedorsay2.jpg" alt="Muse d'Orsay reference">
-          </button>
-          <button data-src="/assets/arts/orsay/musedorsay3.jpg">
-            <img src="/assets/arts/orsay/musedorsay3.jpg" alt="Muse d'Orsay digitialized">
-          </button>
-        </div>
-
-        <div class="lb-ctrls">
-          <button class="lb-btn" data-prev>←</button>
-          <button class="lb-btn" data-next>→</button>
-        </div>
+    <aside class="lb-side">
+      <button class="lb-close" data-close aria-label="Close">✕</button>
+      <h2 id="orsay-t" class="lb-title">Musée&nbsp;d’Orsay</h2>
+      <div class="lb-meta">Serigraphy · 2024</div>
+      <div class="lb-thumbs" data-thumbs>
+        <button aria-label="Show image 1" data-src="/assets/arts/orsay/musedorsay.jpg" data-alt="Musée d’Orsay serigraphy print" aria-current="true"><img src="/assets/arts/orsay/musedorsay.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 2" data-src="/assets/arts/orsay/musedorsay2.jpg" data-alt="Muse d'Orsay reference"><img src="/assets/arts/orsay/musedorsay2.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 3" data-src="/assets/arts/orsay/musedorsay3.jpg" data-alt="Muse d'Orsay digitialized"><img src="/assets/arts/orsay/musedorsay3.jpg" alt="" loading="lazy"></button>
       </div>
-    </div>
+      <div class="lb-count" data-count>1 / 3</div>
+    </aside>
   </dialog>
 
   <!-- I EXIST — Lightbox -->
-  <dialog id="lb-iexist" class="lb lb--gallery-only" aria-labelledby="iexist-t">
-    <div class="lb-head">
-      <div>
-        <h2 id="iexist-t" class="lb-title">I&nbsp;exist</h2>
-        <div class="lb-meta">Serigraphy · 2024</div>
-      </div>
+  <dialog id="lb-iexist" class="lb" aria-labelledby="iexist-t">
+    <div class="lb-stage" data-viewport>
+      <img src="/assets/arts/iexist/iexist.jpg" alt="I exist serigraphy print">
     </div>
-    <button class="lb-btn-close" data-close>✕</button>
-
-    <div class="lb-body" data-gallery>
-      <div class="lb-view" data-viewport>
-        <img src="/assets/arts/iexist/iexist.jpg" alt="I exist serigraphy print" />
-      </div>
-    </div>
+    <aside class="lb-side">
+      <button class="lb-close" data-close aria-label="Close">✕</button>
+      <h2 id="iexist-t" class="lb-title">I&nbsp;exist</h2>
+      <div class="lb-meta">Serigraphy · 2024</div>
+    </aside>
   </dialog>
 
   <!-- STAMPS — Lightbox -->
-  <dialog id="lb-stamps" class="lb lb--gallery-only" aria-labelledby="stamp-t">
-    <div class="lb-head">
-      <div>
-        <h2 id="stamp-t" class="lb-title">Dad's Stamps</h2>
-        <div class="lb-meta">Arrangement · 2024</div>
-      </div>
+  <dialog id="lb-stamps" class="lb" aria-labelledby="stamp-t">
+    <div class="lb-stage" data-viewport>
+      <img src="/assets/arts/stamps.jpg" alt="Dad's Stamp Collection">
     </div>
-    <button class="lb-btn-close" data-close>✕</button>
-
-    <div class="lb-body" data-gallery>
-      <div class="lb-view" data-viewport>
-        <img src="/assets/arts/stamps.jpg" alt="Dad's Stamp Collection" />
-      </div>
-    </div>
+    <aside class="lb-side">
+      <button class="lb-close" data-close aria-label="Close">✕</button>
+      <h2 id="stamp-t" class="lb-title">Dad's Stamps</h2>
+      <div class="lb-meta">Arrangement · 2024</div>
+    </aside>
   </dialog>
 
 
   <!-- HUG — Lightbox -->
-  <dialog id="lb-hug" class="lb lb--gallery-only" aria-labelledby="hug-t">
-    <div class="lb-head">
-      <div>
-        <h2 id="hug-t" class="lb-title">Hug</h2>
-        <div class="lb-meta">Ceramics · 2025</div>
-      </div>
+  <dialog id="lb-hug" class="lb" aria-labelledby="hug-t">
+    <div class="lb-stage" data-viewport>
+      <img src="/assets/arts/hug/hug.jpg" alt="Ceramic sculpture 'Hug'">
+      <button class="lb-nav lb-nav--prev" data-prev aria-label="Previous image">←</button>
+      <button class="lb-nav lb-nav--next" data-next aria-label="Next image">→</button>
     </div>
-    <button class="lb-btn-close" data-close>✕</button>
-
-    <div class="lb-body" data-gallery>
-      <div class="lb-view lb-view--with-rail" data-viewport>
-        <img src="/assets/arts/hug/hug.jpg" alt="Ceramic sculpture 'Hug'">
-
-        <div class="lb-rail-v" data-thumbs>
-          <button data-src="/assets/arts/hug/hug.jpg" aria-current="true">
-            <img src="/assets/arts/hug/hug.jpg" alt="Hug view 1">
-          </button>
-          <button data-src="/assets/arts/hug/hug2.jpg">
-            <img src="/assets/arts/hug/hug2.jpg" alt="Hug view 2">
-          </button>
-          <button data-src="/assets/arts/hug/hug3.jpg">
-            <img src="/assets/arts/hug/hug3.jpg" alt="Hug view 3">
-          </button>
-          <button data-src="/assets/arts/hug/hug4.jpg">
-            <img src="/assets/arts/hug/hug4.jpg" alt="Hug view 4">
-          </button>
-        </div>
-
-        <div class="lb-ctrls">
-          <button class="lb-btn" data-prev>←</button>
-          <button class="lb-btn" data-next>→</button>
-        </div>
+    <aside class="lb-side">
+      <button class="lb-close" data-close aria-label="Close">✕</button>
+      <h2 id="hug-t" class="lb-title">Hug</h2>
+      <div class="lb-meta">Ceramics · 2025</div>
+      <div class="lb-thumbs" data-thumbs>
+        <button aria-label="Show image 1" data-src="/assets/arts/hug/hug.jpg" data-alt="Ceramic sculpture 'Hug'" aria-current="true"><img src="/assets/arts/hug/hug.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 2" data-src="/assets/arts/hug/hug2.jpg" data-alt="Hug view 2"><img src="/assets/arts/hug/hug2.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 3" data-src="/assets/arts/hug/hug3.jpg" data-alt="Hug view 3"><img src="/assets/arts/hug/hug3.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 4" data-src="/assets/arts/hug/hug4.jpg" data-alt="Hug view 4"><img src="/assets/arts/hug/hug4.jpg" alt="" loading="lazy"></button>
       </div>
-    </div>
+      <div class="lb-count" data-count>1 / 4</div>
+    </aside>
   </dialog>
 
   <!-- CERAMICS — Lightbox -->
-  <dialog id="lb-vase" class="lb lb--gallery-only" aria-labelledby="vase-t">
-    <div class="lb-head">
-      <div>
-        <h2 id="vase-t" class="lb-title">Selected Ceramics</h2>
-        <div class="lb-meta">Ceramics · 2025</div>
-      </div>
+  <dialog id="lb-vase" class="lb" aria-labelledby="vase-t">
+    <div class="lb-stage" data-viewport>
+      <img src="/assets/arts/vase/1.jpg" alt="Ceramic works">
+      <button class="lb-nav lb-nav--prev" data-prev aria-label="Previous image">←</button>
+      <button class="lb-nav lb-nav--next" data-next aria-label="Next image">→</button>
     </div>
-    <button class="lb-btn-close" data-close>✕</button>
-
-    <div class="lb-body" data-gallery>
-      <div class="lb-view" data-viewport>
-        <img src="/assets/arts/vase/1.jpg" alt="Ceramic works" />
-        <div class="lb-ctrls">
-          <button class="lb-btn" data-prev>←</button>
-          <button class="lb-btn" data-next>→</button>
-        </div>
+    <aside class="lb-side">
+      <button class="lb-close" data-close aria-label="Close">✕</button>
+      <h2 id="vase-t" class="lb-title">Selected Ceramics</h2>
+      <div class="lb-meta">Ceramics · 2025</div>
+      <div class="lb-thumbs" data-thumbs>
+        <button aria-label="Show image 1" data-src="/assets/arts/vase/1.jpg" data-alt="Ceramic works" aria-current="true"><img src="/assets/arts/vase/1.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 2" data-src="/assets/arts/vase/2.jpg" data-alt="Ceramics2"><img src="/assets/arts/vase/2.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 3" data-src="/assets/arts/vase/3.jpg" data-alt="Ceramics3"><img src="/assets/arts/vase/3.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 4" data-src="/assets/arts/vase/4.jpg" data-alt="Ceramics4"><img src="/assets/arts/vase/4.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 5" data-src="/assets/arts/vase/5.jpg" data-alt="Ceramics5"><img src="/assets/arts/vase/5.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 6" data-src="/assets/arts/vase/6.jpg" data-alt="Ceramics6"><img src="/assets/arts/vase/6.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 7" data-src="/assets/arts/vase/7.jpg" data-alt="Ceramics7"><img src="/assets/arts/vase/7.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 8" data-src="/assets/arts/vase/8.jpg" data-alt="Ceramics8"><img src="/assets/arts/vase/8.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 9" data-src="/assets/arts/vase/9.jpg" data-alt="Ceramics9"><img src="/assets/arts/vase/9.jpg" alt="" loading="lazy"></button>
       </div>
-
-      <div class="lb-rail-v" data-thumbs>
-        <button data-src="/assets/arts/vase/1.jpg" aria-current="true">
-          <img src="/assets/arts/vase/1.jpg" alt="Ceramics1">
-        </button>
-        <button data-src="/assets/arts/vase/2.jpg" aria-current="true">
-          <img src="/assets/arts/vase/2.jpg" alt="Ceramics2">
-        </button>
-        <button data-src="/assets/arts/vase/3.jpg" aria-current="true">
-          <img src="/assets/arts/vase/3.jpg" alt="Ceramics3">
-        </button>
-        <button data-src="/assets/arts/vase/4.jpg" aria-current="true">
-          <img src="/assets/arts/vase/4.jpg" alt="Ceramics4">
-        </button>
-        <button data-src="/assets/arts/vase/5.jpg" aria-current="true">
-          <img src="/assets/arts/vase/5.jpg" alt="Ceramics5">
-        </button>
-        <button data-src="/assets/arts/vase/6.jpg" aria-current="true">
-          <img src="/assets/arts/vase/6.jpg" alt="Ceramics6">
-        </button>
-        <button data-src="/assets/arts/vase/7.jpg" aria-current="true">
-          <img src="/assets/arts/vase/7.jpg" alt="Ceramics7">
-        </button>
-        <button data-src="/assets/arts/vase/8.jpg" aria-current="true">
-          <img src="/assets/arts/vase/8.jpg" alt="Ceramics8">
-        </button>
-        <button data-src="/assets/arts/vase/9.jpg" aria-current="true">
-          <img src="/assets/arts/vase/9.jpg" alt="Ceramics9">
-        </button>
-      </div>
+      <div class="lb-count" data-count>1 / 9</div>
+    </aside>
   </dialog>
 
   <!-- DANCE — Lightbox -->
   <dialog id="lb-dance" class="lb" aria-labelledby="dance-t">
-    <div class="lb-head">
-      <div>
-        <h2 id="dance-t" class="lb-title">Dance</h2>
-        <div class="lb-meta">Collage × GenAI · 2025</div>
-      </div>
+    <div class="lb-stage" data-viewport>
+      <img src="/assets/arts/pom/dance_experiment.jpg" alt="Dance — collage x generative AI composition">
+      <button class="lb-nav lb-nav--prev" data-prev aria-label="Previous image">←</button>
+      <button class="lb-nav lb-nav--next" data-next aria-label="Next image">→</button>
     </div>
-    <button class="lb-btn-close" data-close>✕</button>
-
-    <div class="lb-body" data-gallery>
-      <div class="lb-view" data-viewport>
-        <img src="/assets/arts/pom/dance_experiment.jpg" alt="Dance — collage x generative AI composition" />
-        <div class="lb-ctrls">
-          <button class="lb-btn" data-prev>←</button>
-          <button class="lb-btn" data-next>→</button>
-        </div>
+    <aside class="lb-side">
+      <button class="lb-close" data-close aria-label="Close">✕</button>
+      <h2 id="dance-t" class="lb-title">Dance</h2>
+      <div class="lb-meta">Collage × GenAI · 2025</div>
+      <p class="lb-desc">Originally created as a handmade collage in 2020, Dance was later reimagined through Photoshop and generative AI experimentation. Combining analog with digital, the piece explores rhythm, repetition, and the tension between control and emergence — a choreography where human composition and machine generation move in unison.</p>
+      <div class="lb-thumbs" data-thumbs>
+        <button aria-label="Show image 1" data-src="/assets/arts/pom/dance_experiment.jpg" data-alt="Dance — collage x generative AI composition" aria-current="true"><img src="/assets/arts/pom/dance_experiment.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 2" data-src="/assets/arts/pom/dance.jpg" data-alt="Dance analog version"><img src="/assets/arts/pom/dance.jpg" alt="" loading="lazy"></button>
       </div>
-
-      <aside class="lb-aside">
-        <p class="lb-desc">
-          Originally created as a handmade collage in 2020, Dance was later reimagined through Photoshop and generative
-          AI experimentation. Combining analog with digital, the piece explores rhythm,
-          repetition, and the tension between control and emergence — a choreography where human composition and machine
-          generation move in unison. </p>
-
-        <div class="lb-thumbs" data-thumbs>
-          <button data-src="/assets/arts/pom/dance_experiment.jpg">
-            <img src="/assets/arts/pom/dance_experiment.jpg" alt="Dance digitialized composition">
-          </button>
-          <button data-src="/assets/arts/pom/dance.jpg">
-            <img src="/assets/arts/pom/dance.jpg" alt="Dance analog version">
-          </button>
-        </div>
-      </aside>
-    </div>
+      <div class="lb-count" data-count>1 / 2</div>
+    </aside>
   </dialog>
 
   <!-- PERFORMER — Lightbox -->
   <dialog id="lb-performer" class="lb" aria-labelledby="performer-t">
-    <div class="lb-head">
-      <div>
-        <h2 id="performer-t" class="lb-title">Performer</h2>
-        <div class="lb-meta">Collage × GenAI · 2025</div>
-      </div>
+    <div class="lb-stage" data-viewport>
+      <img src="/assets/arts/performer/performer.jpg" alt="Performer collage and generative AI composition">
+      <button class="lb-nav lb-nav--prev" data-prev aria-label="Previous image">←</button>
+      <button class="lb-nav lb-nav--next" data-next aria-label="Next image">→</button>
     </div>
-    <button class="lb-btn-close" data-close>✕</button>
-
-    <div class="lb-body" data-gallery>
-      <div class="lb-view" data-viewport>
-        <img src="/assets/arts/performer/performer.jpg" alt="Performer collage and generative AI composition" />
-        <div class="lb-ctrls">
-          <button class="lb-btn" data-prev>←</button>
-          <button class="lb-btn" data-next>→</button>
-        </div>
+    <aside class="lb-side">
+      <button class="lb-close" data-close aria-label="Close">✕</button>
+      <h2 id="performer-t" class="lb-title">Performer</h2>
+      <div class="lb-meta">Collage × GenAI · 2025</div>
+      <p class="lb-desc">First composed as a mixed-media collage with sewing thread in 2022, Performer was later re-explored through Photoshop’s generative refill. Harpist: Sirin Pancaroglu</p>
+      <div class="lb-thumbs" data-thumbs>
+        <button aria-label="Show image 1" data-src="/assets/arts/performer/performer.jpg" data-alt="Performer collage and generative AI composition" aria-current="true"><img src="/assets/arts/performer/performer.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 2" data-src="/assets/arts/performer/performer2.jpg" data-alt="Performer collage alternate view"><img src="/assets/arts/performer/performer2.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 3" data-src="/assets/arts/performer/performer3.jpg" data-alt="Performer collage original"><img src="/assets/arts/performer/performer3.jpg" alt="" loading="lazy"></button>
       </div>
-
-      <aside class="lb-aside">
-        <p class="lb-desc">
-          First composed as a mixed-media collage with sewing thread in 2022, Performer was later re-explored through
-          Photoshop’s generative refill. Harpist: Sirin Pancaroglu</p>
-        <div class="lb-thumbs" data-thumbs>
-          <button data-src="/assets/arts/performer/performer.jpg">
-            <img src="/assets/arts/performer/performer.jpg" alt="Performer collage main view">
-          </button>
-          <button data-src="/assets/arts/performer/performer2.jpg">
-            <img src="/assets/arts/performer/performer2.jpg" alt="Performer collage alternate view">
-          </button>
-          <button data-src="/assets/arts/performer/performer3.jpg">
-            <img src="/assets/arts/performer/performer3.jpg" alt="Performer collage original">
-          </button>
-        </div>
-      </aside>
-    </div>
+      <div class="lb-count" data-count>1 / 3</div>
+    </aside>
   </dialog>
 
   <!-- Domestic Dreams — Lightbox -->
   <dialog id="lb-dream" class="lb" aria-labelledby="dream-t">
-    <div class="lb-head">
-      <div>
-        <h2 id="dream-t" class="lb-title">Domestic Dreams</h2>
-        <div class="lb-meta">Collage × GenAI · 2025</div>
-      </div>
+    <div class="lb-stage" data-viewport>
+      <img src="/assets/arts/dream/dream.jpg" alt="Domestic Dreams collage × GenAI composition">
+      <button class="lb-nav lb-nav--prev" data-prev aria-label="Previous image">←</button>
+      <button class="lb-nav lb-nav--next" data-next aria-label="Next image">→</button>
     </div>
-    <button class="lb-btn-close" data-close>✕</button>
-
-    <div class="lb-body" data-gallery>
-      <div class="lb-view" data-viewport>
-        <img src="/assets/arts/dream/dream.jpg" alt="Domestic Dreams collage × GenAI composition" />
-        <div class="lb-ctrls">
-          <button class="lb-btn" data-prev>←</button>
-          <button class="lb-btn" data-next>→</button>
-        </div>
+    <aside class="lb-side">
+      <button class="lb-close" data-close aria-label="Close">✕</button>
+      <h2 id="dream-t" class="lb-title">Domestic Dreams</h2>
+      <div class="lb-meta">Collage × GenAI · 2025</div>
+      <p class="lb-desc">The piece began as a handmade collage in 2020 and evolved through generative AI experiments.,</p>
+      <div class="lb-thumbs" data-thumbs>
+        <button aria-label="Show image 1" data-src="/assets/arts/dream/dream.jpg" data-alt="Domestic Dreams collage × GenAI composition" aria-current="true"><img src="/assets/arts/dream/dream.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 2" data-src="/assets/arts/dream/dream1.jpg" data-alt="Domestic Dreams 5"><img src="/assets/arts/dream/dream1.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 3" data-src="/assets/arts/dream/dream2.jpg" data-alt="Domestic Dreams 2"><img src="/assets/arts/dream/dream2.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 4" data-src="/assets/arts/dream/dream3.jpg" data-alt="Domestic Dreams 3"><img src="/assets/arts/dream/dream3.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 5" data-src="/assets/arts/dream/dream4.jpg" data-alt="Domestic Dreams 4"><img src="/assets/arts/dream/dream4.jpg" alt="" loading="lazy"></button>
       </div>
-
-      <aside class="lb-aside">
-        <p class="lb-desc">
-          The piece began as a handmade collage in 2020 and evolved through generative AI experiments.,
-        </p>
-
-        <div class="lb-thumbs" data-thumbs>
-          <button data-src="/assets/arts/dream/dream.jpg">
-            <img src="/assets/arts/dream/dream.jpg" alt="Domestic Dreams 1">
-          </button>
-          <button data-src="/assets/arts/dream/dream1.jpg">
-            <img src="/assets/arts/dream/dream1.jpg" alt="Domestic Dreams 5">
-          </button>
-          <button data-src="/assets/arts/dream/dream2.jpg">
-            <img src="/assets/arts/dream/dream2.jpg" alt="Domestic Dreams 2">
-          </button>
-          <button data-src="/assets/arts/dream/dream3.jpg">
-            <img src="/assets/arts/dream/dream3.jpg" alt="Domestic Dreams 3">
-          </button>
-          <button data-src="/assets/arts/dream/dream4.jpg">
-            <img src="/assets/arts/dream/dream4.jpg" alt="Domestic Dreams 4">
-          </button>
-        </div>
-      </aside>
-    </div>
+      <div class="lb-count" data-count>1 / 5</div>
+    </aside>
   </dialog>
 
   <!-- INVaded — Lightbox -->
   <dialog id="lb-sculpture" class="lb" aria-labelledby="sculpture-t">
-    <div class="lb-head">
-      <div>
-        <h2 id="sculpture-t" class="lb-title">Invaded</h2>
-        <div class="lb-meta">Mixed Media· 2023</div>
-      </div>
+    <div class="lb-stage" data-viewport>
+      <img src="/assets/arts/sculpture/invade.jpg" alt="Invaded — mixed media sculpture">
+      <button class="lb-nav lb-nav--prev" data-prev aria-label="Previous image">←</button>
+      <button class="lb-nav lb-nav--next" data-next aria-label="Next image">→</button>
     </div>
-    <button class="lb-btn-close" data-close type="button">✕</button>
-
-    <div class="lb-body" data-gallery onclick="event.stopPropagation()">
-      <div class="lb-view" data-viewport>
-        <!-- Main image (default) -->
-        <img src="/assets/arts/sculpture/invade.jpg" alt="Invaded — mixed media sculpture" />
-        <div class="lb-ctrls">
-          <button class="lb-btn" data-prev type="button">←</button>
-          <button class="lb-btn" data-next type="button">→</button>
-        </div>
+    <aside class="lb-side">
+      <button class="lb-close" data-close aria-label="Close">✕</button>
+      <h2 id="sculpture-t" class="lb-title">Invaded</h2>
+      <div class="lb-meta">Mixed Media· 2023</div>
+      <p class="lb-desc">Invaded explores the fragile boundary between art, engineering, and technology — asking whether integration with machines leads to enhancement or alienation. The piece combines two contrasting materials: a traditional sculptural form carved from aerated concrete and discarded circuit components collected from laboratory waste. Cables and circuits spread across the surface like living ivy, bugs, and mushrooms, suggesting that technology — once external — now grows inward, becoming part of the body’s ecosystem. What emerges is a system both parasitic and symbiotic, questioning whether technological integration signifies evolution, dependency, or the rise of a new kind of nature.</p>
+      <div class="lb-thumbs" data-thumbs>
+        <button aria-label="Show image 1" data-src="/assets/arts/sculpture/invade.jpg" data-alt="Invaded — mixed media sculpture" aria-current="true"><img src="/assets/arts/sculpture/invade.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 2" data-src="/assets/arts/sculpture/side.jpg" data-alt="Invaded — detail 1"><img src="/assets/arts/sculpture/side.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 3" data-src="/assets/arts/sculpture/medium.jpg" data-alt="Invaded — detail 2"><img src="/assets/arts/sculpture/medium.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 4" data-src="/assets/arts/sculpture/us.jpg" data-alt="Invaded — detail 3"><img src="/assets/arts/sculpture/us.jpg" alt="" loading="lazy"></button>
+        <button aria-label="Show image 5" data-src="/assets/arts/sculpture/ideathon.jpg" data-alt="Invaded — detail 4"><img src="/assets/arts/sculpture/ideathon.jpg" alt="" loading="lazy"></button>
       </div>
-
-      <aside class="lb-aside">
-        <p class="lb-desc">
-          Invaded explores the fragile boundary between art, engineering, and technology — asking whether integration
-          with machines leads to enhancement or alienation.
-
-          The piece combines two contrasting materials: a traditional sculptural form carved from aerated concrete and
-          discarded circuit components collected from laboratory waste.
-
-          Cables and circuits spread across the surface like living ivy, bugs, and mushrooms, suggesting that technology
-          — once external — now grows inward, becoming part of the body’s ecosystem.
-
-          What emerges is a system both parasitic and symbiotic, questioning whether technological integration signifies
-          evolution, dependency, or the rise of a new kind of nature. </p>
-
-        <!-- Thumbnails -->
-        <div class="lb-thumbs" data-thumbs>
-          <button data-src="/assets/arts/sculpture/invade.jpg" type="button" aria-current="true">
-            <img src="/assets/arts/sculpture/invade.jpg" alt="Invaded — front view">
-          </button>
-          <button data-src="/assets/arts/sculpture/side.jpg" type="button">
-            <img src="/assets/arts/sculpture/side.jpg" alt="Invaded — detail 1">
-          </button>
-          <button data-src="/assets/arts/sculpture/medium.jpg" type="button">
-            <img src="/assets/arts/sculpture/medium.jpg" alt="Invaded — detail 2">
-          </button>
-          <button data-src="/assets/arts/sculpture/us.jpg" type="button">
-            <img src="/assets/arts/sculpture/us.jpg" alt="Invaded — detail 3">
-          </button>
-          <button data-src="/assets/arts/sculpture/ideathon.jpg" type="button">
-            <img src="/assets/arts/sculpture/ideathon.jpg" alt="Invaded — detail 4">
-          </button>
-
-        </div>
-      </aside>
-    </div>
+      <div class="lb-count" data-count>1 / 5</div>
+    </aside>
   </dialog>
 
   <script src="js/gallery.js"></script>

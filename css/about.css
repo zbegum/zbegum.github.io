@@ -20,15 +20,14 @@
     width: 100%;
     margin: 0 auto;
     padding: clamp(16px, 4vw, 24px);
-    display: grid;
-    align-content: start;
-    gap: 0;
+    display: block;
   }
   
   .about-text { 
-    font-size: 1rem;
-    line-height: 1.75;
+    font-size: 1.02rem;
+    line-height: 1.95;
   }
+  .about-text p { margin: 0 0 1.4em; }
   .about-text::after { content:""; display: table; clear: both; }
   
   .about-kicker{
@@ -53,9 +52,9 @@
     float: left;
     width: clamp(150px, 24%, 220px);
     height: auto;
-    margin: 0 14px 6px 0;
+    margin: 6px 28px 14px 0;
     border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 4px;
+    border-radius: 0;
     filter: grayscale(8%) contrast(105%);
     object-fit: cover;
     shape-outside: margin-box;
@@ -68,7 +67,7 @@
   .rule{
     border: 0;
     border-top: 1px dotted rgba(255,255,255,0.18);
-    margin: 10px 0;
+    margin: 28px 0 18px;
   }
   
   .about-links{
@@ -143,11 +142,16 @@
   .term-chip {
     background: rgba(0, 195, 255, 0.28);
     padding: 0.02rem 0.35rem;
-    border-radius: 6px;
+    border-radius: 0;
     font-weight: 500;
     color: var(--text);
     white-space: nowrap;
   }
+  
+  .term-chip--teal   { background: rgba(94, 234, 212, 0.26); }
+  .term-chip--coral  { background: rgba(255, 111, 97, 0.30); }
+  .term-chip--yellow { background: rgba(255, 228, 92, 0.24); }
+  .term-chip--lime   { background: rgba(163, 230, 53, 0.24); }
   
   .wavy-key {
     text-decoration: underline;
@@ -236,3 +240,68 @@
     .about-links a{ font-size: 0.92rem; }
   }
   
+
+/* =========================
+   ABOUT — photo left, text right
+   ========================= */
+.about-page { max-width: 1040px; }
+
+.about-split {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 56px;
+  align-items: start;
+  margin-top: 6rem;
+}
+
+.about-hero {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0;
+}
+
+.about-side {
+  position: sticky;
+  top: 120px;
+}
+
+.about-side .ascii-wrap {
+  justify-content: flex-start;
+  margin: 56px 0 0;
+  transform: none;
+  overflow: visible;
+}
+
+.about-side .ascii-art { font-size: 9.3px; margin-left: -28px; }
+
+.about-side .ascii-credit {
+  text-align: left;
+  margin: 8px 0 0;
+}
+
+.about-main .about-kicker { margin-top: 0; }
+
+@media (max-width: 760px) {
+  .about-split {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 3rem;
+  }
+  .about-side { position: static; }
+  .about-hero { width: min(260px, 70%); }
+}
+
+/* Contact icons */
+.about-links { gap: 22px; margin-top: 10px; }
+.about-links a { display: inline-flex; line-height: 0; }
+.about-links svg { display: block; }
+.about-text .about-email {
+  margin-top: -0.6em;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  user-select: all;
+}
