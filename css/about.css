@@ -244,7 +244,7 @@
 /* =========================
    ABOUT — photo left, text right
    ========================= */
-.about-page { max-width: 1040px; }
+.about-page { max-width: 1200px; }
 
 .about-split {
   display: grid;
@@ -303,10 +303,119 @@
 .about-links { gap: 22px; margin-top: 10px; }
 .about-links a { display: inline-flex; line-height: 0; }
 .about-links svg { display: block; }
-.about-text .about-email {
-  margin-top: -0.6em;
+.about-email {
+  margin: 0;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.92rem;
   color: var(--text-muted);
   user-select: all;
 }
+
+/* "think, learn, and create with machines" — handwritten words */
+.fx-phrase { font-weight: 700; white-space: nowrap; }
+.fx { font-weight: 400; }
+.fx-think, .fx-learn, .fx-create { font-family: "Caveat", cursive; font-weight: 700; font-size: 1.4em; line-height: 1; }
+
+/* Contact under the portrait; ASCII garden closes the text column */
+.about-contact {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.about-contact .about-links { margin: 0; }
+
+.about-main .ascii-wrap {
+  transform: none;
+  justify-content: center;
+  margin: 8px 0 0;
+}
+.about-main .ascii-art { font-size: 9.3px; }
+.about-main .ascii-credit { text-align: center; margin: 8px 0 0; }
+
+/* =========================
+   PROFILE CARD (left column)
+   ========================= */
+:root {
+  --card-bg: #16171a;
+  --card-border: rgba(255, 255, 255, 0.09);
+}
+
+.profile-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+}
+
+.profile-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.profile-body { padding: 18px 20px 20px; }
+
+.profile-card .profile-name {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.profile-loc {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.profile-loc svg { flex-shrink: 0; }
+
+.profile-rule {
+  border: 0;
+  border-top: 1px solid var(--card-border);
+  margin: 16px 0 12px;
+}
+
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  font-size: 0.92rem;
+  color: var(--text);
+  text-decoration: none;
+}
+.contact-row svg { flex-shrink: 0; color: var(--accent-violet); }
+a.contact-row { transition: color 0.15s ease; }
+a.contact-row:hover { color: var(--accent-violet); }
+
+.contact-row .about-email {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* "About Me" — same treatment as the Research section labels */
+.about-title {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 0.86rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 1.6rem;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--about-rule);
+}
+
+:root { --about-rule: rgba(255, 255, 255, 0.12); }
+:root[data-theme="light"] { --about-rule: rgba(0, 0, 0, 0.12); }

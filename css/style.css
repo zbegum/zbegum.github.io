@@ -1,5 +1,5 @@
 :root {
-  --bg: #18191b;
+  --bg: #0f1012;
   --text: #f4f4f6;
   --text-muted: #9a9ca4;
   --accent-violet: #b38cff;
@@ -45,7 +45,7 @@ body {
     width: 100%;
     text-align: center;
     padding: 20px 0;
-    background: rgba(0, 0, 0, 0.12);
+    background: rgba(26, 27, 30, 0.85);
     backdrop-filter: blur(3px);
   }
   
@@ -63,16 +63,22 @@ body {
   
   /* links */
   .navbar a {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 0.92rem;
     color: var(--text-muted);
     text-decoration: none;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 1.6px;
     transition: color 0.2s ease;
   }
   
-  .navbar a.active,
   .navbar a:hover {
     color: var(--accent-violet);
+  }
+
+  .navbar a.active {
+    color: var(--accent-violet);
+    font-size: 1.05rem;
   }
   
   /* ------------------------------------
@@ -81,7 +87,7 @@ body {
   @media (max-width: 700px) {
     .navbar {
       padding: 14px 0;
-      background: rgba(0, 0, 0, 0.25);
+      background: rgba(26, 27, 30, 0.9);
       backdrop-filter: blur(6px);
     }
   
@@ -90,7 +96,7 @@ body {
     }
   
     .navbar a {
-      font-size: 0.9rem;       /* slightly smaller text */
+      font-size: 0.86rem;      /* slightly smaller text */
       letter-spacing: 0.8px;
     }
   }

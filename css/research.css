@@ -2,9 +2,9 @@
    RESEARCH — publication-list layout
    ==================================== */
 body.research {
-  --page-max: clamp(960px, 68vw, 1360px);
+  --page-max: clamp(960px, 88vw, 1440px);
   --rule: rgba(255, 255, 255, 0.12);
-  --tile-bg: #111214;
+  --tile-bg: #17181b;
 }
 
 /* Per-entry accent: each item gets its own shadow color */
@@ -41,7 +41,7 @@ body.research {
 /* —— Entry row: thumbnail left, text right —— */
 .pub {
   display: grid;
-  grid-template-columns: minmax(240px, 1fr) 2fr;
+  grid-template-columns: minmax(220px, 300px) 1fr;
   gap: 44px;
   align-items: start;
   padding: 36px 0;
@@ -97,9 +97,9 @@ body.research {
 .pub-title {
   font-family: "Space Grotesk", system-ui, sans-serif;
   font-weight: 600;
-  font-size: 1.1rem;
-  line-height: 1.4;
-  margin: 0 0 10px;
+  font-size: 1.28rem;
+  line-height: 1.35;
+  margin: 0 0 12px;
 }
 
 .pub-title a {
@@ -125,9 +125,12 @@ body.research {
   text-underline-offset: 3px;
 }
 
+/* Venue as metadata: upright mono instead of italic */
 .pub-venue {
-  font-style: italic;
-  font-size: 0.96rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  letter-spacing: 0.2px;
   margin: 0 0 6px;
 }
 
@@ -147,19 +150,27 @@ body.research {
 .pub-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 16px;
+  gap: 6px 18px;
   margin-top: 12px;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.86rem;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: 0.94rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 .pub-links a {
-  color: var(--text);
+  color: var(--pub-accent);
   text-decoration: none;
+  transition: opacity 0.15s ease;
 }
 
-.pub-links a::before { content: "["; color: var(--text-muted); }
-.pub-links a::after  { content: "]"; color: var(--text-muted); }
+.pub-links a:hover { opacity: 0.75; }
+
+.pub-links a::before { content: "["; color: var(--text-muted); display: inline-block; }
+.pub-links a::after  { content: "]"; color: var(--text-muted); display: inline-block; }
+
+/* Keep the venue on one line where there's room; the rank never splits off */
+.pub-venue .rank { white-space: nowrap; }
 
 /* —— Mobile: stack —— */
 @media (max-width: 700px) {

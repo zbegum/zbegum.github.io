@@ -8,23 +8,30 @@
 
   <!-- Fonts -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Space+Grotesk:wght@400;600&family=IBM+Plex+Mono:wght@400;500&family=Karla:wght@400;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Space+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&family=Karla:wght@400;600&display=swap"
     rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/style.css?v=1" />
+  <link rel="stylesheet" href="css/style.css?v=10" />
   <link rel="stylesheet" href="css/about.css?v=1" />
   <link rel="stylesheet" href="css/projects.css?v=2" />
-  <link rel="stylesheet" href="css/research.css?v=1" />
+  <link rel="stylesheet" href="css/research.css?v=9" />
+  <link rel="stylesheet" href="css/theme.css?v=17" />
+  <script>(function(){try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}})()</script>
+  <script src="js/page-transitions.js?v=1"></script>
 </head>
 
 <body class="projects research">
   <nav class="navbar">
     <ul>
       <li><a href="index.html">ABOUT</a></li>
-      <li><a class="active" href="research.html">RESEARCH</a></li>
+      <li><span class="nav-br nav-br--l" aria-hidden="true">[</span><span class="nav-br nav-br--r" aria-hidden="true">]</span><a class="active" href="research.html">RESEARCH</a></li>
       <li><a href="arts.html">ARTS</a></li>
     </ul>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode">
+      <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+    </button>
   </nav>
 
   <main class="research-page">
@@ -52,8 +59,7 @@
           <a href="https://www.sciencedirect.com/science/article/pii/S0097849326000749" target="_blank" rel="noopener">Paper</a>
         </div>
         <div class="pub-desc">
-          <p><span class="q-yellow">Do the sketch datasets capture how people actually sketch, or only what is easier to collect?</span> Sketching is a natural way of expressing, processing, and communicating ideas — but as data needs for intelligent systems grow, sketch collection has often shifted toward what is <strong>easy</strong> to collect rather than what is <strong>ecologically valid</strong>.</p>
-          <p>In this paper, we argue that sketch datasets are systematically shaped by their collection protocols and experimental conditions, and therefore should be reported transparently and interpreted in light of the conditions that produced them.</p>
+          <p><span class="q-yellow">Do the sketch datasets capture how people actually sketch, or only what is easier to collect?</span> Sketching is a natural way of expressing, processing, and communicating ideas — but as data needs for intelligent systems grow, sketch collection has often shifted toward what is <strong>easy</strong> to collect rather than what is <strong>ecologically valid</strong>. In this paper, we argue that sketch datasets are systematically shaped by their collection protocols and experimental conditions, and therefore should be reported transparently and interpreted in light of the conditions that produced them.</p>
           <p>We structure this discussion around six contextual factors — time, tools, background, audience, multimodality, and elicitation. Through these factors, we analyze <strong>86 sketch datasets from 2002&ndash;2025</strong>, suggest practices for collecting sketch data that better reflect the diversity of human sketching, and include sketches from our exploratory study to show how different collection conditions can lead to very different kinds of sketches.</p>
         </div>
       </div>
@@ -75,7 +81,7 @@
           <span class="me">Zeynep Begüm Kara</span>, A. İsmail, E. Ateş, İ. N. Tamcı, Z. İyigün,
           S. Ş. Aslangül, Ö. Devran, B. M. Uçar, and E. Tüzün
         </p>
-        <p class="pub-venue">34th ACM International Conference on the Foundations of Software Engineering (FSE 2026), Industry Track<span class="rank">CORE A*</span></p>
+        <p class="pub-venue">34th ACM International Conference on the Foundations of Software Engineering (FSE 2026), Industry Track</p>
         <div class="pub-links">
           <a href="https://dl.acm.org/doi/10.1145/3803437.3805218" target="_blank" rel="noopener">Paper</a>
           <a href="https://figshare.com/s/6a261d3382b116d8494f" target="_blank" rel="noopener">Code</a>
@@ -145,14 +151,12 @@
       <div class="pub-body">
         <h3 class="pub-title">A Case Study on Gemini's MCQ Success: Defining Directed Multiple-Choice Questions</h3>
         <p class="pub-venue">Individual Research, Bilkent University, 2023–2024</p>
+        <div class="pub-links">
+          <a href="https://docs.google.com/presentation/d/15SLUoIjxFbva_8eolX_lBtHR3-phKBGiylkDk47Jbd8/edit?usp=sharing" target="_blank" rel="noopener">Slides</a>
+        </div>
         <div class="pub-desc">
           <p>Individual Research under supervision of <a href="https://www.cs.bilkent.edu.tr/~guvenir/" class="chip" target="_blank" rel="noopener">Prof.&nbsp;H.&nbsp;Altay&nbsp;Guvenir</a> I designed a Directed MCQ (DMCQ) system to evaluate how Large Language Models like Gemini perform under human-informed guidance. The study simulates collaborative test-solving scenarios, where human cues and AI analysis jointly contribute to the elimination of options. The goal is to understand how such directed interaction influences model reasoning and accuracy in structured evaluation settings.</p>
         </div>
-      </div>
-      <div class="pub-embed">
-        <iframe
-          src="https://docs.google.com/presentation/d/15SLUoIjxFbva_8eolX_lBtHR3-phKBGiylkDk47Jbd8/embed?start=false&loop=false&delayms=3000"
-          title="DMCQ presentation slides" loading="lazy" allowfullscreen></iframe>
       </div>
     </article>
 
@@ -240,6 +244,7 @@
 
   </main>
 
+  <script src="js/theme.js?v=4"></script>
 </body>
 
 </html>

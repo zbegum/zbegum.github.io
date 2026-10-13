@@ -1,0 +1,242 @@
+/* ====================================
+   THEME TOGGLE + LIGHT MODE
+   Dark is the default; light applies when <html data-theme="light">.
+   Load this after the page stylesheets so its overrides win.
+   ==================================== */
+:root { color-scheme: dark; }
+
+/* —— Toggle button (top-right, inside the sticky navbar) —— */
+.theme-toggle {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--theme-toggle-border);
+  border-radius: 50%;
+  background: var(--theme-toggle-bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.theme-toggle:hover { color: var(--text); }
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent-violet);
+  outline-offset: 2px;
+}
+.theme-toggle svg { display: block; }
+.theme-toggle.is-switching svg {
+  animation: theme-icon-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes theme-icon-in {
+  from { transform: rotate(-90deg) scale(0.4); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+/* Theme switch: circular reveal (View Transitions) or color crossfade.
+   .theme-vt is set on <html> only while the theme is switching. */
+html.theme-vt::view-transition-old(root),
+html.theme-vt::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+html.theme-vt .navbar,
+html.theme-vt .nav-br { view-transition-name: none; }
+
+/* —— Page-to-page transitions (About / Research / Arts) ——
+   The navbar stays put, brackets glide to the new tab, and the page
+   slides in the direction of travel (js/page-transitions.js sets it). */
+@view-transition { navigation: auto; }
+
+.navbar { view-transition-name: navbar; }
+.navbar li { position: relative; }
+
+/* Brackets around the active tab; each glides to the new tab on navigation */
+.nav-br {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-54%);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--accent-violet);
+  pointer-events: none;
+}
+.nav-br--l { left: -0.75em;  view-transition-name: nav-br-l; }
+.nav-br--r { right: -0.75em; view-transition-name: nav-br-r; }
+.navbar ul { isolation: isolate; }
+
+::view-transition-group(navbar) { animation: none; }
+::view-transition-old(navbar),
+::view-transition-new(navbar) { animation: none; }
+
+/* Springy glide for the brackets (the right one trails a touch) */
+::view-transition-group(nav-br-l),
+::view-transition-group(nav-br-r) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.34, 1.4, 0.5, 1);
+}
+::view-transition-group(nav-br-r) { animation-delay: 0.04s; }
+
+/* Default (no direction known): fade and lift */
+::view-transition-old(root) { animation: page-fade-out 0.22s ease-in both; }
+::view-transition-new(root) { animation: page-lift-in 0.42s cubic-bezier(0.2, 0.7, 0.2, 1) 0.05s both; }
+
+/* Forward (About → Research → Arts): slide left; backward: slide right */
+html:active-view-transition-type(forward)::view-transition-old(root) {
+  animation: slide-out-left 0.32s cubic-bezier(0.5, 0, 0.75, 0) both;
+}
+html:active-view-transition-type(forward)::view-transition-new(root) {
+  animation: slide-in-right 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.08s both;
+}
+html:active-view-transition-type(backward)::view-transition-old(root) {
+  animation: slide-out-right 0.32s cubic-bezier(0.5, 0, 0.75, 0) both;
+}
+html:active-view-transition-type(backward)::view-transition-new(root) {
+  animation: slide-in-left 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.08s both;
+}
+
+@keyframes page-fade-out  { to   { opacity: 0; } }
+@keyframes page-lift-in   { from { opacity: 0; transform: translateY(12px); } }
+@keyframes slide-out-left  { to   { opacity: 0; transform: translateX(-70px); } }
+@keyframes slide-out-right { to   { opacity: 0; transform: translateX(70px); } }
+@keyframes slide-in-right  { from { opacity: 0; transform: translateX(70px); } }
+@keyframes slide-in-left   { from { opacity: 0; transform: translateX(-70px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
+.theme-anim,
+.theme-anim *,
+.theme-anim *::before,
+.theme-anim *::after {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease,
+              fill 0.4s ease, box-shadow 0.4s ease, text-decoration-color 0.4s ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle.is-switching svg { animation: none; }
+}
+
+/* Show the sun in dark mode (click for light), the moon in light mode */
+.theme-toggle .icon-moon { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+:root {
+  --theme-toggle-bg: rgba(255, 255, 255, 0.04);
+  --theme-toggle-border: rgba(255, 255, 255, 0.16);
+}
+
+@media (max-width: 700px) {
+  .theme-toggle { right: 12px; width: 32px; height: 32px; }
+  .theme-toggle svg { width: 16px; height: 16px; }
+}
+
+/* ====================================
+   LIGHT PALETTE
+   ==================================== */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --text: #1b1c1f;
+  --text-muted: #5d5f67;
+  --accent-violet: #7442d6;
+  --accent-coral: #d9442f;
+  --accent-ascii-yellow: #9a7200;
+  --accent-cyan: #0a87b8;
+
+  --theme-toggle-bg: #fff;
+  --theme-toggle-border: rgba(0, 0, 0, 0.12);
+}
+
+/* —— Global —— */
+:root[data-theme="light"] .navbar { background: rgba(240, 240, 238, 0.9); }
+:root[data-theme="light"] .site-name::before { background: rgba(255, 214, 0, 0.3); }
+
+/* —— About —— */
+:root[data-theme="light"] .about-hero,
+:root[data-theme="light"] .about-inline-photo { border-color: rgba(0, 0, 0, 0.12); }
+:root[data-theme="light"] .rule { border-top-color: rgba(0, 0, 0, 0.2); }
+
+/* Term chips: highlighter stroke across the lower half, like the name */
+:root[data-theme="light"] .term-chip {
+  --chip-hl: rgba(56, 189, 248, 0.38);
+  background: linear-gradient(transparent 52%, var(--chip-hl) 52%);
+}
+:root[data-theme="light"] .term-chip--teal   { --chip-hl: rgba(45, 212, 191, 0.4); }
+:root[data-theme="light"] .term-chip--coral  { --chip-hl: rgba(255, 111, 97, 0.38); }
+:root[data-theme="light"] .term-chip--yellow { --chip-hl: rgba(255, 214, 0, 0.5); }
+:root[data-theme="light"] .term-chip--lime   { --chip-hl: rgba(163, 230, 53, 0.5); }
+
+/* ASCII garden: vivid, poppy colors that still hold up on white */
+:root[data-theme="light"] .ascii-art { font-weight: 700; }
+:root[data-theme="light"] .ascii-art font[color="#FFFF00"] { color: #f5b800; }
+:root[data-theme="light"] .ascii-art font[color="#FFFF80"] { color: #ffc61a; }
+:root[data-theme="light"] .ascii-art font[color="#FF8000"] { color: #ff7a00; }
+:root[data-theme="light"] .ascii-art font[color="#FF0000"] { color: #ff2d2d; }
+:root[data-theme="light"] .ascii-art font[color="#FF00FF"] { color: #e60fb4; }
+:root[data-theme="light"] .ascii-art font[color="#FF80FF"] { color: #ff5fd2; }
+:root[data-theme="light"] .ascii-art font[color="#0000FF"] { color: #1f5cff; }
+:root[data-theme="light"] .ascii-art font[color="#00FF00"] { color: #1fbf3a; }
+:root[data-theme="light"] .ascii-art font[color="#008000"] { color: #0e8a2a; }
+
+/* —— Research —— */
+:root[data-theme="light"] body.research {
+  --rule: rgba(0, 0, 0, 0.12);
+  --tile-bg: #f2f2f0;
+}
+:root[data-theme="light"] .pub-thumb--type {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 23px, rgba(0, 0, 0, 0.04) 23px 24px),
+    var(--tile-bg);
+}
+/* Bright accents (yellow, lime, teal) need darkening when used as text */
+:root[data-theme="light"] .pub-authors .me,
+:root[data-theme="light"] .pub-links a,
+:root[data-theme="light"] .pub-venue .rank,
+:root[data-theme="light"] .pub-thumb--type b {
+  color: color-mix(in srgb, var(--pub-accent) 62%, #000);
+}
+:root[data-theme="light"] .pub-venue .rank {
+  border-color: color-mix(in srgb, var(--pub-accent) 62%, #000);
+}
+:root[data-theme="light"] .chip {
+  border-color: rgba(0, 0, 0, 0.16);
+  background: rgba(0, 0, 0, 0.04);
+}
+:root[data-theme="light"] .chip:hover { background: rgba(0, 0, 0, 0.08); }
+
+/* —— Arts —— */
+:root[data-theme="light"] body.arts .work { background: #f2f2f0; }
+:root[data-theme="light"] body.arts .overlay { background: rgba(255, 255, 255, 0.8); }
+
+:root[data-theme="light"] body.arts dialog.lb { background: var(--bg); }
+:root[data-theme="light"] body.arts dialog.lb::backdrop { background: rgba(255, 255, 255, 0.88); }
+:root[data-theme="light"] body.arts .lb-stage { background: #f2f2f0; }
+:root[data-theme="light"] body.arts .lb-nav {
+  border-color: rgba(0, 0, 0, 0.16);
+  background: rgba(255, 255, 255, 0.85);
+}
+:root[data-theme="light"] body.arts .lb-side { border-color: rgba(0, 0, 0, 0.1); }
+:root[data-theme="light"] body.arts .lb-close { border-color: rgba(0, 0, 0, 0.16); }
+:root[data-theme="light"] body.arts .lb-thumbs button {
+  border-color: rgba(0, 0, 0, 0.12);
+  background: #f2f2f0;
+}
+:root[data-theme="light"] body.arts .lb-thumbs button[aria-current="true"] { border-color: var(--text); }
+
+/* —— About: profile card —— */
+:root[data-theme="light"] {
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.1);
+}
+:root[data-theme="light"] .profile-card { box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); }
