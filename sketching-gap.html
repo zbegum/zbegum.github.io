@@ -227,7 +227,7 @@ footer{text-align:center;font-size:13px;color:var(--muted);padding:30px 0 50px}
 <section>
   <h2>What Sketch AI does with sketches</h2>
   <div id="flow"></div>
-  <p class="cap">Principal task of each of the 2,087 papers (left) and the role its sketch plays (right). Band width is the number of papers.</p>
+  <p class="cap">Principal task of each of the 2,087 papers (left) and the role its sketch plays (right). Band width is the number of papers. Click a task to highlight it.</p>
 </section>
 
 <section>
@@ -340,16 +340,20 @@ const TASKF=["Recognition & understanding","Retrieval","Generation","Processing 
   const avail=H-top-10, sc=(avail-gap*(Math.max(tOrder.length,rOrder.length)-1))/DATA.length;
   const tPos={},rPos={}; let y=top; tOrder.forEach(t=>{ const n=DATA.filter(p=>p.t===t).length; tPos[t]={y,h:n*sc,cur:y,n}; y+=n*sc+gap });
   y=top; rOrder.forEach(r=>{ rPos[r]={y,h:rCount[r]*sc,cur:y,n:rCount[r]}; y+=rCount[r]*sc+gap });
-  const tc=t=>t===2?"#D2573A":"#8a8a8a";
+  let sel=2; const bands=[],tRects=[],tLabels=[];
+  const tc=t=>t===sel?"#D2573A":"#8a8a8a", op=t=>t===sel?.42:.22;
+  const paint=()=>{ bands.forEach(([b,t])=>{b.setAttribute("fill",tc(t)); b.setAttribute("fill-opacity",op(t))}); tRects.forEach(([e,t])=>e.setAttribute("fill",tc(t))); tLabels.forEach(([e,t])=>e.setAttribute("fill",t===sel?"#D2573A":"var(--ink)")) };
+  const pick=t=>{ sel=t; paint() };
   tOrder.forEach(t=>rOrder.forEach(r=>{ const n=DATA.filter(p=>p.t===t&&RR(p)===r).length; if(!n) return; const h=n*sc, a=tPos[t].cur, b=rPos[r].cur; tPos[t].cur+=h; rPos[r].cur+=h;
     const xm=(x0+x1)/2, d=`M${x0+bw},${a} C${xm},${a} ${xm},${b} ${x1},${b} L${x1},${b+h} C${xm},${b+h} ${xm},${a+h} ${x0+bw},${a+h} Z`;
-    const band=S("path",{d,fill:tc(t),"fill-opacity":t===2?.42:.22},svg);
-    band.onmouseenter=()=>band.setAttribute("fill-opacity",.7); band.onmouseleave=()=>{band.setAttribute("fill-opacity",t===2?.42:.22); hide()};
+    const band=S("path",{d,fill:tc(t),"fill-opacity":op(t)},svg); band.style.cursor="pointer"; band.onclick=()=>pick(t); bands.push([band,t]);
+    band.onmouseenter=()=>band.setAttribute("fill-opacity",.7); band.onmouseleave=()=>{band.setAttribute("fill-opacity",op(t)); hide()};
     band.onmousemove=e=>show(e,`${TASKF[t]} → ${RNAME(r).toLowerCase()}<br>${n} papers`);  }));
   // labels with collision avoidance
   const place=(items)=>{ let last=-1e9; return items.map(it=>{ let yy=Math.max(it.c,last+15); last=yy; return {...it,yy} }) };
-  place(tOrder.map(t=>({t,c:tPos[t].y+tPos[t].h/2+4}))).forEach(({t,yy})=>{ const p=tPos[t]; S("rect",{x:x0,y:p.y,width:bw,height:Math.max(p.h,1.5),fill:tc(t)},svg);
-    const l=S("text",{x:x0-10,y:yy,"text-anchor":"end","font-size":13,fill:t===2?"#D2573A":"var(--ink)"},svg); l.textContent=`${TASKS[t]} · ${p.n} (${Math.round(100*p.n/DATA.length)}%)` });
+  place(tOrder.map(t=>({t,c:tPos[t].y+tPos[t].h/2+4}))).forEach(({t,yy})=>{ const p=tPos[t]; const rc=S("rect",{x:x0,y:p.y,width:bw,height:Math.max(p.h,1.5),fill:tc(t)},svg);
+    const l=S("text",{x:x0-10,y:yy,"text-anchor":"end","font-size":13,fill:t===sel?"#D2573A":"var(--ink)"},svg); l.textContent=`${TASKS[t]} · ${p.n} (${Math.round(100*p.n/DATA.length)}%)`;
+    [rc,l].forEach(e=>{ e.style.cursor="pointer"; e.onclick=()=>pick(t) }); tRects.push([rc,t]); tLabels.push([l,t]) });
   place(rOrder.map(r=>({r,c:rPos[r].y+rPos[r].h/2+4}))).forEach(({r,yy})=>{ const p=rPos[r]; S("rect",{x:x1,y:p.y,width:bw,height:Math.max(p.h,1.5),fill:"#6a6a6a"},svg);
     const l=S("text",{x:x1+bw+10,y:yy,"font-size":13,fill:"var(--ink)"},svg); l.textContent=`${RNAME(r)} · ${p.n} (${Math.round(100*p.n/DATA.length)}%)` });
   $("#flow").appendChild(svg) })();
