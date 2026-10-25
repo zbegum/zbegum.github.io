@@ -1,7 +1,7 @@
 // Direction-aware page transitions between the nav pages.
 // Runs in <head> so it's ready before the new page's first render.
 (function () {
-  const ORDER = { "": 0, "index.html": 0, "about.html": 0, "home.html": 0, "research.html": 1, "arts.html": 2 };
+  const ORDER = { "": 0, "index.html": 0, "about.html": 0, "home.html": 0, "research.html": 1, "arts.html": 2, "community.html": 3 };
 
   function rank(url) {
     const page = new URL(url, location.href).pathname.split("/").pop();
