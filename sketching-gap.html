@@ -271,7 +271,7 @@ footer{text-align:center;font-size:13px;color:var(--muted);padding:30px 0 50px}
 
 <section>
   <h2 id="data-note">Data</h2>
-  <div class="txt"><p>The 2,087 papers analysed in this study. Search or filter the list, or click a paper to see how it was coded. The coded data, prompts and analysis code are on <a href="https://github.com/zbegum/sketching-gap" target="_blank" rel="noopener">GitHub</a>.</p></div>
+  <div class="txt"><p>The 2,087 papers analysed in this study. Search or filter the list, or click a paper to see how it was coded. The coded data, prompts and analysis code are on <a href="https://github.com/sketching-gap/sketching-gap" target="_blank" rel="noopener">GitHub</a>.</p></div>
   <div id="papers"></div>
 </section>
 
@@ -554,7 +554,7 @@ function openPaper_unused(id){ const p=DATA.find(x=>x.i===id); if(!p) return; Ob
   const reset=el("button","lnk","Reset"); reset.type="button"; reset.onclick=()=>{ q=fT=fR=fC=""; fP=0; inp.value=""; [sT,sR,sC].forEach(x=>x.value=""); sP.value="0"; page=0; apply() }; top.appendChild(reset);
   box.appendChild(top);
   const sub=el("div","dsub"); const cnt=el("span","dcnt"); sub.appendChild(cnt);
-  const lk=el("span","dlinks"); const gh=document.createElement("a"); gh.href="https://github.com/zbegum/sketching-gap"; gh.target="_blank"; gh.rel="noopener"; gh.textContent="Data, prompts and code on GitHub ↗"; lk.appendChild(gh); sub.appendChild(lk); box.appendChild(sub);
+  const lk=el("span","dlinks"); const gh=document.createElement("a"); gh.href="https://github.com/sketching-gap/sketching-gap"; gh.target="_blank"; gh.rel="noopener"; gh.textContent="Data, prompts and code on GitHub ↗"; lk.appendChild(gh); sub.appendChild(lk); box.appendChild(sub);
   const wrap=el("div","dtab"), tb=document.createElement("table"); wrap.appendChild(tb); box.appendChild(wrap);
   const nav=el("div","dnav"), prev=el("button","chip","← Previous"), info=el("span"), next=el("button","chip","Next →"); [prev,next].forEach(b=>b.type="button"); nav.appendChild(prev); nav.appendChild(info); nav.appendChild(next); box.appendChild(nav);
   const SH={3:"Repeated",4:"Unfinished",7:"Several results",8:"Branches",5:"Earlier",6:"Kept",9:"People",10:"Evaluated",11:"Creative claim",12:"Practitioners"};
