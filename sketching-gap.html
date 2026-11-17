@@ -405,11 +405,13 @@ const PERIODS=[["2011–14",2011,2014],["2015–18",2015,2018],["2019–22",2019
   const N=DATA.length, nT=t=>DATA.filter(p=>p.t===t).length, nU=j=>DATA.filter(p=>UL.get(p).includes(j)).length;
   const tr={}, rut={}, uW=Array(NONE+1).fill(0);
   DATA.forEach(p=>{ const t=p.t, r=RG(p), u=UL.get(p); tr[t+"|"+r]=(tr[t+"|"+r]||0)+1; u.forEach(j=>{ const k=r+"|"+j+"|"+t; rut[k]=(rut[k]||0)+1/u.length; uW[j]+=1/u.length }) });
-  const W=1400,H=860,top=10,xs=[220,600,1060], bw=14, sc=(H-top-14-9*(RORD.length-1))/N;
+  const W=1400,H=900,top=50,xs=[220,600,1060], bw=14, sc=(H-top-14-9*(RORD.length-1))/N;
   const node=(items,size)=>{ let y=top; const tot=items.reduce((a,k)=>a+size(k),0), g=(H-top-14-tot*sc)/Math.max(items.length-1,1); const o={}; items.forEach(k=>{ const h=size(k)*sc; o[k]={y,h,in:y,out:y}; y+=h+g }); return o };
   const T=node(TORD,nT), R=node(RORD,r=>rc[r]), U=node(UO,j=>uW[j]);
+  const HEAD=[["Task",xs[0]+bw,"end"],["Role of the sketch",xs[1],"start"],["Practice-related use",xs[2],"start"]];
   const status=el("div","pstat"); box.appendChild(status);
   const svg=S("svg",{viewBox:`0 0 ${W} ${H}`,class:"chart",role:"img","aria-label":"Pipeline from task to role of the sketch to practice-related use"});
+  HEAD.forEach(([t,x,a])=>{ const h=S("text",{x,y:22,"text-anchor":a,"font-size":14,"font-weight":600,fill:"var(--muted)","letter-spacing":".04em"},svg); h.textContent=t.toUpperCase() });
   const bands=[], labels=[], rects=[]; let sel=null;
   const band=(x0,a,x1,b,h,fill,op,keys,tipH)=>{ const xm=(x0+x1)/2, d=`M${x0},${a} C${xm},${a} ${xm},${b} ${x1},${b} L${x1},${b+h} C${xm},${b+h} ${xm},${a+h} ${x0},${a+h} Z`;
     const e=S("path",{d,fill,"fill-opacity":op},svg); e.onmousemove=ev=>show(ev,tipH); e.onmouseleave=hide; e.style.cursor="pointer"; e.onclick=()=>pick(keys.u!=null?["r",keys.r]:["t",keys.t]); bands.push([e,keys,op]) };
